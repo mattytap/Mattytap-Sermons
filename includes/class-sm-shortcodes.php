@@ -504,8 +504,9 @@ class SM_Shortcodes {
 
 			return $list;
 		} else {
-			// If nothing has been found.
-			return 'No ' . $this->convert_taxonomy_name( $args['display'], true ) . ' images found.';
+			// If nothing has been found. $args was reshaped above; the requested
+			// taxonomy now lives under 'taxonomy', not 'display'.
+			return 'No ' . $this->convert_taxonomy_name( $args['taxonomy'], true ) . ' images found.';
 		}
 	}
 

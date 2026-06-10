@@ -23,6 +23,8 @@ class SM_Export_SM {
 
 		require_once( ABSPATH . 'wp-admin/includes/export.php' );
 
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Near-verbatim port of WP core's wp-admin/includes/export.php. All output below is escaped (esc_html/esc_attr/esc_url) or wrapped in wxr_cdata(), which CDATA-escapes for the WXR/XML context; HTML-escaping would corrupt the export.
+
 		$defaults = array(
 			'content'    => 'wpfc_sermon',
 			'author'     => false,
@@ -101,7 +103,7 @@ class SM_Export_SM {
 		 * @return string
 		 */
 		function wxr_cdata( $str ) {
-			if ( wp_is_valid_utf8( $str ) == false ) {
+			if ( mb_check_encoding( $str, 'UTF-8' ) == false ) {
 				$str = mb_convert_encoding( $str, 'UTF-8', 'ISO-8859-1' );
 			}
 
@@ -302,7 +304,7 @@ class SM_Export_SM {
 				$query = $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid=%s", $attachment_url );
 
 				// get attachment id.
-				$attachment_id = $wpdb->get_var( $query );
+				$attachment_id = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query is built with $wpdb->prepare() on the line above.
 			}
 
 			// return id.
@@ -549,5 +551,6 @@ class SM_Export_SM {
 			</channel>
 		</rss>
 		<?php
+		// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

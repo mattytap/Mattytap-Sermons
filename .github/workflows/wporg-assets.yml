@@ -1,0 +1,29 @@
+# Update ONLY the WordPress.org listing assets (banner, icon,
+# screenshots from .wordpress-org/) and the readme.txt shown on the
+# plugin page, without shipping a new plugin version. Useful for
+# screenshot refreshes, FAQ edits, or "Tested up to" bumps between
+# releases.
+#
+# Manual-trigger only; needs the same SVN_USERNAME / SVN_PASSWORD
+# secrets as wporg-deploy.yml (set after WordPress.org approval).
+
+name: Update WordPress.org assets and readme
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: WordPress.org asset/readme update
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: mattytap-sermons
+          ASSETS_DIR: .wordpress-org
+          README_NAME: readme.txt
+          IGNORE_OTHER_FILES: true

@@ -1,0 +1,48 @@
+# Deploy the plugin to WordPress.org SVN (trunk + tags/<version> + assets).
+#
+# Manual-trigger only for now: the SVN slot does not exist until the
+# WordPress.org review approves the plugin, and the SVN_USERNAME /
+# SVN_PASSWORD repository secrets are not set until then. Run this from
+# the Actions tab, selecting the release TAG (e.g. v3.1.1) as the ref.
+# First run should keep dry_run = true and the log inspected before
+# re-running with dry_run = false.
+#
+# Once the slot is live and the first deploy has succeeded, this can be
+# switched to fire automatically on published releases by adding:
+#
+#   release:
+#     types: [published]
+#
+# under `on:` (non-prerelease releases only are deployed by convention;
+# guard with `if: ${{ !github.event.release.prerelease }}` on the job).
+#
+# Packaging exclusions live in .distignore (mirrors the allow-list in
+# bin/build-release-zip.ps1). Listing assets (banner/icon/screenshots)
+# deploy from .wordpress-org/ to the SVN assets/ directory.
+
+name: Deploy to WordPress.org SVN
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (build and diff, do not commit to SVN)"
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: WordPress.org plugin deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          dry-run: ${{ inputs.dry_run }}
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: mattytap-sermons
+          ASSETS_DIR: .wordpress-org

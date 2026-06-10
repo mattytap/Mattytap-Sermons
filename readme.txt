@@ -2,9 +2,9 @@
 Contributors: mattytap
 Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.1-rc2
+Stable tag: 3.1-rc3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,12 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1-rc3 =
+
+* Fixed a WordPress 6.0 to 6.8 compatibility regression in the sermon exporter. `wxr_cdata()` guarded its encoding fallback with `wp_is_valid_utf8()`, a function only available since WordPress 6.9, which would fatal on older supported versions. Switched to `mb_check_encoding()`, restoring the declared WordPress 6.0 floor. Sites on WordPress 6.9 or later were unaffected.
+* Raised "Tested up to" to WordPress 7.0.
+* Plugin Check housekeeping in the WXR exporter, a near-verbatim port of WordPress core's `wp-admin/includes/export.php`: scoped the self-escaping `wxr_cdata()` output under a documented escape-sniff exemption, and annotated a prepared query the analyser misread as unprepared. No runtime change.
 
 = 3.1-rc2 =
 
@@ -205,6 +211,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1-rc3 =
+
+Fixes a sermon-export fatal on WordPress 6.0 through 6.8 (the exporter called a function only added in WordPress 6.9). No data migration. Sites on WordPress 6.9 or later are unaffected.
 
 = 3.1-rc2 =
 

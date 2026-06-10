@@ -3,11 +3,11 @@
  * Plugin Name: Mattytap Sermons
  * Plugin URI: https://github.com/mattytap/Mattytap-Sermons
  * Description: A maintained restoration of WP-for-Church's Sermon Manager: add audio and video sermons, manage preachers, series, and more.
- * Version: 3.1-rc2
+ * Version: 3.1-rc3
  * Author: Matt Fawcett (restoration); WP for Church (original)
  * Author URI: https://github.com/mattytap
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires PHP: 8.1
  * License: GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

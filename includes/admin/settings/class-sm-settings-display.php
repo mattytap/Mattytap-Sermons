@@ -43,11 +43,11 @@ class SM_Settings_Display extends SM_Settings_Page {
 				'default' => '',
 			),
 			array(
-				'title'    => __( 'Sermon Works Styles', 'mattytap-sermons' ),
+				'title'    => __( 'Mattytap Sermons Styles', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Disable Sermon Works CSS.', 'mattytap-sermons' ),
+				'desc'     => __( 'Disable Mattytap Sermons CSS.', 'mattytap-sermons' ),
 				// translators: %s effectively <code>sermons.css</code>.
-				'desc_tip' => wp_sprintf( __( 'This will disable Sermon Works default CSS, so sermon styling will rely only on your CSS. It might be easier to check this option, instead of overriding our rules. Default unchecked.', 'mattytap-sermons' ), '<code>/assets/css/sermon.min.css</code>' ),
+				'desc_tip' => wp_sprintf( __( 'This will disable Mattytap Sermons default CSS, so sermon styling will rely only on your CSS. It might be easier to check this option, instead of overriding our rules. Default unchecked.', 'mattytap-sermons' ), '<code>/assets/css/sermon.min.css</code>' ),
 				'id'       => 'css',
 				'default'  => 'no',
 			),

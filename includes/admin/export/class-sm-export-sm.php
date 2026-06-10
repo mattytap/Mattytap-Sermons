@@ -1,6 +1,6 @@
 <?php
 /**
- * Sermon Works data export.
+ * Mattytap Sermons data export.
  *
  * @package SM/Core/Admin/Importing
  */
@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Export data from Sermon Works
+ * Export data from Mattytap Sermons
  *
  * @since 2.12.0
  */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Most of Sermon Works Settings related functions.
+ * Most of Mattytap Sermons Settings related functions.
  *
  * @package SM/Core/Admin/Settings
  */
@@ -54,7 +54,7 @@ class SM_Admin_Settings {
 	/**
 	 * Settings page.
 	 *
-	 * Handles the display of the main Sermon Works settings page in admin.
+	 * Handles the display of the main Mattytap Sermons settings page in admin.
 	 */
 	public static function output() {
 		global $current_section, $current_tab;
@@ -188,7 +188,7 @@ class SM_Admin_Settings {
 	/**
 	 * Output admin fields.
 	 *
-	 * Loops though the Sermon Works options array and outputs each field.
+	 * Loops though the Mattytap Sermons options array and outputs each field.
 	 *
 	 * @param array[] $options Opens array to output.
 	 * @param array   $values  The array of custom values. Optional.
@@ -769,7 +769,7 @@ class SM_Admin_Settings {
 	/**
 	 * Save admin fields.
 	 *
-	 * Loops though the Sermon Works options array and outputs each field.
+	 * Loops though the Mattytap Sermons options array and outputs each field.
 	 *
 	 * @param array $options Options array to output.
 	 * @param array $data    Optional. Data to use for saving. Defaults to $_POST.

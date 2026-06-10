@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) or die;
 /**
  * SM_Admin_Post_Types Class
  *
- * Handles the edit posts views and some functionality on the edit post screen for Sermon Works post types
+ * Handles the edit posts views and some functionality on the edit post screen for Mattytap Sermons post types
  *
  * @since 2.9
  */

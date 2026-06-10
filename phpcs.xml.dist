@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Sermon Works Ruleset">
-	<description>Sermon Works Ruleset</description>
+<ruleset name="Mattytap Sermons Ruleset">
+	<description>Mattytap Sermons Ruleset</description>
 
     <!-- Include required rulesets. -->
 	<rule ref="WordPress-Extra" />

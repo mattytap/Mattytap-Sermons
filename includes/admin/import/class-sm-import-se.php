@@ -1,6 +1,6 @@
 <?php
 /**
- * Imports data from Series Engine into Sermon Works.
+ * Imports data from Series Engine into Mattytap Sermons.
  *
  * @package SM/Core/Admin/Importing
  */

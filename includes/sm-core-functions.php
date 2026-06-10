@@ -88,7 +88,7 @@ function sm_the_date( $d = '', $before = '', $after = '', $post = null ) {
 }
 
 /**
- * Get permalink settings for Sermon Works independent of the user locale.
+ * Get permalink settings for Mattytap Sermons independent of the user locale.
  *
  * @return array
  * @since 2.12.3 added filter to easily modify slugs.
@@ -143,7 +143,7 @@ function sm_get_permalink_structure() {
 }
 
 /**
- * Switch Sermon Works to site language.
+ * Switch Mattytap Sermons to site language.
  *
  * @since 2.7
  */
@@ -154,13 +154,13 @@ function sm_switch_to_site_locale() {
 		// Filter on plugin_locale so load_plugin_textdomain loads the correct locale.
 		add_filter( 'plugin_locale', 'get_locale' );
 
-		// Init Sermon Works locale.
+		// Init Mattytap Sermons locale.
 		SermonManager::load_translations();
 	}
 }
 
 /**
- * Switch Sermon Works language to original.
+ * Switch Mattytap Sermons language to original.
  *
  * @since 2.7
  */
@@ -171,13 +171,13 @@ function sm_restore_locale() {
 		// Remove filter.
 		remove_filter( 'plugin_locale', 'get_locale' );
 
-		// Init Sermon Works locale.
+		// Init Mattytap Sermons locale.
 		SermonManager::load_translations();
 	}
 }
 
 /**
- * Display a Sermon Works help tip.
+ * Display a Mattytap Sermons help tip.
  *
  * @param string $tip        Help tip text.
  * @param bool   $allow_html Allow sanitized HTML if true or escape.
@@ -587,7 +587,7 @@ function get_sermon_series_image_url( $series_id = 0, $image_size = 'thumbnail' 
 }
 
 /**
- * Gets dropdown options for a setting in "Debug" tab of Sermon Works Settings.
+ * Gets dropdown options for a setting in "Debug" tab of Mattytap Sermons Settings.
  *
  * @return array
  *
@@ -1003,7 +1003,7 @@ function sm_set_service_type( $post_ID ) {
 add_action( 'save_post_wpfc_sermon', 'sm_set_service_type' );
 
 /**
- * Returns registered Sermon Works taxonomies.
+ * Returns registered Mattytap Sermons taxonomies.
  *
  * @return array Array of taxonomy names.
  *

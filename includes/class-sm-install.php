@@ -89,7 +89,7 @@ class SM_Install {
 	}
 
 	/**
-	 * Check Sermon Works version and run the updater is required.
+	 * Check Mattytap Sermons version and run the updater is required.
 	 *
 	 * This check is done on all requests and runs if the versions do not match.
 	 */
@@ -103,7 +103,7 @@ class SM_Install {
 	}
 
 	/**
-	 * Install Sermon Works.
+	 * Install Mattytap Sermons.
 	 */
 	private static function _install() {
 		global $wpdb;
@@ -257,7 +257,7 @@ class SM_Install {
 	 */
 	public static function plugin_action_links( $links ) {
 		$action_links = array(
-			'settings' => '<a href="' . admin_url( 'edit.php?post_type=wpfc_sermon&page=sm-settings' ) . '" aria-label="' . esc_attr__( 'View Sermon Works settings', 'mattytap-sermons' ) . '">' . esc_html__( 'Settings', 'mattytap-sermons' ) . '</a>',
+			'settings' => '<a href="' . admin_url( 'edit.php?post_type=wpfc_sermon&page=sm-settings' ) . '" aria-label="' . esc_attr__( 'View Mattytap Sermons settings', 'mattytap-sermons' ) . '">' . esc_html__( 'Settings', 'mattytap-sermons' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );

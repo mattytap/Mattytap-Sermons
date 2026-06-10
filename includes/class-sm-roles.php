@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds custom roles to Sermon Works.
+ * Adds custom roles to Mattytap Sermons.
  *
  * @since   2.13.0
  *
@@ -43,7 +43,7 @@ class SM_Roles {
 			$role->add_cap( 'manage_wpfc_categories' );
 			// Add additional roles for administrator.
 			if ( 'administrator' === $role_name ) {
-				// Access to Sermon Works Settings.
+				// Access to Mattytap Sermons Settings.
 				$role->add_cap( 'manage_wpfc_sm_settings' );
 			}
 			// Add additional roles for administrator and editor.

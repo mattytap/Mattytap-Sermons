@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Sermon Works Admin
+ * Mattytap Sermons Admin
  *
  * @since 2.9
  */

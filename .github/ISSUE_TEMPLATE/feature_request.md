@@ -1,13 +1,13 @@
 ---
 name: Feature request
-about: Suggest a new feature or enhancement for Sermon Works
+about: Suggest a new feature or enhancement for Mattytap Sermons
 title: ''
 labels: 'enhancement'
 assignees: ''
 ---
 
 <!--
-Sermon Works is a caretaker restoration of Sermon Manager with a "fix not change"
+Mattytap Sermons is a caretaker restoration of Sermon Manager with a "fix not change"
 stance for working code. The bar for new features is higher than the bar for fixing
 bugs. Before opening a feature request, please:
 
@@ -15,7 +15,7 @@ bugs. Before opening a feature request, please:
      no-commitment backlog: https://github.com/mattytap/Sermon-Works/blob/main/ROADMAP.md
   2. Check existing issues to avoid duplicates.
   3. Make the case below: what problem this solves, who it's for, and why
-     it's a better fit for Sermon Works than for a theme or sibling plugin.
+     it's a better fit for Mattytap Sermons than for a theme or sibling plugin.
 -->
 
 ### What problem does this feature solve?

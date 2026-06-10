@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Class used to hook into WordPress and make it use Sermon Works dates, instead of core dates.
+ * Class used to hook into WordPress and make it use Mattytap Sermons dates, instead of core dates.
  *
  * Can be disabled by `add_filter('sm_dates_wp', '__return_false');`.
  *

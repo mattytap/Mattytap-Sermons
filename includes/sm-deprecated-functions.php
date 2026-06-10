@@ -456,7 +456,7 @@ function wpfc_podcast_item_date( $time, $d = 'U', $gmt = false ) {
 }
 
 /**
- * Replace feed title with the one defined in Sermon Works settings.
+ * Replace feed title with the one defined in Mattytap Sermons settings.
  *
  * @param string $title Default title.
  *
@@ -471,7 +471,7 @@ function wpfc_modify_podcast_title( $title ) {
 }
 
 /**
- * Modifies get_bloginfo output and injects Sermon Works data.
+ * Modifies get_bloginfo output and injects Mattytap Sermons data.
  *
  * @param string $info Default data.
  * @param string $show Requested data.

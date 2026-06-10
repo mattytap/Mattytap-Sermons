@@ -5,7 +5,7 @@
  * Replaces the bundled Justin Tadlock entry-views library with a small
  * WP-native implementation. The counter increments a `Views` post meta
  * value on template_redirect for any post type that registers `entry-views`
- * post-type support (Sermon Works registers this for `wpfc_sermon` at
+ * post-type support (Mattytap Sermons registers this for `wpfc_sermon` at
  * includes/class-sm-post-types.php:322). The `[sermon-views]` shortcode
  * reads the same meta.
  *

@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) or die;
 ?>
 <div class="sm wrap">
 	<div class="intro">
-		<h1 class="wp-heading-inline"><?php esc_html_e( 'Sermon Works Import/Export', 'mattytap-sermons' ); ?></h1>
+		<h1 class="wp-heading-inline"><?php esc_html_e( 'Mattytap Sermons Import/Export', 'mattytap-sermons' ); ?></h1>
 	</div>
 	<div class="wp-list-table widefat">
 		<p><?php esc_html_e( 'We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started.', 'mattytap-sermons' ); ?></p>
@@ -71,7 +71,7 @@ defined( 'ABSPATH' ) or die;
 						</ul>
 					</div>
 					<div class="desc column-description">
-						<p><?php esc_html_e( 'Import sermons from another Sermon Works (or Sermon Manager) installation.', 'mattytap-sermons' ); ?></p>
+						<p><?php esc_html_e( 'Import sermons from another Mattytap Sermons (or Sermon Manager) installation.', 'mattytap-sermons' ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,7 @@ defined( 'ABSPATH' ) or die;
 	</div>
 	<div class="wp-list-table widefat">
 		<h2><?php esc_html_e( 'Import From 3rd Party Plugins', 'mattytap-sermons' ); ?></h2>
-		<p><?php esc_html_e( 'You can import sermons from the following plugins into Sermon Works', 'mattytap-sermons' ); ?></p>
+		<p><?php esc_html_e( 'You can import sermons from the following plugins into Mattytap Sermons', 'mattytap-sermons' ); ?></p>
 		<div id="the-list">
 			<div class="plugin-card <?php echo SM_Import_SB::is_installed() ? '' : 'not-available'; ?>">
 				<h2>Plugin not installed</h2>
@@ -132,7 +132,7 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'mattytap-sermons' ), 'Sermon Browser' ) );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Mattytap Sermons', 'mattytap-sermons' ), 'Sermon Browser' ) );
 							?>
 						</p>
 						<p class="import-note">
@@ -164,7 +164,7 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'mattytap-sermons' ), 'Series Engine' ) );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Mattytap Sermons', 'mattytap-sermons' ), 'Series Engine' ) );
 							?>
 						</p>
 						<p class="import-note">

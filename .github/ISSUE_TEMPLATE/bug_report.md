@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug or unexpected behaviour in Sermon Works
+about: Report a bug or unexpected behaviour in Mattytap Sermons
 title: ''
 labels: 'bug'
 assignees: ''
@@ -29,7 +29,7 @@ Before opening a bug report, please:
 
 ### Environment
 
-- **Sermon Works version:** (e.g. `2.15.16`, or `main` HEAD if running from git)
+- **Mattytap Sermons version:** (e.g. `3.1`, or `main` HEAD if running from git)
 - **WordPress version:** 
 - **PHP version:** 
 - **Theme:** 

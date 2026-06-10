@@ -30,7 +30,7 @@ class SM_Admin_Menus {
 	 * Add menu item.
 	 */
 	public function settings_menu() {
-		add_submenu_page( 'edit.php?post_type=wpfc_sermon', __( 'Sermon Works Settings', 'mattytap-sermons' ), __( 'Settings', 'mattytap-sermons' ), 'manage_wpfc_sm_settings', 'sm-settings', array(
+		add_submenu_page( 'edit.php?post_type=wpfc_sermon', __( 'Mattytap Sermons Settings', 'mattytap-sermons' ), __( 'Settings', 'mattytap-sermons' ), 'manage_wpfc_sm_settings', 'sm-settings', array(
 			$this,
 			'settings_page',
 		) );
@@ -40,7 +40,7 @@ class SM_Admin_Menus {
 	 * Add menu item.
 	 */
 	public function import_export_menu() {
-		add_submenu_page( 'edit.php?post_type=wpfc_sermon', __( 'Sermon Works Import/Export', 'mattytap-sermons' ), __( 'Import/Export', 'mattytap-sermons' ), 'manage_wpfc_sm_settings', 'sm-import-export', array(
+		add_submenu_page( 'edit.php?post_type=wpfc_sermon', __( 'Mattytap Sermons Import/Export', 'mattytap-sermons' ), __( 'Import/Export', 'mattytap-sermons' ), 'manage_wpfc_sm_settings', 'sm-import-export', array(
 			$this,
 			'import_export_page',
 		) );
@@ -62,7 +62,7 @@ class SM_Admin_Menus {
 	}
 
 	/**
-	 * Fixes Sermon Works top-level icon.
+	 * Fixes Mattytap Sermons top-level icon.
 	 */
 	public function fix_icon() {
 		wp_enqueue_style( 'sm-icon', SM_URL . 'assets/css/admin-icon.css', array(), SM_VERSION );

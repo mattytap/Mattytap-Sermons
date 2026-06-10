@@ -11,7 +11,7 @@ $current_tab = empty( $current_tab ) ? 'general' : $current_tab;
 ?>
 <div class="wrap sm sm_settings_<?php echo esc_attr( $current_tab ); ?>">
 	<div class="intro">
-		<h1 class="wp-heading-inline">Sermon Works Settings</h1>
+		<h1 class="wp-heading-inline"><?php esc_html_e( 'Mattytap Sermons Settings', 'mattytap-sermons' ); ?></h1>
 	</div>
 	<?php SM_Admin_Settings::show_messages(); ?>
 	<div class="settings-main">

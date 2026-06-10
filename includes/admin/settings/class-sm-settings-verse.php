@@ -97,7 +97,7 @@ class SM_Settings_Verse extends SM_Settings_Page {
 				'title'    => __( 'Verse Popups', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
 				'desc'     => __( 'Disable verse popups', 'mattytap-sermons' ),
-				'desc_tip' => __( 'If this option is checked, the verses will not have a link and a popup anymore. But, you would be free to use any other service you want to use without interfering with Sermon Works.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'If this option is checked, the verses will not have a link and a popup anymore. But, you would be free to use any other service you want to use without interfering with Mattytap Sermons.', 'mattytap-sermons' ),
 				'id'       => 'verse_popup',
 				'default'  => 'no',
 			),

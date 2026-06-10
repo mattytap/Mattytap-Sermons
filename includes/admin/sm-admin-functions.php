@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Get all Sermon Works screen ids.
+ * Get all Mattytap Sermons screen ids.
  *
  * @return array Screen IDs
  * @since 2.9

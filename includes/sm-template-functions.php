@@ -800,7 +800,7 @@ function wpfc_get_partial( $name = '', $args = array() ) {
 				if ( file_exists( SM_PATH . 'views/partials/' . $name ) ) {
 					load_template( SM_PATH . 'views/partials/' . $name, false );
 				} elseif ( current_user_can( 'manage_options' ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ) {
-					echo '<p><b>Sermon Works</b>: Failed loading partial "<i>' . esc_html( str_replace( '.php', '', $name ) ) . '</i>", file does not exist.</p>';
+					echo '<p><b>Mattytap Sermons</b>: Failed loading partial "<i>' . esc_html( str_replace( '.php', '', $name ) ) . '</i>", file does not exist.</p>';
 				}
 			}
 

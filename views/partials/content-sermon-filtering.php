@@ -34,7 +34,7 @@ foreach (
 ) {
 	if ( ! isset( $$required_variable ) ) {
 		if ( current_user_can( 'manage_options' ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ) {
-			echo '<p><b>Sermon Works</b>: Partial "<i>' . esc_html( str_replace( '.php', '', basename( __FILE__ ) ) ) . '</i>" loaded incorrectly.</p>';
+			echo '<p><b>Mattytap Sermons</b>: Partial "<i>' . esc_html( str_replace( '.php', '', basename( __FILE__ ) ) ) . '</i>" loaded incorrectly.</p>';
 		}
 
 		return;

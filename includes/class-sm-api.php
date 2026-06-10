@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Sermon Works API.
+ * Mattytap Sermons API.
  *
  * Handles SM-API endpoint requests.
  *
@@ -33,7 +33,7 @@ class SM_API {
 	}
 
 	/**
-	 * Saves custom Sermon Works data passed through REST API into database.
+	 * Saves custom Mattytap Sermons data passed through REST API into database.
 	 *
 	 * @param WP_Post         $post    Post object.
 	 * @param WP_REST_Request $request The request.

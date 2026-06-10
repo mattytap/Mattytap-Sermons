@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.1-rc3
+Stable tag: 3.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1 =
+
+First stable release of the renamed Mattytap Sermons line, and the first WordPress.org submission. No runtime change against 3.1-rc3: this entry promotes the release-candidate cycle to stable. The rc1, rc2, and rc3 entries below record the rename from Sermon Works, the ten WordPress.org pre-review fixes, the three rc1 playback and widget regressions, and the WordPress 6.0 to 6.8 export-compatibility fix closed during the candidate cycle.
 
 = 3.1-rc3 =
 
@@ -211,6 +215,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1 =
+
+First stable release of Mattytap Sermons. No data migration. Existing 3.0.x and Sermon Works installs migrate by deactivating the old plugin and activating Mattytap Sermons; existing Sermon Manager installs (including 2.30.0) can switch as a drop-in replacement.
 
 = 3.1-rc3 =
 

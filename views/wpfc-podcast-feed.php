@@ -383,7 +383,7 @@ $cover_image_url  = $settings['itunes_cover_image'];
 			<?php
 			endwhile;
 		endif;
-		wp_reset_query();
+		wp_reset_postdata();
 		?>
 
 	</channel>

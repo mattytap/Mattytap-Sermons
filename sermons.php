@@ -661,7 +661,10 @@ class SermonManager { // phpcs:ignore
 		add_action(
 			'sm_admin_settings_sanitize_option_execute_specific_unexecuted_function',
 			function ( $value ) {
-				if ( '' !== $value ) {
+				// Only registered SM update routines may run; the settings
+				// <select> is built from this same list, so anything else is
+				// a forged request.
+				if ( '' !== $value && array_key_exists( $value, sm_debug_get_update_functions() ) ) {
 					if ( ! function_exists( $value ) ) {
 						require_once SM_PATH . 'includes/sm-update-functions.php';
 					}

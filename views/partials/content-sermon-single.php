@@ -129,14 +129,25 @@ global $post;
 						<?php
 						$previous_attr = apply_filters( 'previous_posts_link_attributes', 'class="previous-sermon"' );
 						$next_attr     = apply_filters( 'next_posts_link_attributes', 'class="next-sermon"' );
+						$nav_allowed   = array(
+							'a' => array(
+								'href'       => true,
+								'class'      => true,
+								'id'         => true,
+								'rel'        => true,
+								'title'      => true,
+								'target'     => true,
+								'aria-label' => true,
+							),
+						);
 						if ( null !== $previous_sermon ) :
 							?>
-							<a href="<?php echo esc_url( get_the_permalink( $previous_sermon ) ); ?>" <?php echo $previous_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered attribute string from previous_posts_link_attributes; consistent with WP core's nav patterns. ?>>&laquo; <?php echo esc_html( get_the_title( $previous_sermon ) ); ?></a>
+							<?php echo wp_kses( '<a href="' . esc_url( get_the_permalink( $previous_sermon ) ) . '" ' . $previous_attr . '>&laquo; ' . esc_html( get_the_title( $previous_sermon ) ) . '</a>', $nav_allowed ); ?>
 						<?php else : ?>
 							<div></div>
 						<?php endif; ?>
 						<?php if ( null !== $next_sermon ) : ?>
-							<a href="<?php echo esc_url( get_the_permalink( $next_sermon ) ); ?>" <?php echo $next_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered attribute string from next_posts_link_attributes; consistent with WP core's nav patterns. ?>><?php echo esc_html( get_the_title( $next_sermon ) ); ?> &raquo;</a>
+							<?php echo wp_kses( '<a href="' . esc_url( get_the_permalink( $next_sermon ) ) . '" ' . $next_attr . '>' . esc_html( get_the_title( $next_sermon ) ) . ' &raquo;</a>', $nav_allowed ); ?>
 						<?php else : ?>
 							<div></div>
 						<?php endif; ?>

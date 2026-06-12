@@ -174,7 +174,7 @@ function wpfc_sermon_excerpt( $return = false ) {
 	$output = apply_filters( 'wpfc_sermon_excerpt', $output, $post );
 
 	if ( ! $return ) {
-		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $output is sermon HTML built above with per-site escapers + filtered through wpfc_sermon_excerpt; deprecated since 2.12.0.
+		echo wp_kses( $output, sm_template_allowed_html() );
 	}
 
 	return $output;
@@ -248,7 +248,7 @@ function wpfc_sermon_single( $return = false, $post = null ) {
 	$output = apply_filters( 'wpfc_sermon_single', $output, $post );
 
 	if ( ! $return ) {
-		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $output is sermon HTML built above with per-site escapers + filtered through wpfc_sermon_single; deprecated since 2.12.0.
+		echo wp_kses( $output, sm_template_allowed_html() );
 	}
 
 	return $output;

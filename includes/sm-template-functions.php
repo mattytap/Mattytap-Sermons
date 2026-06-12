@@ -86,6 +86,22 @@ function sm_template_allowed_html() {
 	$allowed['source']['media']  = true;
 	$allowed['source']['srcset'] = true;
 
+	// The legacy sermon_video meta stores pasted embed codes, so sermon
+	// templates must let provider iframes (YouTube, Vimeo, etc.) through.
+	$allowed['iframe'] = array(
+		'src'             => true,
+		'width'           => true,
+		'height'          => true,
+		'title'           => true,
+		'frameborder'     => true,
+		'allow'           => true,
+		'allowfullscreen' => true,
+		'loading'         => true,
+		'referrerpolicy'  => true,
+		'class'           => true,
+		'id'              => true,
+	);
+
 	return $allowed;
 }
 

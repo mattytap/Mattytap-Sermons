@@ -1120,7 +1120,7 @@ class SM_Shortcodes {
 								$output = '<div class="wpfc-sermon wpfc-sermon-shortcode">' . wpfc_sermon_excerpt_v2( true, $args ) . '</div>';
 							}
 
-							echo apply_filters( 'sm_shortcode_sermons_single_output', $output, $post, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $output is sermon excerpt HTML wrapped from wpfc_sermon_excerpt_v2; per-site escapers applied inside.
+							echo wp_kses( apply_filters( 'sm_shortcode_sermons_single_output', $output, $post, $args ), sm_template_allowed_html() );
 						}
 						?>
 					</div>

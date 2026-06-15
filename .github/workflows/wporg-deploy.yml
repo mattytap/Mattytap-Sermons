@@ -3,7 +3,8 @@
 # Manual-trigger only for now: the SVN slot does not exist until the
 # WordPress.org review approves the plugin, and the SVN_USERNAME /
 # SVN_PASSWORD repository secrets are not set until then. Run this from
-# the Actions tab, selecting the release TAG (e.g. v3.1.1) as the ref.
+# the Actions tab against main (the version ships from readme.txt's Stable
+# tag, not the git ref, so any ref carrying the intended release works).
 # First run should keep dry_run = true and the log inspected before
 # re-running with dry_run = false.
 #
@@ -36,6 +37,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Derive the release version from readme.txt's Stable tag rather than
+      # the git ref. A manual workflow_dispatch against a branch leaves
+      # GITHUB_REF as refs/heads/main, which the deploy action would try to
+      # use verbatim as the SVN tag name. Reading the Stable tag makes the
+      # workflow runnable from any ref and keeps the SVN tag in lockstep
+      # with the version the plugin actually declares.
+      - name: Determine plugin version
+        id: ver
+        run: |
+          VERSION="$(grep -i '^Stable tag:' readme.txt | head -1 | sed -E 's/.*:[[:space:]]*//' | tr -d '[:space:]\r')"
+          if [ -z "$VERSION" ]; then echo "Could not read Stable tag from readme.txt" >&2; exit 1; fi
+          echo "Detected version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: WordPress.org plugin deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         with:
@@ -45,4 +60,5 @@ jobs:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: mattytap-sermons
+          VERSION: ${{ steps.ver.outputs.version }}
           ASSETS_DIR: .wordpress-org

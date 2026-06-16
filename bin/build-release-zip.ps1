@@ -126,6 +126,28 @@ try {
     if ($hasBackslash) {
         Write-Warning "ZIP entries contain backslashes. ZIP spec violation, something is wrong."
     }
+
+    # Guard: the package MUST carry the bundled runtime libraries. A 3.1.2
+    # regression shipped a WordPress.org build with includes/vendor and
+    # assets/vendor stripped, which white-screened every install. Fail loudly
+    # rather than publish a broken ZIP.
+    $requiredRuntime = @(
+        'includes/vendor/CMB2/init.php',
+        'includes/vendor/wp-background-process.php',
+        'includes/vendor/wp-async-request.php',
+        'assets/vendor/js/plyr.polyfilled.min.js'
+    )
+    $entryNames = $entries | ForEach-Object { $_.FullName }
+    $missing = @()
+    foreach ($req in $requiredRuntime) {
+        if (-not ($entryNames | Where-Object { $_ -like "*$req" })) {
+            $missing += $req
+        }
+    }
+    if ($missing.Count -gt 0) {
+        throw "Release ZIP is missing required bundled libraries: $($missing -join ', '). Refusing to publish a broken package."
+    }
+    Write-Host "Runtime library check: all bundled libraries present." -ForegroundColor Green
 }
 finally {
     $zip.Dispose()

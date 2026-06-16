@@ -52,6 +52,7 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: WordPress.org plugin deploy
+        id: deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         with:
           dry-run: ${{ inputs.dry_run }}
@@ -62,3 +63,31 @@ jobs:
           SLUG: mattytap-sermons
           VERSION: ${{ steps.ver.outputs.version }}
           ASSETS_DIR: .wordpress-org
+
+      # Guard against the 3.1.2 regression: an unanchored `vendor` entry in
+      # .distignore stripped the bundled runtime libraries (includes/vendor:
+      # CMB2 + wp-background-processing; assets/vendor: Plyr) from the SVN
+      # payload, white-screening every install. The deploy action builds the
+      # package zip even on a dry run, so this inspects the real payload and
+      # fails before a live commit can ship a broken package.
+      - name: Verify bundled runtime libraries are packaged
+        run: |
+          ZIP="${{ steps.deploy.outputs.zip-path }}"
+          if [ -z "$ZIP" ] || [ ! -f "$ZIP" ]; then
+            echo "Could not find the generated package zip at '$ZIP'." >&2
+            exit 1
+          fi
+          required="includes/vendor/CMB2/init.php includes/vendor/wp-background-process.php includes/vendor/wp-async-request.php assets/vendor/js/plyr.polyfilled.min.js"
+          list="$(unzip -Z1 "$ZIP")"
+          missing=0
+          for f in $required; do
+            if ! printf '%s\n' "$list" | grep -qF -- "$f"; then
+              echo "MISSING from package: $f" >&2
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Deploy package is missing bundled runtime libraries; failing the job." >&2
+            exit 1
+          fi
+          echo "All bundled runtime libraries present in the deploy package."

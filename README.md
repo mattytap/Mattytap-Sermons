@@ -6,9 +6,9 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Install
 
-The current release is **3.1.2**.
+The current release is **3.1.3**.
 
-1. Open the [Releases page](https://github.com/mattytap/Mattytap-Sermons/releases) and download `mattytap-sermons-3.1.2.zip` from the latest release.
+1. Open the [Releases page](https://github.com/mattytap/Mattytap-Sermons/releases) and download `mattytap-sermons-3.1.3.zip` from the latest release.
 2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
 3. Choose the ZIP, click **Install Now**, then **Activate**.
 
@@ -18,7 +18,7 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 ## Status
 
-Latest tag: `3.1.2`, hardening output escaping and the debug update-runner. WordPress.org submission as `mattytap-sermons` is in progress.
+Latest tag: `3.1.3`, a packaging fix for the WordPress.org build (the 3.1.2 package shipped without its bundled libraries). Mattytap Sermons is published on WordPress.org at [wordpress.org/plugins/mattytap-sermons](https://wordpress.org/plugins/mattytap-sermons/).
 
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.

@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.1.2
+Stable tag: 3.1.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1.3 =
+
+* Packaging fix for the WordPress.org release. The 3.1.2 package published to WordPress.org was missing its bundled libraries (CMB2, the background-processing library, and the Plyr media player), because the release-packaging exclusion list stripped every directory named `vendor`, including the plugin's own. On a WordPress.org install or update this caused a fatal error on every page. The packaging now keeps the bundled libraries. If you installed or updated to 3.1.2 from WordPress.org, update to 3.1.3. The plugin code is unchanged from 3.1.2; no data migration.
 
 = 3.1.2 =
 
@@ -227,6 +231,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1.3 =
+
+Critical packaging fix. The WordPress.org 3.1.2 package omitted its bundled libraries and caused a fatal error on install or update. 3.1.3 restores them. Update immediately if you installed 3.1.2 from WordPress.org. No data change.
 
 = 3.1.2 =
 

@@ -18,18 +18,18 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 ## Status
 
-Latest tag: `3.1.3`, a packaging fix for the WordPress.org build (the 3.1.2 package shipped without its bundled libraries). Mattytap Sermons is published on WordPress.org at [wordpress.org/plugins/mattytap-sermons](https://wordpress.org/plugins/mattytap-sermons/).
+**Published and live.** Mattytap Sermons is on the WordPress.org plugin directory at [wordpress.org/plugins/mattytap-sermons](https://wordpress.org/plugins/mattytap-sermons/), installable from any WordPress dashboard, and running in production. The barn-find is back on the road: a faithful restoration of Sermon Manager, and a capable, maintained sermon plugin in its own right.
 
-- **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
+- **Approved and shipped.** Submitted as `mattytap-sermons` and approved by the WordPress.org plugin team on 2026-06-15. The earlier `sermon-works` slug was bounced in pre-review on trademark grounds; the ten pre-review technical findings (text-domain loading, prefix annotations, output escaping in views, callback escaping, enqueue-path refactors, vendor refresh) are all closed.
+- **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All have shipping patches, verified in production.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
-- **Drop-in compatibility against 2.30.0.** The `wpfc_sermon` post type, `wpfc_*` taxonomies, core option keys, six shortcodes, and view-template surface match the WP.org-shipped 2.30.0 line. Multi-attachments for notes and bulletin, post-body editor support, and the Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0; a small set of upstream changes are documented as gaps with rationale. See [`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md) for the full classification.
-- **Renamed for WordPress.org submission.** The `sermon-works` slug was bounced in pre-review on 2026-05-11 on trademark grounds. The plugin has been renamed to Mattytap Sermons (slug `mattytap-sermons`). The same pre-review surfaced ten technical findings (text-domain loading, prefix annotations, output escaping in views, callback escaping, enqueue-path refactors, vendor refresh) which are now closed in `3.1-rc1`.
+- **Drop-in compatible against 2.30.0.** The `wpfc_sermon` post type, `wpfc_*` taxonomies, core option keys, six shortcodes, and view-template surface match the WP.org-shipped 2.30.0 line. Multi-attachments for notes and bulletin, post-body editor support, and the Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0; a small set of upstream changes are documented as gaps with rationale. See [`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md) for the full classification.
 
 ## Who is Mattytap Sermons for?
 
 Three audiences are particularly in scope.
 
-**Existing Sermon Manager site administrators** running an installation of the original plugin and increasingly concerned about its unpatched CVEs. Mattytap Sermons is being designed as a drop-in replacement; you should be able to deactivate Sermon Manager and activate Mattytap Sermons without losing sermons, preachers, series, or settings.
+**Existing Sermon Manager site administrators** running an installation of the original plugin and increasingly concerned about its unpatched CVEs. Mattytap Sermons is a drop-in replacement: you can deactivate Sermon Manager and activate Mattytap Sermons without losing sermons, preachers, series, or settings.
 
 **Churches building a new WordPress site** who need a maintained sermon plugin and want one that's GPL-licensed, free, and unlikely to disappear.
 

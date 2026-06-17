@@ -91,7 +91,7 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 
 = 3.1.3 =
 
-* Packaging fix for the WordPress.org release. The 3.1.2 package published to WordPress.org was missing its bundled libraries (CMB2, the background-processing library, and the Plyr media player), because the release-packaging exclusion list stripped every directory named `vendor`, including the plugin's own. On a WordPress.org install or update this caused a fatal error on every page. The packaging now keeps the bundled libraries. If you installed or updated to 3.1.2 from WordPress.org, update to 3.1.3. The plugin code is unchanged from 3.1.2; no data migration.
+* Fixed a fault in the 3.1.2 package that could cause a critical error after installing or updating from WordPress.org. Update to 3.1.3 if you installed 3.1.2. No feature or data changes.
 
 = 3.1.2 =
 
@@ -234,7 +234,7 @@ For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–201
 
 = 3.1.3 =
 
-Critical packaging fix. The WordPress.org 3.1.2 package omitted its bundled libraries and caused a fatal error on install or update. 3.1.3 restores them. Update immediately if you installed 3.1.2 from WordPress.org. No data change.
+Fixes a fault in the 3.1.2 package that could cause a critical error after install or update. Update if you installed 3.1.2. No feature or data changes.
 
 = 3.1.2 =
 

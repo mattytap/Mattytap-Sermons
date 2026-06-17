@@ -1,0 +1,114 @@
+// Archive layout modes (#47).
+//
+// The "Archive layout" setting (Display > Archive) is applied as a modifier
+// class on the sermon container: .wpfc-sermon-container for the plugin-rendered
+// archive (added via the sm_templates_additional_classes filter) and
+// #wpfc-sermons-shortcode for the [sermons] shortcode. Classic emits no class,
+// so none of these rules apply by default and existing installs are unchanged.
+//
+// Layouts are written container-query-first: the grid uses auto-fill so it
+// reflows to the container's own width (sensible inside narrow builder columns,
+// not just the viewport), and the compact row collapses with a @container query.
+
+// ---- Grid ----
+// Archive cards (<article>) are direct children of the container; shortcode
+// cards (.wpfc-sermon-shortcode) sit inside #wpfc-sermons-container.
+.wpfc-sermon-container.wpfc-sermon-layout-grid,
+.wpfc-sermon-layout-grid #wpfc-sermons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+// Sorting widget and pagination stay full width rather than becoming columns.
+.wpfc-sermon-container.wpfc-sermon-layout-grid > *:not(article),
+.wpfc-sermon-layout-grid #wpfc-sermons-container > *:not(.wpfc-sermon-shortcode) {
+  grid-column: 1 / -1;
+}
+
+.wpfc-sermon-layout-grid {
+  .wpfc-sermon-shortcode {
+    margin-bottom: 0;
+  }
+
+  // Stack image over content inside a column (override the classic side-by-side
+  // flex row, which is too wide for a grid track).
+  .wpfc-sermon-inner {
+    display: block;
+    height: 100%;
+  }
+
+  .wpfc-sermon-image {
+    flex: none;
+  }
+
+  .wpfc-sermon-image-img {
+    height: auto;
+    padding-top: 56.25%;
+  }
+
+  // Clamp the excerpt so cards stay roughly even in height.
+  .wpfc-sermon-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+}
+
+// ---- Compact list ----
+// One tight row per sermon: no excerpt, no audio player, small thumbnail,
+// reduced padding. Per-card styling, so it works in any container.
+.wpfc-sermon-layout-compact {
+  .wpfc-sermon-description,
+  .wpfc-sermon-audio {
+    display: none;
+  }
+
+  .wpfc-sermon-shortcode {
+    margin-bottom: 0;
+  }
+
+  > article,
+  #wpfc-sermons-container > .wpfc-sermon-shortcode {
+    container-type: inline-size;
+    border-bottom: 1px solid #eee;
+  }
+
+  .wpfc-sermon-inner {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  .wpfc-sermon-image {
+    flex: 0 0 64px;
+  }
+
+  .wpfc-sermon-image-img {
+    width: 64px;
+    height: 64px;
+    padding-top: 0;
+  }
+
+  .wpfc-sermon-main {
+    padding: 12px 16px;
+  }
+
+  .wpfc-sermon-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  // Narrow containers (a sidebar, a builder column): drop the thumbnail and let
+  // the header stack so the row never overflows.
+  @container (max-width: 380px) {
+    .wpfc-sermon-image {
+      display: none;
+    }
+
+    .wpfc-sermon-inner {
+      flex-flow: row wrap;
+    }
+  }
+}

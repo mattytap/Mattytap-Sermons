@@ -806,6 +806,7 @@ class SM_Shortcodes {
 			'include'            => '',
 			'exclude'            => '',
 			'hide_service_types' => \SermonManager::getOption( 'service_type_filtering' ) ? '' : 'yes',
+			'layout'             => '', // classic|compact|grid; empty falls back to the Display > Archive setting.
 		);
 
 		// Legacy convert.
@@ -1095,10 +1096,16 @@ class SM_Shortcodes {
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream constant prefix; drop-in compat with Sermon Manager.
 		define( 'WPFC_SM_SHORTCODE', true );
 
+		// Resolve the archive layout: an explicit layout="" attribute wins,
+		// otherwise fall back to the Display > Archive setting. Classic emits
+		// no class, leaving the shortcode markup unchanged.
+		$sm_layout       = $args['layout'] ? strtolower( trim( $args['layout'] ) ) : SermonManager::getOption( 'archive_layout', 'classic' );
+		$sm_layout_class = in_array( $sm_layout, array( 'compact', 'grid' ), true ) ? 'wpfc-sermon-layout-' . $sm_layout : '';
+
 		if ( $query->have_posts() ) {
 			if ( SM_OB_ENABLED ) {
 				ob_start(); ?>
-				<div id="wpfc-sermons-shortcode">
+				<div id="wpfc-sermons-shortcode"<?php echo $sm_layout_class ? ' class="' . esc_attr( $sm_layout_class ) . '"' : ''; ?>>
 					<div id="wpfc-sermons-container">
 						<?php
 						if ( $args['hide_filters'] !== true && ! in_array( $args['hide_filters'], array(

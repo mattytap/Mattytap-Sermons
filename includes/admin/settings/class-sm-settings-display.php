@@ -81,6 +81,19 @@ class SM_Settings_Display extends SM_Settings_Page {
 				'id'      => 'archive_order',
 			),
 			array(
+				'title'    => __( 'Archive layout', 'mattytap-sermons' ),
+				'type'     => 'select',
+				'options'  => array(
+					'classic' => __( 'Classic (default)', 'mattytap-sermons' ),
+					'compact' => __( 'Compact list', 'mattytap-sermons' ),
+					'grid'    => __( 'Grid', 'mattytap-sermons' ),
+				),
+				'desc'     => __( 'How sermons are arranged on archive pages and in the [sermons] shortcode. Classic keeps the full-width stacked cards; Compact list is a tighter one-row-per-sermon layout; Grid arranges cards in responsive columns. Default "Classic".', 'mattytap-sermons' ),
+				'desc_tip' => __( 'If your theme renders its own sermon archive (theme compatibility mode), apply the layout with the [sermons] shortcode instead. Default "Classic".', 'mattytap-sermons' ),
+				'default'  => 'classic',
+				'id'       => 'archive_layout',
+			),
+			array(
 				'title'    => __( 'Display Audio Player', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
 				'desc_tip' => __( 'Displays audio player on archive pages. Default unchecked.', 'mattytap-sermons' ),

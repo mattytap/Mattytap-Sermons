@@ -105,6 +105,33 @@ function sm_template_allowed_html() {
 	return $allowed;
 }
 
+/**
+ * Append the archive-layout modifier class to the Sermon Manager container.
+ *
+ * The Display > Archive "Archive layout" setting (classic|compact|grid) is
+ * applied purely as a CSS modifier class on the existing wpfc-sermon-container
+ * wrapper, via the wrapper's sm_templates_additional_classes filter. Classic
+ * adds nothing, so existing markup and styling are untouched on upgrade; the
+ * compact and grid rules live in assets/css/sermon.css scoped to these classes.
+ *
+ * @since 3.1.4
+ *
+ * @param array $classes Existing container classes.
+ *
+ * @return array The classes with the layout modifier appended when not classic.
+ */
+function sm_archive_layout_container_class( $classes ) {
+	$layout = SermonManager::getOption( 'archive_layout', 'classic' );
+
+	if ( in_array( $layout, array( 'compact', 'grid' ), true ) ) {
+		$classes[] = 'wpfc-sermon-layout-' . $layout;
+	}
+
+	return $classes;
+}
+
+add_filter( 'sm_templates_additional_classes', 'sm_archive_layout_container_class' );
+
 if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	/**
 	 * Include template files.

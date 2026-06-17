@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) or die;
 get_header();
 ?>
 
-<?php echo wp_kses( wpfc_get_partial( 'content-sermon-wrapper-start' ), sm_template_allowed_html() ); ?>
+<?php wpfc_print_partial( 'content-sermon-wrapper-start' ); ?>
 
 <?php
 echo wp_kses( render_wpfc_sorting(), sm_template_allowed_html() );

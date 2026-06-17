@@ -865,6 +865,61 @@ function wpfc_get_partial( $name = '', $args = array() ) {
 }
 
 /**
+ * Renders a partial straight to output, without capturing it into a string.
+ *
+ * Companion to {@see wpfc_get_partial()}, which buffers the partial and returns
+ * it so the caller can pass it through wp_kses(). That capture-then-filter
+ * pattern is wrong for a self-escaping partial that prints an inline <script>:
+ * `content-sermon-wrapper-start` emits the Uncode theme init call via
+ * wp_print_inline_script_tag(), and a blanket wp_kses() at the call site strips
+ * it (see #45). Every value such a partial outputs is already escaped at its own
+ * echo, so rendering it directly is fully escaped without a second filter and
+ * without suppressing an escaping warning.
+ *
+ * The theme-override resolution mirrors wpfc_get_partial() exactly.
+ *
+ * @param string $name File name of the partial file to load. Can include `.php`, but not required.
+ * @param array  $args Array of variable => content, to use in the partial.
+ *
+ * @since 3.1.5
+ */
+function wpfc_print_partial( $name = '', $args = array() ) {
+	if ( '' === $name ) {
+		return;
+	}
+
+	$GLOBALS['wpfc_partial_args'] = $args;
+
+	if ( false === strpos( $name, '.php' ) ) {
+		$name .= '.php';
+	}
+
+	$partial = null;
+
+	foreach (
+		array(
+			'partials/',
+			'template-parts/',
+			'',
+		) as $path
+	) {
+		$partial = locate_template( $path . $name );
+
+		if ( $partial ) {
+			break;
+		}
+	}
+
+	if ( $partial ) {
+		load_template( $partial, false );
+	} elseif ( file_exists( SM_PATH . 'views/partials/' . $name ) ) {
+		load_template( SM_PATH . 'views/partials/' . $name, false );
+	} elseif ( current_user_can( 'manage_options' ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ) {
+		echo '<p><b>Mattytap Sermons</b>: Failed loading partial "<i>' . esc_html( str_replace( '.php', '', $name ) ) . '</i>", file does not exist.</p>';
+	}
+}
+
+/**
  * Returns SM template path.
  *
  * @param string $template The template.

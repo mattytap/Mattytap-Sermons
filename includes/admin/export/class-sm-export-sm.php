@@ -102,14 +102,16 @@ class SM_Export_SM {
 		 *
 		 * @return string
 		 */
-		function wxr_cdata( $str ) {
-			if ( mb_check_encoding( $str, 'UTF-8' ) == false ) {
-				$str = mb_convert_encoding( $str, 'UTF-8', 'ISO-8859-1' );
+		if ( ! function_exists( 'wxr_cdata' ) ) {
+			function wxr_cdata( $str ) {
+				if ( mb_check_encoding( $str, 'UTF-8' ) == false ) {
+					$str = mb_convert_encoding( $str, 'UTF-8', 'ISO-8859-1' );
+				}
+
+				$str = '<![CDATA[' . str_replace( ']]>', ']]]]><![CDATA[>', $str ) . ']]>';
+
+				return $str;
 			}
-
-			$str = '<![CDATA[' . str_replace( ']]>', ']]]]><![CDATA[>', $str ) . ']]>';
-
-			return $str;
 		}
 
 		/**
@@ -119,13 +121,15 @@ class SM_Export_SM {
 		 *
 		 * @return string Site URL.
 		 */
-		function wxr_site_url() {
-			// ms: the base url.
-			if ( is_multisite() ) {
-				return network_home_url();
-			} // wp: the blog url.
-			else {
-				return get_bloginfo_rss( 'url' );
+		if ( ! function_exists( 'wxr_site_url' ) ) {
+			function wxr_site_url() {
+				// ms: the base url.
+				if ( is_multisite() ) {
+					return network_home_url();
+				} // wp: the blog url.
+				else {
+					return get_bloginfo_rss( 'url' );
+				}
 			}
 		}
 
@@ -136,18 +140,20 @@ class SM_Export_SM {
 		 *
 		 * @param int $post_id The post ID.
 		 */
-		function wxr_post_taxonomy( $post_id ) {
-			$custom_taxonomies = array(
-				'wpfc_preacher',
-				'wpfc_sermon_series',
-				'wpfc_sermon_topics',
-				'wpfc_bible_book',
-				'wpfc_service_type',
-			);
-			$terms             = wp_get_object_terms( $post_id, $custom_taxonomies );
+		if ( ! function_exists( 'wxr_post_taxonomy' ) ) {
+			function wxr_post_taxonomy( $post_id ) {
+				$custom_taxonomies = array(
+					'wpfc_preacher',
+					'wpfc_sermon_series',
+					'wpfc_sermon_topics',
+					'wpfc_bible_book',
+					'wpfc_service_type',
+				);
+				$terms             = wp_get_object_terms( $post_id, $custom_taxonomies );
 
-			foreach ( (array) $terms as $term ) {
-				echo "\t\t<category domain=\"" . esc_attr( $term->taxonomy ) . '" nicename="' . esc_attr( $term->slug ) . '">' . wxr_cdata( $term->name ) . "</category>\n";
+				foreach ( (array) $terms as $term ) {
+					echo "\t\t<category domain=\"" . esc_attr( $term->taxonomy ) . '" nicename="' . esc_attr( $term->slug ) . '">' . wxr_cdata( $term->name ) . "</category>\n";
+				}
 			}
 		}
 
@@ -158,12 +164,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $category Category Object.
 		 */
-		function wxr_cat_name( $category ) {
-			if ( empty( $category->name ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_cat_name' ) ) {
+			function wxr_cat_name( $category ) {
+				if ( empty( $category->name ) ) {
+					return;
+				}
 
-			echo '<wp:cat_name>' . wxr_cdata( $category->name ) . '</wp:cat_name>';
+				echo '<wp:cat_name>' . wxr_cdata( $category->name ) . '</wp:cat_name>';
+			}
 		}
 
 		/**
@@ -173,12 +181,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $category Category Object.
 		 */
-		function wxr_category_description( $category ) {
-			if ( empty( $category->description ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_category_description' ) ) {
+			function wxr_category_description( $category ) {
+				if ( empty( $category->description ) ) {
+					return;
+				}
 
-			echo '<wp:category_description>' . wxr_cdata( $category->description ) . '</wp:category_description>';
+				echo '<wp:category_description>' . wxr_cdata( $category->description ) . '</wp:category_description>';
+			}
 		}
 
 		/**
@@ -188,12 +198,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $tag Tag Object.
 		 */
-		function wxr_tag_name( $tag ) {
-			if ( empty( $tag->name ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_tag_name' ) ) {
+			function wxr_tag_name( $tag ) {
+				if ( empty( $tag->name ) ) {
+					return;
+				}
 
-			echo '<wp:tag_name>' . wxr_cdata( $tag->name ) . '</wp:tag_name>';
+				echo '<wp:tag_name>' . wxr_cdata( $tag->name ) . '</wp:tag_name>';
+			}
 		}
 
 		/**
@@ -203,12 +215,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $tag Tag Object.
 		 */
-		function wxr_tag_description( $tag ) {
-			if ( empty( $tag->description ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_tag_description' ) ) {
+			function wxr_tag_description( $tag ) {
+				if ( empty( $tag->description ) ) {
+					return;
+				}
 
-			echo '<wp:tag_description>' . wxr_cdata( $tag->description ) . '</wp:tag_description>';
+				echo '<wp:tag_description>' . wxr_cdata( $tag->description ) . '</wp:tag_description>';
+			}
 		}
 
 		/**
@@ -218,12 +232,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $term Term Object.
 		 */
-		function wxr_term_name( $term ) {
-			if ( empty( $term->name ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_term_name' ) ) {
+			function wxr_term_name( $term ) {
+				if ( empty( $term->name ) ) {
+					return;
+				}
 
-			echo '<wp:term_name>' . wxr_cdata( $term->name ) . '</wp:term_name>';
+				echo '<wp:term_name>' . wxr_cdata( $term->name ) . '</wp:term_name>';
+			}
 		}
 
 		/**
@@ -233,12 +249,14 @@ class SM_Export_SM {
 		 *
 		 * @param object $term Term Object.
 		 */
-		function wxr_term_description( $term ) {
-			if ( empty( $term->description ) ) {
-				return;
-			}
+		if ( ! function_exists( 'wxr_term_description' ) ) {
+			function wxr_term_description( $term ) {
+				if ( empty( $term->description ) ) {
+					return;
+				}
 
-			echo '<wp:term_description>' . wxr_cdata( $term->description ) . '</wp:term_description>';
+				echo '<wp:term_description>' . wxr_cdata( $term->description ) . '</wp:term_description>';
+			}
 		}
 
 		/**
@@ -246,26 +264,28 @@ class SM_Export_SM {
 		 *
 		 * @since 3.1.0
 		 */
-		function wxr_authors_list() {
-			global $wpdb;
+		if ( ! function_exists( 'wxr_authors_list' ) ) {
+			function wxr_authors_list() {
+				global $wpdb;
 
-			$authors = array();
-			$results = $wpdb->get_results( "SELECT DISTINCT post_author FROM $wpdb->posts WHERE post_status != 'auto-draft'" );
-			foreach ( (array) $results as $result ) {
-				$authors[] = get_userdata( $result->post_author );
-			}
+				$authors = array();
+				$results = $wpdb->get_results( "SELECT DISTINCT post_author FROM $wpdb->posts WHERE post_status != 'auto-draft'" );
+				foreach ( (array) $results as $result ) {
+					$authors[] = get_userdata( $result->post_author );
+				}
 
-			$authors = array_filter( $authors );
+				$authors = array_filter( $authors );
 
-			foreach ( $authors as $author ) {
-				echo "\t<wp:author>";
-				echo '<wp:author_id>' . (int) $author->ID . '</wp:author_id>';
-				echo '<wp:author_login>' . esc_html( $author->user_login ) . '</wp:author_login>';
-				echo '<wp:author_email>' . esc_html( $author->user_email ) . '</wp:author_email>';
-				echo '<wp:author_display_name>' . wxr_cdata( $author->display_name ) . '</wp:author_display_name>';
-				echo '<wp:author_first_name>' . wxr_cdata( $author->user_firstname ) . '</wp:author_first_name>';
-				echo '<wp:author_last_name>' . wxr_cdata( $author->user_lastname ) . '</wp:author_last_name>';
-				echo "</wp:author>\n";
+				foreach ( $authors as $author ) {
+					echo "\t<wp:author>";
+					echo '<wp:author_id>' . (int) $author->ID . '</wp:author_id>';
+					echo '<wp:author_login>' . esc_html( $author->user_login ) . '</wp:author_login>';
+					echo '<wp:author_email>' . esc_html( $author->user_email ) . '</wp:author_email>';
+					echo '<wp:author_display_name>' . wxr_cdata( $author->display_name ) . '</wp:author_display_name>';
+					echo '<wp:author_first_name>' . wxr_cdata( $author->user_firstname ) . '</wp:author_first_name>';
+					echo '<wp:author_last_name>' . wxr_cdata( $author->user_lastname ) . '</wp:author_last_name>';
+					echo "</wp:author>\n";
+				}
 			}
 		}
 
@@ -277,12 +297,14 @@ class SM_Export_SM {
 		 *
 		 * @return mixed
 		 */
-		function wxr_filter_postmeta( $return_me, $meta_key ) {
-			if ( '_edit_lock' == $meta_key ) {
-				$return_me = true;
-			}
+		if ( ! function_exists( 'wxr_filter_postmeta' ) ) {
+			function wxr_filter_postmeta( $return_me, $meta_key ) {
+				if ( '_edit_lock' == $meta_key ) {
+					$return_me = true;
+				}
 
-			return $return_me;
+				return $return_me;
+			}
 		}
 
 		add_filter( 'wxr_export_skip_postmeta', 'wxr_filter_postmeta', 10, 2 );
@@ -294,21 +316,23 @@ class SM_Export_SM {
 		 *
 		 * @return null|string
 		 */
-		function sermon_return_attachment_id_from_url( $attachment_url ) {
-			global $wpdb;
-			$attachment_id = '';
+		if ( ! function_exists( 'sermon_return_attachment_id_from_url' ) ) {
+			function sermon_return_attachment_id_from_url( $attachment_url ) {
+				global $wpdb;
+				$attachment_id = '';
 
-			// is attachment url set?
-			if ( '' !== $attachment_url ) {
-				// prepare query.
-				$query = $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid=%s", $attachment_url );
+				// is attachment url set?
+				if ( '' !== $attachment_url ) {
+					// prepare query.
+					$query = $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid=%s", $attachment_url );
 
-				// get attachment id.
-				$attachment_id = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query is built with $wpdb->prepare() on the line above.
+					// get attachment id.
+					$attachment_id = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $query is built with $wpdb->prepare() on the line above.
+				}
+
+				// return id.
+				return $attachment_id;
 			}
-
-			// return id.
-			return $attachment_id;
 		}
 
 		echo '<?xml version="1.0" encoding="' . esc_attr( get_bloginfo( 'charset' ) ) . "\" ?>\n";

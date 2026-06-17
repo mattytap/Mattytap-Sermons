@@ -32,7 +32,12 @@ jobs:
             build/mattytap-sermons/
 
       - name: Run Plugin Check
-        uses: WordPress/plugin-check-action@v1
+        # Pinned to v1.1.7 (2026-06-15): v1.1.6 broke on the ubuntu-24.04
+        # runner image bump when wp-env's URL-plugin download path silently
+        # exited 0 without starting WordPress, so the check died with
+        # "Environment not initialized" (action issue #579, fixed in PR #590).
+        # No project .wp-env.json is needed; the fix is action-side. See #48.
+        uses: WordPress/plugin-check-action@v1.1.7
         with:
           build-dir: ./build/mattytap-sermons
           # Exclude the WXR exporter port from Plugin Check.

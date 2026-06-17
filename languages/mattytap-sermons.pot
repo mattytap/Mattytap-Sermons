@@ -1,1835 +1,1734 @@
-# Copyright (C) 2017
-# This file is distributed under the same license as the package.
+# Copyright (C) 2026 Matt Fawcett (restoration); WP for Church (original)
+# This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: mattytap-sermons 2.16.0\n"
-"Report-Msgid-Bugs-To: https://github.com/mattytap/Mattytap-Sermons/issues\n"
-"POT-Creation-Date: 2017-10-10 14:00:00+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HH:MM:SS\n"
-"Language-Team: Mattytap Sermons contributors\n"
-"Language:\n"
+"Project-Id-Version: Mattytap Sermons 3.1.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-17T07:38:10+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: mattytap-sermons\n"
 
-#. translators: %s see msgid "View sermon", effectively <a href="%s">View sermon</a>
-#: includes/admin-functions.php:125
+#. Plugin Name of the plugin
+#. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
+#: sermons.php
+#: sermons.php:871
+msgid "Mattytap Sermons"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: sermons.php
+msgid "https://github.com/mattytap/Mattytap-Sermons"
+msgstr ""
+
+#. Description of the plugin
+#: sermons.php
+msgid "A maintained restoration of WP-for-Church's Sermon Manager: add audio and video sermons, manage preachers, series, and more."
+msgstr ""
+
+#. Author of the plugin
+#: sermons.php
+msgid "Matt Fawcett (restoration); WP for Church (original)"
+msgstr ""
+
+#. Author URI of the plugin
+#: sermons.php
+msgid "https://github.com/mattytap"
+msgstr ""
+
+#: includes/admin/class-sm-admin-menus.php:33
+#: includes/admin/views/html-admin-settings.php:14
+msgid "Mattytap Sermons Settings"
+msgstr ""
+
+#: includes/admin/class-sm-admin-menus.php:33
+#: includes/class-sm-install.php:260
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-sm-admin-menus.php:43
+#: includes/admin/views/html-admin-import-export.php:12
+msgid "Mattytap Sermons Import/Export"
+msgstr ""
+
+#: includes/admin/class-sm-admin-menus.php:43
+msgid "Import/Export"
+msgstr ""
+
+#: includes/admin/class-sm-admin-menus.php:83
+msgid "All Sermons"
+msgstr ""
+
+#. translators: %s: The URL to the sermon.
+#: includes/admin/class-sm-admin-post-types.php:57
 #, php-format
 msgid "Sermon updated. %s"
 msgstr ""
 
-#: includes/admin-functions.php:125 includes/admin-functions.php:132
-#: includes/admin-functions.php:144 includes/class-sm-post-types.php:201
-#: includes/class-sm-post-types.php:202
+#. translators: %s: The URL to the sermon.
+#. translators: %s The URL to the sermon.
+#: includes/admin/class-sm-admin-post-types.php:57
+#: includes/admin/class-sm-admin-post-types.php:64
+#: includes/admin/class-sm-admin-post-types.php:76
+#: includes/class-sm-post-types.php:286
+#: includes/class-sm-post-types.php:287
 msgid "View sermon"
 msgstr ""
 
-#: includes/admin-functions.php:126
+#: includes/admin/class-sm-admin-post-types.php:58
 msgid "Custom field updated."
 msgstr ""
 
-#: includes/admin-functions.php:127
+#: includes/admin/class-sm-admin-post-types.php:59
 msgid "Custom field deleted."
 msgstr ""
 
-#: includes/admin-functions.php:128
+#: includes/admin/class-sm-admin-post-types.php:60
 msgid "Sermon updated."
 msgstr ""
 
-#. translators: %s date and time of the revision
-#: includes/admin-functions.php:130
+#. translators: %s: Date and time of the revision.
+#: includes/admin/class-sm-admin-post-types.php:62
 #, php-format
 msgid "Sermon restored to revision from %s"
 msgstr ""
 
-#. translators: %s see msgid "View sermon", effectively <a href="<URL>">View sermon</a>
-#: includes/admin-functions.php:132
+#. translators: %s: The URL to the sermon.
+#: includes/admin/class-sm-admin-post-types.php:64
 #, php-format
 msgid "Sermon published. %s"
 msgstr ""
 
-#: includes/admin-functions.php:133
+#: includes/admin/class-sm-admin-post-types.php:65
 msgid "Sermon saved."
 msgstr ""
 
-#: includes/admin-functions.php:135 includes/admin-functions.php:142
-msgid "Preview sermon"
-msgstr ""
-
-#. translators: %s see msgid "Preview sermon", effectively <a target="_blank" href="<URL>">Preview sermon</a>
-#: includes/admin-functions.php:135
+#. translators: %s: The URL to the sermon.
+#: includes/admin/class-sm-admin-post-types.php:67
 #, php-format
 msgid "Sermon submitted. %s"
 msgstr ""
 
-#. translators: %1$s see msgid "%1$s at %2$s", effectively <strong><date> at <time></strong>
-#. translators: %2$s see msgid "Preview sermon", effectively <a target="_blank" href="<URL>">Preview sermon</a>
-#: includes/admin-functions.php:138
+#. translators: %s: The URL to the sermon.
+#. translators: %s: The preview sermon URL.
+#: includes/admin/class-sm-admin-post-types.php:67
+#: includes/admin/class-sm-admin-post-types.php:73
+msgid "Preview sermon"
+msgstr ""
+
+#. translators: %1$s: The date and time. %2$s: The preview sermon URL.
+#: includes/admin/class-sm-admin-post-types.php:69
 #, php-format
 msgid "Sermon scheduled for: %1$s. %2$s"
 msgstr ""
 
-#. translators: %1$s date
-#. translators: %2$s time
-#: includes/admin-functions.php:141
+#. translators: %1$s: Date. %2$s: Time.
+#: includes/admin/class-sm-admin-post-types.php:71
 #, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
-#. translators: %s see msgid "Preview sermon", effectively <a target="_blank" href="<URL>">Preview sermon</a>
-#: includes/admin-functions.php:144
+#. translators: %s The URL to the sermon.
+#: includes/admin/class-sm-admin-post-types.php:76
 #, php-format
 msgid "Sermon draft updated. %s"
 msgstr ""
 
-#: includes/admin-functions.php:197
+#: includes/admin/class-sm-admin-post-types.php:96
 msgid "Sermon Title"
 msgstr ""
 
-#. Translators: %s: Preacher label (sentence case; singular) 
-#. translators: %s Preachers label (sentence case; plural) 
-#. translators: %s Preachers label (sentence case; plural) 
-#. translators: %s Preacher label (sentence case; singular) 
-#: includes/admin-functions.php:199 includes/class-sm-post-types.php:44
-#: includes/class-sm-post-types.php:47 includes/class-sm-post-types.php:49
-#, php-format
-msgid "%s"
-msgstr ""
-
-#: includes/admin-functions.php:200 includes/types-taxonomies.php:120
-#: includes/types-taxonomies.php:121 includes/types-taxonomies.php:122
+#: includes/admin/class-sm-admin-post-types.php:98
 msgid "Sermon Series"
 msgstr ""
 
-#: includes/admin-functions.php:201 includes/class-sm-post-types.php:104
-#: includes/class-sm-post-types.php:106
+#: includes/admin/class-sm-admin-post-types.php:99
+#: includes/class-sm-post-types.php:145
+#: includes/class-sm-post-types.php:147
+#: views/partials/content-sermon-single.php:117
 msgid "Topics"
 msgstr ""
 
-#: includes/admin-functions.php:202
+#: includes/admin/class-sm-admin-post-types.php:100
 msgid "Views"
 msgstr ""
 
-#: includes/admin-functions.php:203 includes/sm-cmb-functions.php:85
-#: includes/types-taxonomies.php:301
-msgid "Date Preached"
+#: includes/admin/class-sm-admin-post-types.php:102
+msgid "Preached"
 msgstr ""
 
-#: includes/admin-functions.php:204
-msgid "Bible Passage"
+#: includes/admin/class-sm-admin-post-types.php:103
+msgid "Published"
 msgstr ""
 
-#. translators: %s see msgid "Error:"
-#: includes/admin-functions.php:222
+#. translators: %s: The time. Such as "12 hours".
+#: includes/admin/class-sm-admin-post-types.php:138
 #, php-format
-msgid "%s Can&rsquo;t find sermon ID."
+msgid "%s ago"
 msgstr ""
 
-#: includes/admin-functions.php:222 includes/admin-functions.php:261
-#: includes/admin-functions.php:262
-msgid "Error:"
+#: includes/admin/class-sm-admin-post-types.php:152
+msgid "Error"
 msgstr ""
 
-#. translators: %s integer count of sermons
-#: includes/admin-functions.php:317
+#: includes/admin/class-sm-admin-post-types.php:258
+msgid "Sermon title"
+msgstr ""
+
+#. translators: %s Taxonomy name. Default: Service Type.
+#: includes/admin/class-sm-admin-post-types.php:313
+#, php-format
+msgid "Filter by %s"
+msgstr ""
+
+#: includes/admin/class-sm-admin-settings.php:75
+msgid "The changes you made will be lost if you navigate away from this page."
+msgstr ""
+
+#: includes/admin/class-sm-admin-settings.php:76
+#: includes/admin/settings/class-sm-settings-verse.php:76
+msgid "Note: WordPress is not set to any Spanish variant. Reverted to ESV."
+msgstr ""
+
+#: includes/admin/class-sm-admin-settings.php:137
+msgid "Action failed. Please refresh the page and retry."
+msgstr ""
+
+#: includes/admin/class-sm-admin-settings.php:152
+msgid "Your settings have been saved."
+msgstr ""
+
+#: includes/admin/class-sm-admin-settings.php:716
+msgid "Error in populating field options."
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:425
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:946
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:963
+msgid "Invalid file type"
+msgstr ""
+
+#. translators: %s: error message returned by the URL validator.
+#: includes/admin/import/class-sm-import-sm.php:999
+#, php-format
+msgid "Remote URL rejected: %s"
+msgstr ""
+
+#. translators: 1: HTTP response code, 2: HTTP response status message.
+#: includes/admin/import/class-sm-import-sm.php:1033
+#, php-format
+msgid "Remote server returned error response %1$d %2$s"
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:1040
+msgid "Could not write to upload file"
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:1062
+msgid "Remote file is incorrect size"
+msgstr ""
+
+#: includes/admin/import/class-sm-import-sm.php:1068
+msgid "Zero size file downloaded"
+msgstr ""
+
+#. translators: %s: size limit, e.g. "8 MB".
+#: includes/admin/import/class-sm-import-sm.php:1076
+#, php-format
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:19
+msgid "Advanced"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:32
+msgid "Advanced Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:38
+msgid "Import Log"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:40
+msgid "Show log after finished data import."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:41
+msgid "Shows log after import is finished, with a lot of useful data for debugging. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:46
+msgid "Book Sorting"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:48
+msgid "Enable book sorting."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:49
+msgid "Orders book in filtering by biblical order, rather than alphabetical. Default checked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:54
+msgid "Background Updates"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:55
+msgid "Execute all update functions that have not been executed yet."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:56
+msgid "Sometimes, some update functions may not execute after plugin update. This will make them do it. Executes functions and restores to unchecked after settings save."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:62
+msgid "Excerpt Override"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:65
+msgid "Disable override of excerpt."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:66
+msgid "By default, Mattytap Sermons overrides excerpt output to show audio player, detailed sermon data, etc... Some themes use different ways of outputting the excerpt, so sermon data can mistakenly be shown multiple times under the title. By checking this option, we try to fix that. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:70
+msgid "Theme Compatibility"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:72
+msgid "Use alternative layout override."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:73
+msgid "This will disable full-page layout override, and use alternative layout algorithm, which was used in very old Sermon Manager versions."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:78
+msgid "Safari Player"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:80
+msgid "Use native player on Safari."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:81
+msgid "Sometimes, Plyr does not work well on Safari, and by checking this box, Safari users will see native browser player instead of it. Only affects Plyr player. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:86
+msgid "Cloudflare Compatibility"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:88
+msgid "Load Plyr script immediately."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:89
+msgid "Cloudflare uses some caching methods which break player loading, mostly when displaying sermons via shortcodes. Checking this option will most likely fix it. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:94
+msgid "\"Views\" count"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:96
+msgid "Enable \"views\" count for admin and editor users."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:97
+msgid "Disable this option if you do not want to count sermon views for editors and admins."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:102
+msgid "Importing Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:106
+msgid "Comments Status"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:108
+msgid "Disallow comments"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:109
+msgid "When this is checked, the comments on all imported sermons in future will be disabled. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:114
+msgid "Very Advanced Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:118
+msgid "Specific Background Updates"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:123
+msgid "The option named \"Background updates\" executes all un-executed update functions. This option allows you to execute a specific one, even if it's already been executed. Just select a function and save settings.<br><code>[AE]</code> - Already Executed; <code>[NE]</code> - Not Executed"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:126
+msgid "Automatic Excerpt Creation"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:129
+msgid "Enable"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:130
+msgid "Enable and re-create all"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:131
+msgid "Disable"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:132
+msgid "Disable and flush existing"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:134
+msgid "Enables or disables creation of short plaintext excerpt in sermon's <code>post_content</code> database field. Could be removed in future versions. Default enabled."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:139
+msgid "Plyr JavaScript Loading"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:142
+msgid "Load files after the website content."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:143
+msgid "It should never happen now, but we are leaving this option here anyway. Plyr JavaScript files are loaded into <code>&lt;head&gt;</code> by default (before page content), but it used to happen that it's too early. This tried to fix that. But, it is likely that it is not needed in the latest Mattytap Sermons version, since the loader has been changed. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:147
+msgid "Disable Plugin Views"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:149
+msgid "Disable loading of Mattytap Sermons views."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:150
+msgid "Completely disables loading of views, including overrides. Uses whatever the theme is using. Default disabled."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:155
+msgid "Force Plugin Views"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:157
+msgid "Force plugin views."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:158
+msgid "Forces loading of Mattytap Sermons views, while overriding theme overrides."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:163
+msgid "Clear All Transients"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:165
+msgid "Clear all transients on save."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-debug.php:166
+msgid "Removes all transients from the database on save. Useful for debugging RSS feed. Your website will not break by executing this."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:19
+msgid "Display"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:33
+msgid "Display Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:39
+msgid "Default Image"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:41
+msgid "Sets the default sermon image that would show up if there is no sermon or series (if applicable) image is set."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:46
+msgid "Mattytap Sermons Styles"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:48
+msgid "Disable Mattytap Sermons CSS."
+msgstr ""
+
+#. translators: %s effectively <code>sermons.css</code>.
+#: includes/admin/settings/class-sm-settings-display.php:50
+msgid "This will disable Mattytap Sermons default CSS, so sermon styling will rely only on your CSS. It might be easier to check this option, instead of overriding our rules. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:55
+msgid "Archive"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:59
+msgid "Order sermons by"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:68
+msgid "Changes the way sermons are ordered by default. Affects the RSS feed and shown date as well. Default \"Date Preached\"."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:73
+msgid "Order direction"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:79
+msgid "Related to the setting above. Default descending."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:84
+msgid "Display Audio Player"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:86
+msgid "Displays audio player on archive pages. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:91
+msgid "Display Attachments"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:93
+msgid "Displays attachments links on archive pages. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:98
+#: includes/admin/settings/class-sm-settings-display.php:143
+msgid "Disable Sermon Image"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:100
+msgid "Disable image output on archive views. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:105
+msgid "Read More"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:107
+msgid "Do not show read more when all the text is visible."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:108
+msgid "By default, \"Read more...\" text shows up regardless if sermon has or does not have description. By checking this option, it will show only if there is more text to read."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:113
+msgid "Hide Filtering"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:115
+msgid "Hide filters on archive pages."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:116
+msgid "Currently, the filter dropdowns are shown by default on all archive pages. By checking this option, you can hide them. Default unchecked."
+msgstr ""
+
+#. translators: %s the taxonomy label. Default: Service Type.
+#: includes/admin/settings/class-sm-settings-display.php:122
+#, php-format
+msgid "Display %s Filtering"
+msgstr ""
+
+#. translators: %s the taxonomy label. Default: service type.
+#: includes/admin/settings/class-sm-settings-display.php:125
+#, php-format
+msgid "Displays %s filtering on archive pages. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:131
+msgid "Use Previous/Next Pagination"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:133
+msgid "Instead of paginated pagination (1,2,3), use previous/next links."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:134
+msgid "Some themes do not have styling for paginated pagination, so it's easier for you to use previous/next pagination for them, instead of writing custom CSS. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:139
+msgid "Single"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:145
+msgid "Disable image output on single sermon view. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:19
+msgid "General"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:33
+msgid "General Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:39
+msgid "Audio & Video Player"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:41
+msgid "Select which player to use for playing Sermons."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:52
+msgid "Sermon Date Format"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:54
+msgid "(used only in admin area, when creating a new Sermon)"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:65
+msgid "Sermons Per Page (default)"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:67
+msgid "(Affects only the default number, other settings will override it)"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:72
+msgid "Links"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:76
+msgid "Archive Page Slug"
+msgstr ""
+
+#. translators: %s: Archive page title, default: "Sermons".
+#: includes/admin/settings/class-sm-settings-general.php:80
+#, php-format
+msgid "e.g. %s"
+msgstr ""
+
+#. translators: %s: Archive page title, default: "Sermons".
+#: includes/admin/settings/class-sm-settings-general.php:80
+#: includes/class-sm-post-types.php:277
+#: includes/class-sm-post-types.php:279
+msgid "Sermons"
+msgstr ""
+
+#. translators: %2$s Example single sermon path, effectively <code>/sermons/god</code>.
+#: includes/admin/settings/class-sm-settings-general.php:83
+#, php-format
+msgid "This controls the page where sermons will be located, which includes single sermons. For example, by default, all sermons would be located under %1$s, and a single sermon with slug “god” would be under %2$s. Does not apply if \"pretty permalinks\" are not turned on."
+msgstr ""
+
+#. translators: %2$s Example single sermon path, effectively <code>/sermons/god</code>.
+#: includes/admin/settings/class-sm-settings-general.php:83
+msgid "/sermons"
+msgstr ""
+
+#. translators: %2$s Example single sermon path, effectively <code>/sermons/god</code>.
+#: includes/admin/settings/class-sm-settings-general.php:83
+msgid "/sermons/god"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:87
+msgid "Common Base Slug"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:89
+msgid "Enable a common base slug across all taxonomies."
+msgstr ""
+
+#. translators: %2$s Example preacher path, effectively <code>/sermons/preacher/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:92
+#, php-format
+msgid "If this option is checked, the taxonomies would also be under the slug set above, for example, by default, series named “Jesus” would be under %1$s, preacher “Mark” would be under %2$s, and so on."
+msgstr ""
+
+#. translators: %2$s Example preacher path, effectively <code>/sermons/preacher/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:92
+msgid "/sermons/series/jesus"
+msgstr ""
+
+#. translators: %2$s Example preacher path, effectively <code>/sermons/preacher/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:92
+msgid "/sermons/preacher/mark"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:97
+msgid "&ldquo;Preacher&rdquo; Label"
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/speaker/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:102
+#, php-format
+msgid "Put the label in singular form. It will change the default Preacher to anything you wish. (\"Speaker\", for example). Note: it will also change the slugs. For example, %1$s would become %2$s."
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/speaker/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:102
+msgid "/preacher/mark"
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/speaker/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:102
+msgid "/speaker/mark"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-general.php:107
+msgid "&ldquo;Service Type&rdquo; Label"
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/service-type/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:112
+#, php-format
+msgid "Put the label in singular form. It will change the default Service Type label to anything you wish. (\"Congregation\", for example). Note: it will also change the slugs. For example, %1$s would become %2$s."
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/service-type/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:112
+msgid "/service-type/mark"
+msgstr ""
+
+#. translators: %2$s Example changed slug/path. Effectively <code>/service-type/mark</code>.
+#: includes/admin/settings/class-sm-settings-general.php:112
+msgid "/congregation/mark"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:19
+msgid "Podcast"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:33
+msgid "Podcast Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:39
+msgid "Title"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:45
+#: includes/admin/sm-cmb-functions.php:75
+msgid "Description"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:51
+msgid "Website Link"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:57
+msgid "Language"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:63
+msgid "Copyright"
+msgstr ""
+
+#. translators: %s: blog name.
+#: includes/admin/settings/class-sm-settings-podcast.php:67
+#, php-format
+msgid "Copyright &copy; %s"
+msgstr ""
+
+#. translators: %s: copyright symbol HTML entitiy (&copy;).
+#: includes/admin/settings/class-sm-settings-podcast.php:69
+#, php-format
+msgid "Tip: Use %s to generate a copyright symbol."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:72
+msgid "Webmaster Name"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:75
+msgid "e.g. Your Name"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:78
+msgid "Webmaster Email"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:81
+#: includes/admin/settings/class-sm-settings-podcast.php:117
+msgid "e.g. Your Email"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:84
+msgid "Author"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:87
+msgid "e.g. Primary Speaker or Church Name"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:88
+msgid "This will display at the &ldquo;Artist&rdquo; in the iTunes Store."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:91
+msgid "Subtitle"
+msgstr ""
+
+#. translators: %s: blog name.
+#: includes/admin/settings/class-sm-settings-podcast.php:95
+#, php-format
+msgid "e.g. Preaching and teaching audio from %s"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:96
+msgid "Your subtitle should briefly tell the listener what they can expect to hear."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:99
+msgid "Summary"
+msgstr ""
+
+#. translators: %s: blog name.
+#: includes/admin/settings/class-sm-settings-podcast.php:103
+#, php-format
+msgid "e.g. Weekly teaching audio brought to you by %s in City, State."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:104
+msgid "Keep your Podcast Summary short, sweet and informative. Be sure to include a brief statement about your mission and in what region your audio content originates."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:107
+msgid "Owner Name"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:111
+msgid "This should typically be the name of your Church."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:114
+msgid "Owner Email"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:118
+msgid "Use an email address that you don&rsquo;t mind being made public. If someone wants to contact you regarding your Podcast this is the address they will use."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:121
+msgid "Cover Image"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:124
+msgid "This JPG will serve as the Podcast artwork in the iTunes Store. The image must be between 1,400px by 1,400px and 3,000px by 3,000px or else iTunes will not accept your feed."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:127
+#: includes/admin/settings/class-sm-settings-podcast.php:131
+msgid "Sub Category"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:132
+msgid "Buddhism"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:133
+msgid "Christianity"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:134
+msgid "Hinduism"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:135
+msgid "Islam"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:136
+msgid "Judaism"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:137
+msgid "Other"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:138
+msgid "Spirituality"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:142
+msgid "PodTrac Tracking"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:145
+msgid "Enables PodTrac tracking."
+msgstr ""
+
+#. translators: %s <a href="http://podtrac.com">podtrac.com</a>.
+#: includes/admin/settings/class-sm-settings-podcast.php:147
+#, php-format
+msgid "For more info on PodTrac or to sign up for an account, visit %s"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:151
+msgid "HTML in description"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:154
+msgid "Enables showing of HTML in iTunes description field. Uncheck if description looks messy."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:155
+msgid "It is recommended to leave it unchecked. Uncheck if the feed does not validate."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:159
+msgid "Redirect"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:162
+msgid "Enables redirection of podcast from old to new URL."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:163
+msgid "You can use relative or absolute URLs."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:166
+msgid "Old URL"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:171
+msgid "New URL"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:176
+msgid "Number of podcasts to show"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:182
+msgid "iTunes Podcast URL"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:190
+msgid "Android Podcast URL"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:198
+msgid "Overcast Podcast URL"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:206
+msgid "Sermon Image"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:209
+msgid "Fallback to series image if sermon does not have its own image."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:210
+msgid "Default disabled."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-podcast.php:230
+msgid "Feed URL to Submit to iTunes"
+msgstr ""
+
+#. translators: %s Feed Validator link, see msgid "Feed Validator".
+#: includes/admin/settings/class-sm-settings-podcast.php:237
+#, php-format
+msgid "Use the %s to diagnose and fix any problems before submitting your Podcast to iTunes."
+msgstr ""
+
+#. translators: %s Feed Validator link, see msgid "Feed Validator".
+#: includes/admin/settings/class-sm-settings-podcast.php:237
+msgid "Feed Validator"
+msgstr ""
+
+#. translators: %s see msgid "Submit Your Podcast".
+#: includes/admin/settings/class-sm-settings-podcast.php:243
+#, php-format
+msgid "Once your Podcast Settings are complete and your Sermons are ready, it&rsquo;s time to %s to the iTunes Store!"
+msgstr ""
+
+#. translators: %s see msgid "Submit Your Podcast".
+#: includes/admin/settings/class-sm-settings-podcast.php:243
+msgid "Submit Your Podcast"
+msgstr ""
+
+#. translators: %s see msgid "FeedBurner".
+#: includes/admin/settings/class-sm-settings-podcast.php:249
+#, php-format
+msgid "Alternatively, if you want to track your Podcast subscribers, simply pass the Podcast Feed URL above through %s. FeedBurner will then give you a new URL to submit to iTunes instead."
+msgstr ""
+
+#. translators: %s see msgid "FeedBurner".
+#: includes/admin/settings/class-sm-settings-podcast.php:249
+msgid "FeedBurner"
+msgstr ""
+
+#. translators: %s see msgid "iTunes FAQ for Podcast Makers".
+#: includes/admin/settings/class-sm-settings-podcast.php:255
+#, php-format
+msgid "Please read the %s for more information."
+msgstr ""
+
+#. translators: %s see msgid "iTunes FAQ for Podcast Makers".
+#: includes/admin/settings/class-sm-settings-podcast.php:255
+msgid "iTunes FAQ for Podcast Makers"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:19
+msgid "Verse"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:91
+msgid "Verse Settings"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:97
+msgid "Verse Popups"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:99
+msgid "Disable verse popups"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:100
+msgid "If this option is checked, the verses will not have a link and a popup anymore. But, you would be free to use any other service you want to use without interfering with Mattytap Sermons."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:105
+msgid "Bible Version for Verse Popups"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:107
+msgid "Default: ESV."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:136
+msgid "Verse In Sermons Widget"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:138
+msgid "Show verse."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-verse.php:139
+msgid "By checking this option, the verse in our WordPress widget will show up. Default unchecked."
+msgstr ""
+
+#. translators: %s integer count of sermons.
+#: includes/admin/sm-admin-functions.php:97
 #, php-format
 msgid "%s sermon"
 msgid_plural "%s sermons"
 msgstr[0] ""
 msgstr[1] ""
 
-#. translators: %s Plugin name 
-#: includes/class-sm-error-recovery.php:212
-#, php-format
-msgid "%s encountered a fatal error and recovered successfully."
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:215
-msgid "The issue has already been submitted."
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:220
-msgctxt "button"
-msgid "Send an anonymous report"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:224
-msgctxt "button"
-msgid "Show error message"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:227
-msgctxt "button"
-msgid "Reactivate Plugin"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:234
-msgctxt "title"
-msgid "Are you sure?"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:236
-msgid ""
-"If the issue is not fixed, website will crash. (but we will recover it again)"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:238
-msgctxt "title"
-msgid "Optional info"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:240
-msgid ""
-"If you have more information about the issue, please type it here (optional):"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:242
-msgctxt "label"
-msgid "Issue details"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:244
-msgctxt "placeholder"
-msgid "Steps for how to reproduce, etc&hellip;"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:245
-msgid "Email for further contact (optional)"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:246
-msgid "name@example.com"
-msgstr ""
-
-#: includes/class-sm-error-recovery.php:247
-msgctxt "label"
-msgid "Email"
-msgstr ""
-
-#: includes/class-sm-install.php:158
-msgid "Monthly"
-msgstr ""
-
-#: includes/class-sm-install.php:173
-msgid "View Sermon Manager settings"
-msgstr ""
-
-#: includes/class-sm-install.php:191
-msgid "Premium support"
-msgstr ""
-
-#: includes/class-sm-install.php:191
-msgid "Visit premium customer support"
-msgstr ""
-
-#. translators: %s Preachers label (sentence case; plural) 
-#: includes/class-sm-post-types.php:51
-#, php-format
-msgctxt "menu"
-msgid "%s"
-msgstr ""
-
-#. translators: %s Preachers label (lowercase; plural) 
-#: includes/class-sm-post-types.php:53 includes/types-taxonomies.php:96
-#, php-format
-msgid "Search %s"
-msgstr ""
-
-#. translators: %s Preachers label (lowercase; plural) 
-#: includes/class-sm-post-types.php:55 includes/types-taxonomies.php:98
-#, php-format
-msgid "All %s"
-msgstr ""
-
-#. translators: %s Preacher label (lowercase; singular) 
-#: includes/class-sm-post-types.php:59 includes/types-taxonomies.php:99
-#, php-format
-msgid "Edit %s"
-msgstr ""
-
-#. translators: %s Preacher label (lowercase; singular) 
-#: includes/class-sm-post-types.php:61 includes/types-taxonomies.php:100
-#, php-format
-msgid "Update %s"
-msgstr ""
-
-#. translators: %s Preacher label (lowercase; singular) 
-#: includes/class-sm-post-types.php:63 includes/types-taxonomies.php:101
-#, php-format
-msgid "Add new %s"
-msgstr ""
-
-#. translators: %s Preacher label (lowercase; singular) 
-#: includes/class-sm-post-types.php:65
-#, php-format
-msgid "New %s name"
-msgstr ""
-
-#. translators: %s Preacher label (lowercase; singular) 
-#: includes/class-sm-post-types.php:67
-#, php-format
-msgid "No %s found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:79 includes/class-sm-post-types.php:81
-#: includes/class-sm-post-types.php:82
-msgid "Series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:83
-msgctxt "menu"
-msgid "Series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:84
-msgid "Search series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:85
-msgid "All series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:88
-msgid "Edit series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:89
-msgid "Update series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:90
-msgid "Add new series"
-msgstr ""
-
-#: includes/class-sm-post-types.php:91
-msgid "New series name"
-msgstr ""
-
-#: includes/class-sm-post-types.php:92
-msgid "No series found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:107
-msgid "Topic"
-msgstr ""
-
-#: includes/class-sm-post-types.php:108
-msgctxt "menu"
-msgid "Topics"
-msgstr ""
-
-#: includes/class-sm-post-types.php:109
-msgid "Search topics"
-msgstr ""
-
-#: includes/class-sm-post-types.php:110
-msgid "All topics"
-msgstr ""
-
-#: includes/class-sm-post-types.php:113
-msgid "Edit topic"
-msgstr ""
-
-#: includes/class-sm-post-types.php:114
-msgid "Update topic"
-msgstr ""
-
-#: includes/class-sm-post-types.php:115
-msgid "Add new topic"
-msgstr ""
-
-#: includes/class-sm-post-types.php:116
-msgid "New topic name"
-msgstr ""
-
-#: includes/class-sm-post-types.php:117
-msgid "No topics found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:129
-msgid "Books"
-msgstr ""
-
-#: includes/class-sm-post-types.php:131
-msgid "Bible books"
-msgstr ""
-
-#: includes/class-sm-post-types.php:132
-msgid "Book"
-msgstr ""
-
-#: includes/class-sm-post-types.php:133
-msgctxt "menu"
-msgid "Books"
-msgstr ""
-
-#: includes/class-sm-post-types.php:134
-msgid "Search books"
-msgstr ""
-
-#: includes/class-sm-post-types.php:135
-msgid "All books"
-msgstr ""
-
-#: includes/class-sm-post-types.php:138
-msgid "Edit book"
-msgstr ""
-
-#: includes/class-sm-post-types.php:139
-msgid "Update book"
-msgstr ""
-
-#: includes/class-sm-post-types.php:140
-msgid "Add new book"
-msgstr ""
-
-#: includes/class-sm-post-types.php:141
-msgid "New book name"
-msgstr ""
-
-#: includes/class-sm-post-types.php:142
-msgid "No books found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:154 includes/class-sm-post-types.php:156
-msgid "Service Types"
-msgstr ""
-
-#: includes/class-sm-post-types.php:157 includes/sm-cmb-functions.php:93
-#: includes/types-taxonomies.php:201 includes/types-taxonomies.php:202
-#: includes/types-taxonomies.php:203 includes/types-taxonomies.php:309
-msgid "Service Type"
-msgstr ""
-
-#: includes/class-sm-post-types.php:158
-msgctxt "menu"
-msgid "Service Types"
-msgstr ""
-
-#: includes/class-sm-post-types.php:159 includes/types-taxonomies.php:204
-msgid "Search service types"
-msgstr ""
-
-#: includes/class-sm-post-types.php:160 includes/types-taxonomies.php:206
-msgid "All service types"
-msgstr ""
-
-#: includes/class-sm-post-types.php:163 includes/types-taxonomies.php:207
-msgid "Edit service type"
-msgstr ""
-
-#: includes/class-sm-post-types.php:164 includes/types-taxonomies.php:208
-msgid "Update service type"
-msgstr ""
-
-#: includes/class-sm-post-types.php:165
-msgid "Add new service type"
-msgstr ""
-
-#: includes/class-sm-post-types.php:166
-msgid "New service type name"
-msgstr ""
-
-#: includes/class-sm-post-types.php:167
-msgid "No service types found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:192 includes/options.php:269
-#: includes/options.php:278 includes/types-taxonomies.php:58
-#: includes/types-taxonomies.php:68 views/archive-wpfc_sermon.php:13
-msgid "Sermons"
-msgstr ""
-
-#: includes/class-sm-post-types.php:193 includes/types-taxonomies.php:59
-msgid "Sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:194
-msgid "All Sermons"
-msgstr ""
-
-#: includes/class-sm-post-types.php:195
-msgctxt "menu"
-msgid "Sermons"
-msgstr ""
-
-#: includes/class-sm-post-types.php:196 includes/types-taxonomies.php:60
-msgid "Add New"
-msgstr ""
-
-#: includes/class-sm-post-types.php:197
-msgid "Add new sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:198 views/archive-wpfc_sermon.php:62
-#: views/single-wpfc_sermon.php:23 views/taxonomy-wpfc_bible_book.php:90
-#: views/taxonomy-wpfc_preacher.php:96 views/taxonomy-wpfc_sermon_series.php:97
-#: views/taxonomy-wpfc_sermon_topics.php:97
-#: views/taxonomy-wpfc_service_type.php:90
-msgid "Edit"
-msgstr ""
-
-#: includes/class-sm-post-types.php:199
-msgid "Edit sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:200
-msgid "New sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:203
-msgid "Search sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:204 includes/types-taxonomies.php:66
-msgid "No sermons found"
-msgstr ""
-
-#: includes/class-sm-post-types.php:205
-msgid "No sermons found in trash"
-msgstr ""
-
-#: includes/class-sm-post-types.php:206
-msgid "Sermon image"
-msgstr ""
-
-#: includes/class-sm-post-types.php:207
-msgid "Set sermon image"
-msgstr ""
-
-#: includes/class-sm-post-types.php:208
-msgid "Remove sermon image"
-msgstr ""
-
-#: includes/class-sm-post-types.php:209
-msgid "Use as sermon image"
-msgstr ""
-
-#: includes/class-sm-post-types.php:210
-msgid "Insert to sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:211
-msgid "Uploaded to this sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:212
-msgid "Filter sermon"
-msgstr ""
-
-#: includes/class-sm-post-types.php:213
-msgid "Sermon navigation"
-msgstr ""
-
-#: includes/class-sm-post-types.php:214
-msgid "Sermon list"
-msgstr ""
-
-#: includes/class-sm-post-types.php:216
-msgid "This is where you can add new sermons to your website."
-msgstr ""
-
-#: includes/helper-functions.php:193 includes/template-tags.php:127
-#: includes/template-tags.php:410 includes/template-tags.php:456
-msgid "Series: "
-msgstr ""
-
-#: includes/libraries/wp-background-process.php:423
-#, php-format
-msgid "Every %s minutes"
-msgstr ""
-
-#: includes/options.php:71 includes/options.php:165
-msgid "Sermon Manager Settings"
-msgstr ""
-
-#: includes/options.php:71 includes/taxonomy-images/taxonomy-images.php:333
-#: includes/taxonomy-images/taxonomy-images.php:1238
-msgid "Settings"
-msgstr ""
-
-#: includes/options.php:80 includes/taxonomy-images/taxonomy-images.php:1263
-msgid "Manage Settings"
-msgstr ""
-
-#: includes/options.php:170
-msgid "General"
-msgstr ""
-
-#: includes/options.php:173
-msgid "Verse"
-msgstr ""
-
-#: includes/options.php:176
-msgid "Podcast"
-msgstr ""
-
-#: includes/options.php:184
-msgid "Settings saved"
-msgstr ""
-
-#: includes/options.php:194
-msgid "Need Some Help?"
-msgstr ""
-
-#. translators: %s see msgid "Sign up"
-#: includes/options.php:198
-#, php-format
-msgid ""
-"Did you know you can get expert support for only $49 per year! %s today and "
-"get support from the developers who are building the Sermon Manager."
-msgstr ""
-
-#: includes/options.php:198
-msgid "Sign up"
-msgstr ""
-
-#: includes/options.php:202
-msgid "Free&nbsp;Support"
-msgstr ""
-
-#: includes/options.php:204
-msgid "Priority&nbsp;Support"
-msgstr ""
-
-#: includes/options.php:207
-msgid "We offer limited free support via WordPress.org"
-msgstr ""
-
-#: includes/options.php:214
-msgid "Frequently Asked Questions"
-msgstr ""
-
-#. translators: %s see msgid "knowledge base"
-#: includes/options.php:232
-#, php-format
-msgid "Find out more in our %s"
-msgstr ""
-
-#: includes/options.php:232
-msgid "knowledge base"
-msgstr ""
-
-#: includes/options.php:239
-msgid "Lets Make It Even Better!"
-msgstr ""
-
-#: includes/options.php:242
-msgid ""
-"If you have ideas on how to make Sermon Manager or any of our products "
-"better, let us know!"
-msgstr ""
-
-#: includes/options.php:246
-msgid "Submit&nbsp;Your&nbsp;Idea"
-msgstr ""
-
-#: includes/options.php:260
-msgid "General Settings"
-msgstr ""
-
-#: includes/options.php:265
-msgid "Archive Page Title"
-msgstr ""
-
-#: includes/options.php:269 includes/options.php:278 includes/options.php:488
-#: includes/options.php:498 includes/options.php:508 includes/options.php:518
-#: includes/options.php:554 includes/options.php:602 includes/options.php:615
-#: includes/options.php:643 includes/options.php:656
-#, php-format
-msgid "e.g. %s"
-msgstr ""
-
-#: includes/options.php:274
-msgid "Archive Page Slug"
-msgstr ""
-
-#. translators: %1$s see msgid "sermons/preacher", effectively <code>sermons/preacher</code>
-#. translators: %2$s see msgid "sermons/series", effectively <code>sermons/series</code>
-#: includes/options.php:285
-#, php-format
-msgid ""
-"Common Base Slug &mdash; this is for users who want to have a common base "
-"slug across all taxonomies, e.g. %1$s or %2$s."
-msgstr ""
-
-#: includes/options.php:285
-msgid "sermons/preacher"
-msgstr ""
-
-#: includes/options.php:285
-msgid "sermons/series"
-msgstr ""
-
-#: includes/options.php:290
-msgid "Enable a common base slug across all taxonomies"
-msgstr ""
-
-#: includes/options.php:296
-msgid ""
-"Enable Template Files &mdash; this is for users upgrading from an older "
-"version who have issues with version 1.5+."
-msgstr ""
-
-#. translators: %s effectively <code>/views</code>
-#. translators: Since /views is a locale independent folder name it MUST NOT be localized
-#: includes/options.php:303
-#, php-format
-msgid "Enable template files found in the %s folder"
-msgstr ""
-
-#: includes/options.php:309
-msgid "Disable Sermon Styles"
-msgstr ""
-
-#. translators: %s effectively <code>sermons.css</code>
-#: includes/options.php:315
-#, php-format
-msgid ""
-"Disable Sermon CSS. If you do this, you should copy the styles from %s and "
-"include them in your theme CSS."
-msgstr ""
-
-#: includes/options.php:321
-msgid "Display audio player or video on archive pages"
-msgstr ""
-
-#: includes/options.php:326
-msgid "Display an audio player or video embed in the archive listing."
-msgstr ""
-
-#: includes/options.php:332 includes/options.php:337
-msgid "Use old audio player"
-msgstr ""
-
-#: includes/options.php:343
-msgid ""
-"Custom label for &ldquo;Preacher&rdquo;. Note: it will also change preacher "
-"slugs."
-msgstr ""
-
-#: includes/options.php:351
-msgid "Sermon date format (used when creating a new Sermon)"
-msgstr ""
-
-#: includes/options.php:372 includes/options.php:378
-msgid "Show key verse in widget"
-msgstr ""
-
-#. translators: %s version like x.x.x
-#: includes/options.php:385
-#, php-format
-msgid "Version %s"
-msgstr ""
-
-#: includes/options.php:389
-msgid "Current Version"
-msgstr ""
-
-#: includes/options.php:398
-msgid "Verse Settings"
-msgstr ""
-
-#: includes/options.php:404
-msgid "Verse Popups"
-msgstr ""
-
-#: includes/options.php:410
-msgid "Disable Bib.ly verse popups"
-msgstr ""
-
-#: includes/options.php:416
-msgid "Select Bible Version for Verse Popups"
-msgstr ""
-
-#. translators: %1$s effectively <code>ESV</code>
-#. translators: %2$s effectively <code>NET</code>
-#. translators: %3$s effectively <code>KJV</code>
-#. translators: %4$s effectively <code>LEB</code>
-#. translators: %5$s see msgid "bib.ly", effectively <a href="http://bib.ly">bib.ly</a>
-#: includes/options.php:443
-#, php-format
-msgid "%1$s, %2$s, %3$s, or %4$s are the currently supported popups for %5$s."
-msgstr ""
-
-#: includes/options.php:448
-msgid "bib.ly"
-msgstr ""
-
-#. translators: %s see effectively <code>ESV</code>
-#: includes/options.php:451
-#, php-format
-msgid "Warning! %s is not supported if your site uses SSL (HTTPS)."
-msgstr ""
-
-#: includes/options.php:461
-msgid "Podcast Settings"
-msgstr ""
-
-#: includes/options.php:484
-msgid "Title"
-msgstr ""
-
-#: includes/options.php:494 includes/sm-cmb-functions.php:107
-#: includes/types-taxonomies.php:323
-msgid "Description"
-msgstr ""
-
-#: includes/options.php:504
-msgid "Website Link"
-msgstr ""
-
-#: includes/options.php:514
-msgid "Language"
-msgstr ""
-
-#: includes/options.php:524
-msgid "Copyright"
-msgstr ""
-
-#: includes/options.php:528
-#, php-format
-msgid "e.g. Copyright &copy; %s"
-msgstr ""
-
-#. translators: %s <code>&amp;copy;</code>
-#: includes/options.php:534
-#, php-format
-msgid "Tip: Use %s to generate a copyright symbol."
-msgstr ""
-
-#: includes/options.php:540
-msgid "Webmaster Name"
-msgstr ""
-
-#: includes/options.php:544
-msgid "e.g. Your Name"
-msgstr ""
-
-#: includes/options.php:550
-msgid "Webmaster Email"
-msgstr ""
-
-#: includes/options.php:560
-msgid "Author"
-msgstr ""
-
-#: includes/options.php:564
-msgid "e.g. Primary Speaker or Church Name"
-msgstr ""
-
-#: includes/options.php:568
-msgid "This will display at the &ldquo;Artist&rdquo; in the iTunes Store."
-msgstr ""
-
-#: includes/options.php:573
-msgid "Subtitle"
-msgstr ""
-
-#: includes/options.php:577
-#, php-format
-msgid "e.g. Preaching and teaching audio from %s"
-msgstr ""
-
-#: includes/options.php:581
-msgid ""
-"Your subtitle should briefly tell the listener what they can expect to hear."
-msgstr ""
-
-#: includes/options.php:586
-msgid "Summary"
-msgstr ""
-
-#: includes/options.php:590
-#, php-format
-msgid "e.g. Weekly teaching audio brought to you by %s in City, State."
-msgstr ""
-
-#: includes/options.php:593
-msgid ""
-"Keep your Podcast Summary short, sweet and informative. Be sure to include a "
-"brief statement about your mission and in what region your audio content "
-"originates."
-msgstr ""
-
-#: includes/options.php:598
-msgid "Owner Name"
-msgstr ""
-
-#: includes/options.php:606
-msgid "This should typically be the name of your Church."
-msgstr ""
-
-#: includes/options.php:611
-msgid "Owner Email"
-msgstr ""
-
-#: includes/options.php:619
-msgid ""
-"Use an email address that you don&rsquo;t mind being made public. If someone "
-"wants to contact you regarding your Podcast this is the address they will use."
-msgstr ""
-
-#: includes/options.php:624
-msgid "Cover Image"
-msgstr ""
-
-#: includes/options.php:631
-msgid "Upload Image"
-msgstr ""
-
-#: includes/options.php:634
-msgid ""
-"This JPG will serve as the Podcast artwork in the iTunes Store. The image "
-"must be between 1,400px by 1,400px and 3,000px by 3,000px or else iTunes will "
-"not accept your feed."
-msgstr ""
-
-#: includes/options.php:639
-msgid "Top Category"
-msgstr ""
-
-#: includes/options.php:647
-msgid ""
-"Choose the appropriate top-level category for your Podcast listing in iTunes."
-msgstr ""
-
-#: includes/options.php:652
-msgid "Sub Category"
-msgstr ""
-
-#: includes/options.php:660
-msgid "Choose the appropriate sub category for your Podcast listing in iTunes."
-msgstr ""
-
-#: includes/options.php:665
-msgid "PodTrac Tracking"
-msgstr ""
-
-#: includes/options.php:670
-msgid "Enables PodTrac tracking."
-msgstr ""
-
-#. translators: %s <a href="http://podtrac.com">podtrac.com</a>
-#: includes/options.php:675
-#, php-format
-msgid "For more info on PodTrac or to sign up for an account, visit %s"
-msgstr ""
-
-#: includes/options.php:680
-msgid "HTML in description"
-msgstr ""
-
-#: includes/options.php:686
-msgid "Enable HTML description"
-msgstr ""
-
-#: includes/options.php:690
-msgid ""
-"Enables showing of HTML in iTunes description field. Uncheck if description "
-"looks messy."
-msgstr ""
-
-#: includes/options.php:695
-msgid "Number of podcasts to show"
-msgstr ""
-
-#: includes/options.php:704
-msgid ""
-"Shows custom podcast count. If not defined, it uses WordPress default count."
-msgstr ""
-
-#: includes/options.php:711
-msgid "Feed URL to Submit to iTunes"
-msgstr ""
-
-#: includes/options.php:722
-msgid "Feed Validator"
-msgstr ""
-
-#. translators: %s Feed Validator link, see msgid "Feed Validator"
-#: includes/options.php:722
-#, php-format
-msgid ""
-"Use the %s to diagnose and fix any problems before submitting your Podcast to "
-"iTunes."
-msgstr ""
-
-#. translators: %s see msgid "Submit Your Podcast"
-#: includes/options.php:726
-#, php-format
-msgid ""
-"Once your Podcast Settings are complete and your Sermons are ready, it&rsquo;"
-"s time to %s to the iTunes Store!"
-msgstr ""
-
-#: includes/options.php:726
-msgid "Submit Your Podcast"
-msgstr ""
-
-#. translators: %s see msgid "FeedBurner"
-#: includes/options.php:730
-#, php-format
-msgid ""
-"Alternatively, if you want to track your Podcast subscribers, simply pass the "
-"Podcast Feed URL above through %s. FeedBurner will then give you a new URL to "
-"submit to iTunes instead."
-msgstr ""
-
-#: includes/options.php:730
-msgid "FeedBurner"
-msgstr ""
-
-#. translators: %s see msgid "iTunes FAQ for Podcast Makers"
-#: includes/options.php:734
-#, php-format
-msgid "Please read the %s for more information."
-msgstr ""
-
-#: includes/options.php:734
-msgid "iTunes FAQ for Podcast Makers"
-msgstr ""
-
-#. translators: Button on the custom administration page. 
-#: includes/options.php:742 includes/taxonomy-images/taxonomy-images.php:395
-msgid "Save Changes"
-msgstr ""
-
-#: includes/shortcodes.php:805 includes/template-tags.php:112
-#: views/archive-wpfc_sermon.php:40 views/taxonomy-wpfc_bible_book.php:72
-#: views/taxonomy-wpfc_preacher.php:78 views/taxonomy-wpfc_sermon_series.php:79
-#: views/taxonomy-wpfc_sermon_topics.php:79
-#: views/taxonomy-wpfc_service_type.php:72
-#, php-format
-msgid "Permalink to %s"
-msgstr ""
-
-#: includes/sm-cmb-functions.php:57 includes/types-taxonomies.php:273
+#: includes/admin/sm-cmb-functions.php:40
 msgid "Sermon Details"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:86
+#: includes/admin/sm-cmb-functions.php:47
+msgid "Date Preached"
+msgstr ""
+
+#. translators: %s date format, effectively <code>d/m/Y</code> or the like.
+#: includes/admin/sm-cmb-functions.php:49
 msgid "(optional)"
 msgstr ""
 
-#. translators: %s date format, effectively <code>d/m/Y</code> or the like 
-#: includes/sm-cmb-functions.php:86 includes/types-taxonomies.php:302
+#. translators: %s date format, effectively <code>d/m/Y</code> or the like.
+#: includes/admin/sm-cmb-functions.php:49
 #, php-format
 msgid "format: %s"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:94 includes/types-taxonomies.php:310
-msgid ""
-"Select the type of service. Modify service types in Sermons &rarr; Service "
-"Types."
+#. translators: %3$s <a href="edit-tags.php?taxonomy=wpfc_service_type&post_type=wpfc_sermon" target="_blank">here</a>.
+#: includes/admin/sm-cmb-functions.php:60
+#, php-format
+msgid "Select the %1$s. Modify the %2$s %3$s."
 msgstr ""
 
-#: includes/sm-cmb-functions.php:101 includes/types-taxonomies.php:317
+#: includes/admin/sm-cmb-functions.php:67
 msgid "Main Bible Passage"
 msgstr ""
 
-#. translators: %s see msgid "John 3:16-18", effectively <code>John 3:16-18</code> 
-#: includes/sm-cmb-functions.php:102 includes/types-taxonomies.php:318
+#. translators: %2$s see msgid "John 3:16-18, John 2:11-12", effectively <code>John 3:16-18, Luke 2:1-3</code>.
+#: includes/admin/sm-cmb-functions.php:70
 #, php-format
-msgid "Enter the Bible passage with the full book names, e.g. %s."
+msgid "Enter the Bible passage with the full book names, e.g. %1$s Or multiple books like %2$s"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:102 includes/types-taxonomies.php:318
+#. translators: %2$s see msgid "John 3:16-18, John 2:11-12", effectively <code>John 3:16-18, Luke 2:1-3</code>.
+#: includes/admin/sm-cmb-functions.php:70
 msgid "John 3:16-18"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:108 includes/types-taxonomies.php:324
-msgid ""
-"Type a brief description about this sermon, an outline, or a full manuscript"
+#. translators: %2$s see msgid "John 3:16-18, John 2:11-12", effectively <code>John 3:16-18, Luke 2:1-3</code>.
+#: includes/admin/sm-cmb-functions.php:70
+msgid "John 3:16-18, Luke 2:1-3"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:116 includes/types-taxonomies.php:332
+#: includes/admin/sm-cmb-functions.php:76
+msgid "Type a brief description about this sermon, an outline, or a full manuscript"
+msgstr ""
+
+#: includes/admin/sm-cmb-functions.php:87
 msgid "Sermon Files"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:125 includes/types-taxonomies.php:341
+#: includes/admin/sm-cmb-functions.php:94
 msgid "Location of MP3"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:126 includes/types-taxonomies.php:342
+#: includes/admin/sm-cmb-functions.php:95
 msgid "Upload an audio file or enter an URL."
 msgstr ""
 
-#: includes/sm-cmb-functions.php:134 includes/types-taxonomies.php:350
+#: includes/admin/sm-cmb-functions.php:103
 msgid "MP3 Duration"
 msgstr ""
 
-#. translators: %s see msgid "hh:mm:ss", effectively <code>hh:mm:ss</code> 
-#: includes/sm-cmb-functions.php:135 includes/types-taxonomies.php:351
+#. translators: %s see msgid "hh:mm:ss", effectively <code>hh:mm:ss</code>.
+#: includes/admin/sm-cmb-functions.php:105
 #, php-format
-msgid ""
-"Length in %s format (if left blank, will attempt to calculate automatically "
-"when you save)"
+msgid "Length in %s format (fill out only for remote files, local files will get data calculated by default)"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:135 includes/types-taxonomies.php:351
+#. translators: %s see msgid "hh:mm:ss", effectively <code>hh:mm:ss</code>.
+#: includes/admin/sm-cmb-functions.php:105
 msgid "hh:mm:ss"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:140 includes/types-taxonomies.php:356
+#: includes/admin/sm-cmb-functions.php:110
 msgid "Video Embed Code"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:141 includes/types-taxonomies.php:357
-msgid "Paste your embed code for Vimeo, Youtube, or other service here"
+#: includes/admin/sm-cmb-functions.php:111
+msgid "Paste your embed code for Vimeo, Youtube, Facebook, or direct video file here"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:146 includes/types-taxonomies.php:362
+#: includes/admin/sm-cmb-functions.php:116
 msgid "Video Link"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:147 includes/types-taxonomies.php:363
-msgid "Paste your link for Vimeo, Youtube, or other service here"
+#: includes/admin/sm-cmb-functions.php:117
+msgid "Paste your link for Vimeo, Youtube, Facebook, or direct video file here"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:153 includes/types-taxonomies.php:369
+#: includes/admin/sm-cmb-functions.php:122
 msgid "Sermon Notes"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:154 includes/sm-cmb-functions.php:163
-#: includes/types-taxonomies.php:370 includes/types-taxonomies.php:379
+#: includes/admin/sm-cmb-functions.php:123
+#: includes/admin/sm-cmb-functions.php:142
 msgid "Upload a pdf file or enter an URL."
 msgstr ""
 
-#: includes/sm-cmb-functions.php:158 includes/sm-cmb-functions.php:167
-#: includes/types-taxonomies.php:374 includes/types-taxonomies.php:383
+#: includes/admin/sm-cmb-functions.php:127
+#: includes/admin/sm-cmb-functions.php:146
 msgid "Add File"
 msgstr ""
 
-#: includes/sm-cmb-functions.php:162 includes/template-tags.php:376
-#: includes/types-taxonomies.php:378
+#: includes/admin/sm-cmb-functions.php:132
+msgid "Sermon Notes (multiple)"
+msgstr ""
+
+#: includes/admin/sm-cmb-functions.php:133
+msgid "Upload one or more PDF files. Use this when a sermon has more than one notes attachment."
+msgstr ""
+
+#: includes/admin/sm-cmb-functions.php:137
+#: includes/admin/sm-cmb-functions.php:156
+msgid "Add Files"
+msgstr ""
+
+#: includes/admin/sm-cmb-functions.php:141
+#: views/partials/content-sermon-attachments.php:57
+#: views/partials/content-sermon-attachments.php:67
 msgid "Bulletin"
 msgstr ""
 
-#: includes/sm-core-functions.php:121
+#: includes/admin/sm-cmb-functions.php:151
+msgid "Bulletin (multiple)"
+msgstr ""
+
+#: includes/admin/sm-cmb-functions.php:152
+msgid "Upload one or more PDF files. Use this when a sermon has more than one bulletin attachment."
+msgstr ""
+
+#: includes/admin/sm-term-image-functions.php:70
+msgid "Select or upload image"
+msgstr ""
+
+#: includes/admin/sm-term-image-functions.php:71
+msgid "Use this image"
+msgstr ""
+
+#: includes/admin/sm-term-image-functions.php:91
+#: includes/admin/sm-term-image-functions.php:116
+msgid "Image"
+msgstr ""
+
+#: includes/admin/sm-term-image-functions.php:98
+#: includes/admin/sm-term-image-functions.php:122
+msgid "Add Image"
+msgstr ""
+
+#: includes/admin/sm-term-image-functions.php:99
+#: includes/admin/sm-term-image-functions.php:123
+msgid "Remove Image"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:15
+msgid "We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started."
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:20
+#: includes/admin/views/html-admin-import-export.php:23
+#: includes/admin/views/html-admin-import-export.php:55
+msgid "Import from file"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:37
+msgid "Before you can upload your import file, you will need to fix the following error:"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:59
+#: includes/admin/views/html-admin-import-export.php:127
+#: includes/admin/views/html-admin-import-export.php:159
+msgid "Import"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:68
+#: includes/admin/views/html-admin-import-export.php:69
+#: includes/admin/views/html-admin-import-export.php:97
+#: includes/admin/views/html-admin-import-export.php:98
+msgid "More Details"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:74
+msgid "Import sermons from another Mattytap Sermons (or Sermon Manager) installation."
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:81
+#: includes/admin/views/html-admin-import-export.php:84
+#: includes/admin/views/html-admin-import-export.php:92
+msgid "Export to file"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:93
+msgid "Export"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:102
+msgid "Create an export for the purpose of backup or migration to another website."
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:109
+msgid "Import From 3rd Party Plugins"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:110
+msgid "You can import sermons from the following plugins into Mattytap Sermons"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:116
+#: includes/admin/views/html-admin-import-export.php:119
+msgid "Sermon Browser"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:126
+msgid "Import from Sermon Browser"
+msgstr ""
+
+#. translators: %s Plugin name.
+#: includes/admin/views/html-admin-import-export.php:135
+#: includes/admin/views/html-admin-import-export.php:167
+#, php-format
+msgid "Import your existing %s sermon library into Mattytap Sermons"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:139
+#: includes/admin/views/html-admin-import-export.php:171
+msgid "Note: Some restrictions apply."
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:148
+#: includes/admin/views/html-admin-import-export.php:151
+msgid "Series Engine"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:158
+msgid "Import from Series Engine"
+msgstr ""
+
+#: includes/admin/views/html-admin-import-export.php:179
+msgid "Note: We recommend you create a backup of your current database just in case."
+msgstr ""
+
+#: includes/admin/views/html-admin-settings.php:38
+msgid "Save changes"
+msgstr ""
+
+#: includes/class-sm-install.php:245
+msgid "Monthly"
+msgstr ""
+
+#: includes/class-sm-install.php:260
+msgid "View Mattytap Sermons settings"
+msgstr ""
+
+#: includes/class-sm-post-types.php:52
+msgid "Preacher"
+msgstr ""
+
+#: includes/class-sm-post-types.php:53
+msgid "Service Type"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:70
+#: includes/class-sm-post-types.php:225
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:72
+#: includes/class-sm-post-types.php:227
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:76
+#: includes/class-sm-post-types.php:231
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:78
+#: includes/class-sm-post-types.php:233
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:80
+#: includes/class-sm-post-types.php:235
+#, php-format
+msgid "Add new %s"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:82
+#: includes/class-sm-post-types.php:237
+#, php-format
+msgid "New %s name"
+msgstr ""
+
+#. translators: %s preacher
+#: includes/class-sm-post-types.php:84
+#: includes/class-sm-post-types.php:239
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: includes/class-sm-post-types.php:108
+#: includes/class-sm-post-types.php:110
+#: includes/class-sm-post-types.php:111
+#: includes/sm-template-functions.php:178
+#: views/partials/content-sermon-single.php:55
+msgid "Series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:112
+msgctxt "menu"
+msgid "Series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:113
+msgid "Search series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:114
+msgid "All series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:117
+msgid "Edit series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:118
+msgid "Update series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:119
+msgid "Add new series"
+msgstr ""
+
+#: includes/class-sm-post-types.php:120
+msgid "New series name"
+msgstr ""
+
+#: includes/class-sm-post-types.php:121
+msgid "No series found"
+msgstr ""
+
+#: includes/class-sm-post-types.php:148
+#: includes/sm-template-functions.php:183
+msgid "Topic"
+msgstr ""
+
+#: includes/class-sm-post-types.php:149
+msgctxt "menu"
+msgid "Topics"
+msgstr ""
+
+#: includes/class-sm-post-types.php:150
+msgid "Search topics"
+msgstr ""
+
+#: includes/class-sm-post-types.php:151
+msgid "All topics"
+msgstr ""
+
+#: includes/class-sm-post-types.php:154
+msgid "Edit topic"
+msgstr ""
+
+#: includes/class-sm-post-types.php:155
+msgid "Update topic"
+msgstr ""
+
+#: includes/class-sm-post-types.php:156
+msgid "Add new topic"
+msgstr ""
+
+#: includes/class-sm-post-types.php:157
+msgid "New topic name"
+msgstr ""
+
+#: includes/class-sm-post-types.php:158
+msgid "No topics found"
+msgstr ""
+
+#: includes/class-sm-post-types.php:182
+msgid "Books"
+msgstr ""
+
+#: includes/class-sm-post-types.php:184
+msgid "Bible books"
+msgstr ""
+
+#: includes/class-sm-post-types.php:185
+#: includes/sm-template-functions.php:188
+msgid "Book"
+msgstr ""
+
+#: includes/class-sm-post-types.php:186
+msgctxt "menu"
+msgid "Books"
+msgstr ""
+
+#: includes/class-sm-post-types.php:187
+msgid "Search books"
+msgstr ""
+
+#: includes/class-sm-post-types.php:188
+msgid "All books"
+msgstr ""
+
+#: includes/class-sm-post-types.php:191
+msgid "Edit book"
+msgstr ""
+
+#: includes/class-sm-post-types.php:192
+msgid "Update book"
+msgstr ""
+
+#: includes/class-sm-post-types.php:193
+msgid "Add new book"
+msgstr ""
+
+#: includes/class-sm-post-types.php:194
+msgid "New book name"
+msgstr ""
+
+#: includes/class-sm-post-types.php:195
+msgid "No books found"
+msgstr ""
+
+#: includes/class-sm-post-types.php:278
+msgid "Sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:280
+msgctxt "menu"
+msgid "Sermons"
+msgstr ""
+
+#: includes/class-sm-post-types.php:281
+msgid "Add New"
+msgstr ""
+
+#: includes/class-sm-post-types.php:282
+msgid "Add new sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:283
+msgid "Edit"
+msgstr ""
+
+#: includes/class-sm-post-types.php:284
+msgid "Edit sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:285
+msgid "New sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:288
+msgid "Search sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:289
+msgid "No sermons found"
+msgstr ""
+
+#: includes/class-sm-post-types.php:290
+msgid "No sermons found in trash"
+msgstr ""
+
+#: includes/class-sm-post-types.php:291
+msgid "Sermon image"
+msgstr ""
+
+#: includes/class-sm-post-types.php:292
+msgid "Set sermon image"
+msgstr ""
+
+#: includes/class-sm-post-types.php:293
+msgid "Remove sermon image"
+msgstr ""
+
+#: includes/class-sm-post-types.php:294
+msgid "Use as sermon image"
+msgstr ""
+
+#: includes/class-sm-post-types.php:295
+msgid "Insert to sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:296
+msgid "Uploaded to this sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:297
+msgid "Filter sermon"
+msgstr ""
+
+#: includes/class-sm-post-types.php:298
+msgid "Sermon navigation"
+msgstr ""
+
+#: includes/class-sm-post-types.php:299
+msgid "Sermon list"
+msgstr ""
+
+#: includes/class-sm-shortcodes.php:123
+msgid "Subscribe using iTunes"
+msgstr ""
+
+#. translators: %s: Podcast service name (e.g. Android, Overcast).
+#: includes/class-sm-shortcodes.php:126
+#, php-format
+msgid "Subscribe using %s"
+msgstr ""
+
+#: includes/class-sm-shortcodes.php:138
+msgid "No podcast services have been specified. Please check your include/exclude settings."
+msgstr ""
+
+#: includes/class-sm-shortcodes.php:200
+#: includes/class-sm-shortcodes.php:460
+msgid "Error: Invalid \"list\" parameter."
+msgstr ""
+
+#: includes/class-sm-shortcodes.php:200
+#: includes/class-sm-shortcodes.php:460
+msgid "Possible values are: \"series\", \"preachers\", \"topics\" and \"books\"."
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:20
+msgid "The most recent sermons on your site"
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:22
+#: includes/class-sm-widget-recent-sermons.php:62
+msgid "Recent Sermons"
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:123
+#: includes/sm-deprecated-functions.php:100
+#: includes/sm-deprecated-functions.php:140
+#: includes/sm-deprecated-functions.php:216
+msgid "Bible Text: "
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:204
+msgid "Title:"
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:209
+msgid "Number of sermons to show:"
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:215
+msgid "HTML to show before the widget:"
+msgstr ""
+
+#: includes/class-sm-widget-recent-sermons.php:220
+msgid "HTML to show after the widget:"
+msgstr ""
+
+#: includes/sm-core-functions.php:114
 msgctxt "slug"
 msgid "preacher"
 msgstr ""
 
-#: includes/sm-core-functions.php:122
+#: includes/sm-core-functions.php:115
 msgctxt "slug"
 msgid "series"
 msgstr ""
 
-#: includes/sm-core-functions.php:123
+#: includes/sm-core-functions.php:116
 msgctxt "slug"
 msgid "topics"
 msgstr ""
 
-#: includes/sm-core-functions.php:124
+#: includes/sm-core-functions.php:117
 msgctxt "slug"
 msgid "book"
 msgstr ""
 
-#: includes/sm-core-functions.php:125
+#: includes/sm-core-functions.php:118
 msgctxt "slug"
 msgid "service-type"
 msgstr ""
 
-#: includes/sm-core-functions.php:126
+#: includes/sm-core-functions.php:119
 msgctxt "slug"
 msgid "sermons"
 msgstr ""
 
-#. translators: %1$s see msgid "term_taxonomy_id", effectively <code>term_taxonomy_id</code>
-#. translators: %2$s effectively <code><some filter name></code>
-#. translators: %3$s effectively <code>category.php</code>
-#. translators: %4$s effectively <code>tag.php</code>
-#. translators: %5$s effectively <code>taxonomy.php</code>
-#. translators: %6$s see msgid "template hierarchy"
-#: includes/taxonomy-images/public-filters.php:391
+#: includes/sm-core-functions.php:906
+msgid "URL is empty or not a string."
+msgstr ""
+
+#: includes/sm-core-functions.php:911
+msgid "URL is malformed."
+msgstr ""
+
+#: includes/sm-core-functions.php:915
+msgid "Only http and https URLs are allowed."
+msgstr ""
+
+#: includes/sm-core-functions.php:926
+msgid "Cloud metadata hostnames are blocked."
+msgstr ""
+
+#: includes/sm-core-functions.php:935
+msgid "Could not resolve host."
+msgstr ""
+
+#: includes/sm-core-functions.php:953
+msgid "Address resolves to a private or reserved IP range."
+msgstr ""
+
+#. translators: Sermon Title.
+#: includes/sm-deprecated-functions.php:82
 #, php-format
-msgid ""
-"%1$s is not a property of the current queried object. This usually happens "
-"when the %2$s filter is used in an unsupported template file. This filter has "
-"been designed to work in taxonomy archives which are traditionally served by "
-"one of the following template files: %3$s, %4$s or %5$s. Learn more about "
-"%6$s."
+msgid "Permalink to %s"
 msgstr ""
 
-#: includes/taxonomy-images/public-filters.php:392
-msgid "term_taxonomy_id"
+#: includes/sm-deprecated-functions.php:102
+#: includes/sm-deprecated-functions.php:145
+#: includes/sm-deprecated-functions.php:218
+msgid "Series: "
 msgstr ""
 
-#: includes/taxonomy-images/public-filters.php:397
-msgid "template hierarchy"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:130
-#, php-format
-msgid "Associate with %1$s"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:130
-#: includes/taxonomy-images/taxonomy-images.php:131
-msgid "this term"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:131
-#, php-format
-msgid "Remove association with %1$s"
-msgstr ""
-
-#. translators: Notice displayed on the custom administration page. 
-#: includes/taxonomy-images/taxonomy-images.php:290
-msgid "Image support for taxonomies successfully updated"
-msgstr ""
-
-#. translators: Notice displayed on the custom administration page. 
-#: includes/taxonomy-images/taxonomy-images.php:293
-msgid "Image support has been disabled for all taxonomies."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:339
-msgid "Taxonomies"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:359
-#: includes/taxonomy-images/taxonomy-images.php:360
-msgid "Taxonomy Images"
-msgstr ""
-
-#. translators: Heading of the custom administration page. 
-#: includes/taxonomy-images/taxonomy-images.php:387
-msgid "Taxonomy Images Plugin Settings"
-msgstr ""
-
-#. translators: An ajax request has failed for an unknown reason. 
-#: includes/taxonomy-images/taxonomy-images.php:447
-msgid "Unknown error encountered"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:529
-#: includes/taxonomy-images/taxonomy-images.php:611
-msgid "tt_id not sent"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:537
-#: includes/taxonomy-images/taxonomy-images.php:619
-msgid "tt_id is empty"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:544
-#: includes/taxonomy-images/taxonomy-images.php:626
-msgid "You do not have the correct capability to manage this term"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:551
-msgid "No nonce included."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:558
-#: includes/taxonomy-images/taxonomy-images.php:640
-msgid "Nonce did not match"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:565
-msgid "Image id not sent"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:573
-msgid "Image id is not a positive integer"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:582
-msgid "Image successfully associated"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:588
-msgid "Association could not be created"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:633
-msgid "No nonce included"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:648
-msgid "Nothing to remove"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:657
-msgid "Association successfully removed"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:662
-msgid "Association could not be removed"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:739
-#: includes/taxonomy-images/taxonomy-images.php:793
-msgid "Image"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:786
-#: includes/taxonomy-images/taxonomy-images.php:823
-msgid "term"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:797
-#, php-format
-msgid "Associate an image from your media library to this %1$s."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:846
-#, php-format
-msgid "Associate an image with the %1$s named &ldquo;%2$s&rdquo;."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:847
-#, php-format
-msgid "Upload a new image for this %s."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:847
-msgid "Upload."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:848
-msgid "Delete"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:848
-#, php-format
-msgid "Remove image from this %s."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:882
-msgid "&ldquo;"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:883
-msgid "&rdquo;"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:884
-msgid "Associating &#8230;"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:885
-msgid "Successfully Associated"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:886
-msgid "Removing &#8230;"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:887
-msgid "Successfully Removed"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1162
-#, php-format
-msgid ""
-"The %1$s argument for %2$s is set to %3$s which is not a registered taxonomy. "
-"Please check the spelling and update the argument."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1163
-msgid "taxonomy"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1174
-#, php-format
-msgid "No taxonomies have image support. %1$s"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1180
-#, php-format
-msgid "The %1$s taxonomy does not have image support. %2$s"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1206
-#, php-format
-msgid "The %1$s has been called directly. Please use the %2$s filter instead."
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1243
-msgid "Donate"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1302
-#: includes/taxonomy-images/taxonomy-images.php:1303
-#: includes/types-taxonomies.php:94 includes/types-taxonomies.php:96
-#: includes/types-taxonomies.php:97 includes/types-taxonomies.php:99
-#: includes/types-taxonomies.php:100 includes/types-taxonomies.php:101
-#: includes/types-taxonomies.php:102 includes/types-taxonomies.php:104
-msgid "Preacher"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1302
-#: includes/taxonomy-images/taxonomy-images.php:1303
-#, php-format
-msgid "Set %s&rsquo;s image"
-msgstr ""
-
-#: includes/taxonomy-images/taxonomy-images.php:1304
-#: includes/taxonomy-images/taxonomy-images.php:1305
-msgid "Set Series image"
-msgstr ""
-
-#: includes/template-tags.php:125 includes/template-tags.php:408
-#: includes/template-tags.php:454 includes/widgets.php:96
-msgid "Bible Text: "
-msgstr ""
-
-#. Translators: %s: Preacher label (sentence case; singular) 
-#: includes/template-tags.php:158
-#, php-format
-msgid "Filter by %s"
-msgstr ""
-
-#: includes/template-tags.php:163
-msgid "Filter by Series"
-msgstr ""
-
-#: includes/template-tags.php:168
-msgid "Filter by Topic"
-msgstr ""
-
-#: includes/template-tags.php:173
-msgid "Filter by Book"
-msgstr ""
-
-#: includes/template-tags.php:368
-msgid "Download Files"
-msgstr ""
-
-#: includes/template-tags.php:370
-msgid "MP3"
-msgstr ""
-
-#: includes/template-tags.php:373
-msgid "Notes"
-msgstr ""
-
-#: includes/template-tags.php:423
+#: includes/sm-deprecated-functions.php:231
 msgid "Sermon Topics: "
 msgstr ""
 
-#: includes/types-taxonomies.php:61
-msgid "Add New Sermon"
+#: sermons.php:164
+msgid "Bible Text:"
 msgstr ""
 
-#: includes/types-taxonomies.php:62
-msgid "Edit Sermon"
+#: sermons.php:180
+msgid "Series:"
 msgstr ""
 
-#: includes/types-taxonomies.php:63
-msgid "New Sermon"
+#: sermons.php:651
+msgid "Import done!"
 msgstr ""
 
-#: includes/types-taxonomies.php:64
-msgid "View Sermon"
-msgstr ""
-
-#: includes/types-taxonomies.php:65
-msgid "Search Sermons"
-msgstr ""
-
-#: includes/types-taxonomies.php:67
-msgid "No sermons found in Trash"
-msgstr ""
-
-#: includes/types-taxonomies.php:93 includes/types-taxonomies.php:95
-#: includes/types-taxonomies.php:98 includes/types-taxonomies.php:103
-#: includes/types-taxonomies.php:105
-msgid "Preachers"
-msgstr ""
-
-#: includes/types-taxonomies.php:97
+#. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
+#: sermons.php:871
 #, php-format
-msgid "Most frequent %s"
+msgid "%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled."
 msgstr ""
 
-#: includes/types-taxonomies.php:102
-#, php-format
-msgid "New %s"
+#: views/archive-wpfc_sermon.php:32
+msgid "Sorry, but there aren't any posts matching your query."
 msgstr ""
 
-#: includes/types-taxonomies.php:103
-#, php-format
-msgid "Separate multiple %s with commas"
+#: views/partials/content-sermon-archive.php:112
+msgid "Continue reading..."
 msgstr ""
 
-#: includes/types-taxonomies.php:104
-#, php-format
-msgid "Add or remove %s"
+#: views/partials/content-sermon-archive.php:153
+#: views/partials/content-sermon-single.php:62
+msgid "Passage"
 msgstr ""
 
-#: includes/types-taxonomies.php:105
-#, php-format
-msgid "Choose from most frequent %s"
+#: views/partials/content-sermon-attachments.php:30
+msgid "Download Files"
 msgstr ""
 
-#: includes/types-taxonomies.php:123
-msgid "Search sermon series"
+#: views/partials/content-sermon-attachments.php:37
+#: views/partials/content-sermon-attachments.php:47
+msgid "Notes"
 msgstr ""
 
-#: includes/types-taxonomies.php:124
-msgid "Most frequent sermon series"
+#: views/partials/content-sermon-single.php:99
+msgid "Download Audio File"
 msgstr ""
 
-#: includes/types-taxonomies.php:125
-msgid "All sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:126
-msgid "Edit sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:127
-msgid "Update sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:128
-msgid "Add new sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:129
-msgid "New sermon series name"
-msgstr ""
-
-#: includes/types-taxonomies.php:130
-msgid "Separate sermon series with commas"
-msgstr ""
-
-#: includes/types-taxonomies.php:131
-msgid "Add or remove sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:132
-msgid "Choose from most used sermon series"
-msgstr ""
-
-#: includes/types-taxonomies.php:147 includes/types-taxonomies.php:148
-#: includes/types-taxonomies.php:149
-msgid "Sermon Topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:150
-msgid "Search sermon topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:151
-msgid "Most popular sermon topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:152
-msgid "All sermon topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:153
-msgid "Edit sermon topic"
-msgstr ""
-
-#: includes/types-taxonomies.php:154
-msgid "Update sermon topic"
-msgstr ""
-
-#: includes/types-taxonomies.php:155
-msgid "Add new sermon topic"
-msgstr ""
-
-#: includes/types-taxonomies.php:156
-msgid "New sermon topic"
-msgstr ""
-
-#: includes/types-taxonomies.php:157
-msgid "Separate sermon topics with commas"
-msgstr ""
-
-#: includes/types-taxonomies.php:158
-msgid "Add or remove sermon topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:159
-msgid "Choose from most used sermon topics"
-msgstr ""
-
-#: includes/types-taxonomies.php:174 includes/types-taxonomies.php:175
-#: includes/types-taxonomies.php:176
-msgid "Book of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:177
-msgid "Search books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:178
-msgid "Most popular books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:179
-msgid "All books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:180
-msgid "Edit book of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:181
-msgid "Update book of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:182
-msgid "Add new books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:183
-msgid "New book of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:184
-msgid "Separate books of the Bible with commas"
-msgstr ""
-
-#: includes/types-taxonomies.php:185
-msgid "Add or remove books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:186
-msgid "Choose from most used books of the Bible"
-msgstr ""
-
-#: includes/types-taxonomies.php:205
-msgid "Most popular service types"
-msgstr ""
-
-#: includes/types-taxonomies.php:209
-msgid "Add new service types"
-msgstr ""
-
-#: includes/types-taxonomies.php:210
-msgid "New Service Type"
-msgstr ""
-
-#: includes/types-taxonomies.php:211
-msgid "Separate service types with commas"
-msgstr ""
-
-#: includes/types-taxonomies.php:212
-msgid "Add or remove service types"
-msgstr ""
-
-#: includes/types-taxonomies.php:213
-msgid "Choose from most used service types"
-msgstr ""
-
-#: includes/types-taxonomies.php:346
-msgid "Add Sermon Audio"
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:29
-#, php-format
-msgid "The %s method must be overridden."
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:41
-#: includes/vendor/abstract-wp-rest-controller.php:53
-#: includes/vendor/abstract-wp-rest-controller.php:65
-#: includes/vendor/abstract-wp-rest-controller.php:77
-#: includes/vendor/abstract-wp-rest-controller.php:89
-#: includes/vendor/abstract-wp-rest-controller.php:101
-#: includes/vendor/abstract-wp-rest-controller.php:113
-#: includes/vendor/abstract-wp-rest-controller.php:125
-#: includes/vendor/abstract-wp-rest-controller.php:137
-#: includes/vendor/abstract-wp-rest-controller.php:149
-#: includes/vendor/abstract-wp-rest-controller.php:161
-#: includes/vendor/abstract-wp-rest-controller.php:174
-#, php-format
-msgid "Method %s not implemented. Must be overridden in subclass."
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:287
-msgid "Current page of the collection."
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:295
-msgid "Maximum number of items to be returned in result set."
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:304
-msgid "Limit results to those matching a string."
-msgstr ""
-
-#: includes/vendor/abstract-wp-rest-controller.php:324
-msgid ""
-"Scope under which the request is made; determines fields present in response."
-msgstr ""
-
-#: includes/widgets.php:12
-msgid "The most recent sermons on your site"
-msgstr ""
-
-#: includes/widgets.php:14 includes/widgets.php:43
-msgid "Recent Sermons"
-msgstr ""
-
-#: includes/widgets.php:134
-msgid "Title:"
-msgstr ""
-
-#: includes/widgets.php:140
-msgid "Number of sermons to show:"
-msgstr ""
-
-#. translators: plugin header field "Plugin Name"
-#: sermons.php:3
-msgid "Sermon Manager for WordPress"
-msgstr ""
-
-#. translators: plugin header field "Description"
-#: sermons.php:5
-msgid "Add audio and video sermons, manage speakers, series, and more."
-msgstr ""
-
-#: sermons.php:32
-#, php-format
-msgid "PHP %s"
-msgstr ""
-
-#. translators: %1$s current PHP version, see msgid "PHP %s", effectively <strong>PHP %s</strong>
-#. translators: %2$s required PHP version, see msgid "PHP %s", effectively <strong>PHP %s</strong>
-#: sermons.php:32
-#, php-format
-msgid "You are running %1$s, but Sermon Manager requires at least %2$s."
-msgstr ""
-
-#. translators: %s see msgid "&larr;", effectively <span class="meta-nav">&larr;</span> 
-#: views/archive-wpfc_sermon.php:18 views/archive-wpfc_sermon.php:71
-#, php-format
-msgid "%s Older sermons"
-msgstr ""
-
-#. translators: %s see msgid "&rarr;", effectively <span class="meta-nav">&rarr;</span> 
-#: views/archive-wpfc_sermon.php:21 views/archive-wpfc_sermon.php:74
-#, php-format
-msgid "Newer sermons %s"
-msgstr ""
-
-#: views/archive-wpfc_sermon.php:28 views/taxonomy-wpfc_bible_book.php:45
-#: views/taxonomy-wpfc_preacher.php:51 views/taxonomy-wpfc_sermon_series.php:52
-#: views/taxonomy-wpfc_sermon_topics.php:52
-#: views/taxonomy-wpfc_service_type.php:45
-msgid "Not Found"
-msgstr ""
-
-#: views/archive-wpfc_sermon.php:30 views/taxonomy-wpfc_bible_book.php:47
-#: views/taxonomy-wpfc_preacher.php:53 views/taxonomy-wpfc_sermon_series.php:54
-#: views/taxonomy-wpfc_sermon_topics.php:54
-#: views/taxonomy-wpfc_service_type.php:47
-msgid "Apologies, but no sermons were found."
-msgstr ""
-
-#: views/archive-wpfc_sermon.php:47 views/taxonomy-wpfc_bible_book.php:77
-#: views/taxonomy-wpfc_preacher.php:83 views/taxonomy-wpfc_sermon_series.php:84
-#: views/taxonomy-wpfc_sermon_topics.php:84
-#: views/taxonomy-wpfc_service_type.php:77
-#, php-format
-msgid "Preached on %s"
-msgstr ""
-
-#: views/archive-wpfc_sermon.php:60 views/taxonomy-wpfc_bible_book.php:89
-#: views/taxonomy-wpfc_preacher.php:95 views/taxonomy-wpfc_sermon_series.php:96
-#: views/taxonomy-wpfc_sermon_topics.php:96
-#: views/taxonomy-wpfc_service_type.php:89
-#, php-format
-msgid "%s comment"
-msgid_plural "%s comments"
-msgstr[0] ""
-msgstr[1] ""
-
-#: views/archive-wpfc_sermon.php:60 views/taxonomy-wpfc_bible_book.php:89
-#: views/taxonomy-wpfc_preacher.php:95 views/taxonomy-wpfc_sermon_series.php:96
-#: views/taxonomy-wpfc_sermon_topics.php:96
-#: views/taxonomy-wpfc_service_type.php:89
-msgid "Leave a comment"
-msgstr ""
-
-#: views/single-wpfc_sermon.php:30
-msgctxt "Previous post link"
-msgid "&larr;"
-msgstr ""
-
-#: views/single-wpfc_sermon.php:33
-msgctxt "Next post link"
-msgid "&rarr;"
-msgstr ""
-
-#: views/taxonomy-wpfc_bible_book.php:20
-#, php-format
-msgid "Sermons by Book: %s"
-msgstr ""
-
-#. translators: %s see msgid "&larr;", effectively <span class="meta-nav">&larr;</span> 
-#: views/taxonomy-wpfc_bible_book.php:36 views/taxonomy-wpfc_bible_book.php:100
-#: views/taxonomy-wpfc_preacher.php:42 views/taxonomy-wpfc_preacher.php:106
-#: views/taxonomy-wpfc_sermon_series.php:43
-#: views/taxonomy-wpfc_sermon_series.php:107
-#: views/taxonomy-wpfc_sermon_topics.php:43
-#: views/taxonomy-wpfc_sermon_topics.php:107
-#: views/taxonomy-wpfc_service_type.php:36
-#: views/taxonomy-wpfc_service_type.php:100
-#, php-format
-msgid "%s Older posts"
-msgstr ""
-
-#: views/taxonomy-wpfc_bible_book.php:36 views/taxonomy-wpfc_bible_book.php:100
-#: views/taxonomy-wpfc_preacher.php:42 views/taxonomy-wpfc_preacher.php:106
-#: views/taxonomy-wpfc_sermon_series.php:43
-#: views/taxonomy-wpfc_sermon_series.php:107
-#: views/taxonomy-wpfc_sermon_topics.php:43
-#: views/taxonomy-wpfc_sermon_topics.php:107
-#: views/taxonomy-wpfc_service_type.php:36
-#: views/taxonomy-wpfc_service_type.php:100
-msgid "&larr;"
-msgstr ""
-
-#: views/taxonomy-wpfc_bible_book.php:38 views/taxonomy-wpfc_bible_book.php:102
-#: views/taxonomy-wpfc_preacher.php:44 views/taxonomy-wpfc_preacher.php:108
-#: views/taxonomy-wpfc_sermon_series.php:45
-#: views/taxonomy-wpfc_sermon_series.php:109
-#: views/taxonomy-wpfc_sermon_topics.php:45
-#: views/taxonomy-wpfc_sermon_topics.php:109
-#: views/taxonomy-wpfc_service_type.php:38
-#: views/taxonomy-wpfc_service_type.php:102
-msgid "&rarr;"
-msgstr ""
-
-#. translators: %s see msgid "&rarr;", effectively <span class="meta-nav">&rarr;</span> 
-#: views/taxonomy-wpfc_bible_book.php:38 views/taxonomy-wpfc_bible_book.php:102
-#: views/taxonomy-wpfc_preacher.php:44 views/taxonomy-wpfc_preacher.php:108
-#: views/taxonomy-wpfc_sermon_series.php:45
-#: views/taxonomy-wpfc_sermon_series.php:109
-#: views/taxonomy-wpfc_sermon_topics.php:45
-#: views/taxonomy-wpfc_sermon_topics.php:109
-#: views/taxonomy-wpfc_service_type.php:38
-#: views/taxonomy-wpfc_service_type.php:102
-#, php-format
-msgid "Newer posts %s"
-msgstr ""
-
-#: views/taxonomy-wpfc_preacher.php:20
-#, php-format
-msgid "Sermons by: %s"
-msgstr ""
-
-#: views/taxonomy-wpfc_sermon_series.php:20
-#, php-format
-msgid "Sermons Series: %s"
-msgstr ""
-
-#: views/taxonomy-wpfc_sermon_topics.php:20
-#, php-format
-msgid "Sermons Topic: %s"
-msgstr ""
-
-#: views/taxonomy-wpfc_service_type.php:20
-#, php-format
-msgid "Sermons By Service: %s"
+#: views/taxonomy-wpfc_bible_book.php:33
+#: views/taxonomy-wpfc_preacher.php:33
+#: views/taxonomy-wpfc_sermon_series.php:33
+#: views/taxonomy-wpfc_sermon_topics.php:33
+#: views/taxonomy-wpfc_service_type.php:33
+msgid "Sorry, but there are no posts matching your query."
 msgstr ""

@@ -8,10 +8,46 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * User can also use a custom action for echoing the whole feed.
- * Example: `do_action( 'do_feed_podcast' );`
+ * Locates and loads the podcast feed template.
+ *
+ * The view can be overridden by placing a file named "wpfc-podcast-feed.php"
+ * in your (child) theme.
+ *
+ * @since 3.1.5
  */
-add_action( 'do_feed_podcast', 'wpfc_podcast_render', 10, 1 );
+function sm_load_podcast_template() {
+	$overridden_template = locate_template( 'wpfc-podcast-feed.php' );
+	if ( $overridden_template ) {
+		load_template( $overridden_template );
+	} else {
+		load_template( SM_PATH . 'views/wpfc-podcast-feed.php' );
+	}
+}
+
+/**
+ * Renders the dedicated podcast feed at `?feed=podcast`.
+ *
+ * The handler previously registered here, wpfc_podcast_render(), was deprecated
+ * to a no-op in 2.13.0, so the route returned an empty body (and logged a
+ * deprecation notice) while the real rendering lived only on rss_tag_pre, which
+ * fires inside core's feed-rss2.php and so never ran for ?feed=podcast. This
+ * handler renders the feed directly. Unlike the rss_tag_pre path it does not
+ * inherit core's Content-Type header or XML prolog, so both are emitted here;
+ * the template itself begins at the <rss> element.
+ *
+ * Users can also echo the whole feed manually: `do_action( 'do_feed_podcast' );`.
+ *
+ * @since 3.1.5
+ */
+function sm_do_feed_podcast() {
+	header( 'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ), true );
+	echo '<?xml version="1.0" encoding="' . esc_attr( get_option( 'blog_charset' ) ) . '"?>' . "\n";
+
+	sm_load_podcast_template();
+
+	exit;
+}
+add_action( 'do_feed_podcast', 'sm_do_feed_podcast' );
 
 /**
  * Redirection, if enabled in settings.
@@ -37,12 +73,7 @@ add_action( 'rss_tag_pre', function () {
 	global $post_type, $taxonomy;
 
 	if ( 'wpfc_sermon' === $post_type || in_array( $taxonomy, sm_get_taxonomies() ) ) {
-		$overridden_template = locate_template( 'wpfc-podcast-feed.php' );
-		if ( $overridden_template ) {
-			load_template( $overridden_template );
-		} else {
-			load_template( SM_PATH . 'views/wpfc-podcast-feed.php' );
-		}
+		sm_load_podcast_template();
 
 		exit;
 	}

@@ -93,7 +93,7 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 
 * New: an "Archive layout" option in Settings > Display, under Archive. Choose Classic (the existing full-width cards, unchanged), Compact list, or Grid for sermon archive pages and the [sermons] shortcode. The shortcode also accepts a layout="classic|compact|grid" attribute to override the setting per page. Classic remains the default, so existing sites are unchanged.
 * Updated the bundled CMB2 admin framework from 2.11.0 to 2.12.0, fixing several PHP 8.2/8.3 deprecation notices on the sermon edit screen and a WordPress 7.0 field-styling issue.
-* Fixed PHP 8.3 deprecation notices ("Calling get_class() without arguments is deprecated") emitted by the sermon date hooks.
+* Cleared deprecation notices our own code emitted on current PHP/WordPress: the PHP 8.3 "Calling get_class() without arguments" notices from the sermon date hooks, and the "Hook contextual_help is deprecated" notice from the admin help-tab cleanup (now done on current_screen instead).
 * Refreshed the translation template (.pot) so the renamed plugin strings are available to translators.
 
 = 3.1.3 =

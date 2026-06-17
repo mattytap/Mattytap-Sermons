@@ -542,17 +542,18 @@ class SermonManager { // phpcs:ignore
 		// Render sermon HTML for search compatibility.
 		add_action( 'wp_insert_post', array( $this, 'render_sermon_into_content' ), 10, 2 );
 		// Remove SB Help from SM pages, since it messes up the formatting.
+		// Done on current_screen rather than by adding our own callback to the
+		// deprecated contextual_help hook: hooking contextual_help ourselves is
+		// what makes WordPress emit the "Hook contextual_help is deprecated"
+		// notice (PHP/WP 8.x admin). remove_action does not trigger it, and
+		// current_screen fires before the help tabs render.
 		add_action(
-			'contextual_help',
-			function () {
-				$screen    = get_current_screen();
-				$screen_id = $screen ? $screen->id : '';
-
-				if ( in_array( $screen_id, sm_get_screen_ids() ) ) {
+			'current_screen',
+			function ( $screen ) {
+				if ( $screen && in_array( $screen->id, sm_get_screen_ids(), true ) ) {
 					remove_action( 'contextual_help', 'sb_add_contextual_help' );
 				}
-			},
-			0
+			}
 		);
 		// Allow usage of remote URLs for attachments (used for images imported from SE).
 		add_filter(

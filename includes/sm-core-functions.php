@@ -795,6 +795,60 @@ function wpfc_get_media_url_seconds( $url ) {
 }
 
 /**
+ * Finds the sermon adjacent to a given one, ordered by the preached date (the
+ * `sermon_date` meta) rather than the publish date.
+ *
+ * WordPress core's get_previous_post() / get_next_post() order strictly by
+ * post_date, i.e. when the sermon was published, not when it was preached. This
+ * resolves the neighbour by the numeric sermon_date meta instead, so the
+ * single-sermon next/previous links follow the preaching order, which is what
+ * sm_get_previous_sermon() / sm_get_next_sermon() always claimed to do. See #7.
+ *
+ * Sermons sharing the reference sermon's exact sermon_date are skipped (strict
+ * comparison); a sermon with no sermon_date has no adjacency and returns null.
+ *
+ * @param bool    $previous Whether to get the previous (older) sermon. False for the next (newer) one.
+ * @param WP_Post $post     The reference sermon.
+ *
+ * @return WP_Post|null The adjacent sermon if found, null otherwise.
+ *
+ * @since 3.1.5
+ */
+function sm_get_adjacent_sermon( $previous, $post ) {
+	if ( ! $post instanceof WP_Post ) {
+		return null;
+	}
+
+	$current_date = get_post_meta( $post->ID, 'sermon_date', true );
+
+	if ( '' === $current_date ) {
+		return null;
+	}
+
+	$query = new WP_Query(
+		array(
+			'post_type'           => 'wpfc_sermon',
+			'post_status'         => 'publish',
+			'posts_per_page'      => 1,
+			'post__not_in'        => array( $post->ID ),
+			'meta_query'          => array(
+				'sermon_date_clause' => array(
+					'key'     => 'sermon_date',
+					'value'   => $current_date,
+					'compare' => $previous ? '<' : '>',
+					'type'    => 'NUMERIC',
+				),
+			),
+			'orderby'             => array( 'sermon_date_clause' => $previous ? 'DESC' : 'ASC' ),
+			'no_found_rows'       => true,
+			'ignore_sticky_posts' => true,
+		)
+	);
+
+	return $query->have_posts() ? $query->posts[0] : null;
+}
+
+/**
  * Gets previous latest sermon. I.e. orders sermons by meta and finds the previous one.
  *
  * @param WP_Post $post The current sermon, will use global if not defined.
@@ -812,7 +866,7 @@ function sm_get_previous_sermon( $post = null ) {
 		_doing_it_wrong( __FUNCTION__, '$post must be an instance of WP_Post.', '2.12.5' );
 	}
 
-	$the_post = get_previous_post();
+	$the_post = sm_get_adjacent_sermon( true, $post );
 
 	/**
 	 * Allows to filter the return value.
@@ -840,7 +894,7 @@ function sm_get_next_sermon( $post = null ) {
 		_doing_it_wrong( __FUNCTION__, '$post must be an instance of WP_Post.', '2.12.5' );
 	}
 
-	$the_post = get_next_post();
+	$the_post = sm_get_adjacent_sermon( false, $post );
 
 	/**
 	 * Allows to filter the return value.

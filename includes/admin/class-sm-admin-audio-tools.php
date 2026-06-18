@@ -10,7 +10,7 @@
  * @package SM/Core/Admin
  */
 
-defined( 'ABSPATH' ) or die;
+defined( 'ABSPATH' ) || die;
 
 /**
  * Audio Health reports.

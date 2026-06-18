@@ -52,7 +52,10 @@ class SM_Admin_Audio_Tools {
 							<tr>
 								<td>
 									<a href="<?php echo esc_url( get_edit_post_link( $row['id'] ) ); ?>">
-										<?php echo esc_html( get_the_title( $row['id'] ) ?: __( '(no title)', 'mattytap-sermons' ) ); ?>
+										<?php
+										$sermon_title = get_the_title( $row['id'] );
+										echo esc_html( '' !== $sermon_title ? $sermon_title : __( '(no title)', 'mattytap-sermons' ) );
+										?>
 									</a>
 								</td>
 								<td><?php echo esc_html( $row['problem'] ); ?></td>
@@ -111,13 +114,13 @@ class SM_Admin_Audio_Tools {
 				'no_found_rows'       => true,
 				'ignore_sticky_posts' => true,
 				'meta_query'          => array(
-					'relation'             => 'OR',
-					'audio_url_clause'     => array(
+					'relation'         => 'OR',
+					'audio_url_clause' => array(
 						'key'     => 'sermon_audio',
 						'value'   => '',
 						'compare' => '!=',
 					),
-					'audio_id_clause'      => array(
+					'audio_id_clause'  => array(
 						'key'     => 'sermon_audio_id',
 						'value'   => '',
 						'compare' => '!=',

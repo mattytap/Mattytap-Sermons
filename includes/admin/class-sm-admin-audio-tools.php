@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) or die;
 /**
  * Audio Health reports.
  *
- * @since 3.2.0
+ * @since 3.1.6
  */
 class SM_Admin_Audio_Tools {
 	/**

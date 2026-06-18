@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,11 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1.6 =
+
+* New: an optional "Delete Audio On Sermon Deletion" setting under Settings > General. When enabled, permanently deleting a sermon also removes its audio file from the Media Library, but only when no other sermon uses that file. It applies to permanent deletion only, never to sermons moved to Trash, and never touches externally hosted (URL-only) audio. Off by default, so existing sites are unchanged.
+* New: an "Audio Health" report under Sermons. Two read-only checks: sermons whose audio attachment or local file is missing (a dead player on an otherwise fine-looking sermon), and audio files in the sermons folder that no sermon references. Nothing on the screen changes or deletes anything.
 
 = 3.1.5 =
 
@@ -245,6 +250,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1.6 =
+
+Adds an optional setting to delete a sermon's audio file when the sermon is permanently deleted (off by default, never touches Trash or shared/external audio), and a read-only "Audio Health" report under Sermons for finding broken and orphaned sermon audio. No data change.
 
 = 3.1.5 =
 

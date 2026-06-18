@@ -69,6 +69,14 @@ class SM_Settings_General extends SM_Settings_Page {
 				'default' => get_option( 'posts_per_page' ),
 			),
 			array(
+				'title'    => __( 'Delete Audio On Sermon Deletion', 'mattytap-sermons' ),
+				'type'     => 'checkbox',
+				'desc'     => __( 'When a sermon is permanently deleted, also delete its audio file from the Media Library.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'Only applies on permanent deletion, not when a sermon is moved to Trash, so trashed sermons stay fully recoverable. The audio is removed only when no other sermon references the same file, and externally hosted audio (stored as a URL with no Media Library attachment) is never touched. Off by default.', 'mattytap-sermons' ),
+				'id'       => 'delete_audio_on_delete',
+				'default'  => 'no',
+			),
+			array(
 				'title' => __( 'Links', 'mattytap-sermons' ),
 				'type'  => 'separator_title',
 			),

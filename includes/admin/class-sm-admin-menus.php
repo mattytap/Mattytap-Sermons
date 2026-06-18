@@ -19,6 +19,7 @@ class SM_Admin_Menus {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'settings_menu' ), 60 );
 		add_action( 'admin_menu', array( $this, 'import_export_menu' ), 70 );
+		add_action( 'admin_menu', array( $this, 'audio_health_menu' ), 80 );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'fix_icon' ) );
 
@@ -47,10 +48,27 @@ class SM_Admin_Menus {
 	}
 
 	/**
+	 * Add menu item.
+	 */
+	public function audio_health_menu() {
+		add_submenu_page( 'edit.php?post_type=wpfc_sermon', __( 'Mattytap Sermons Audio Health', 'mattytap-sermons' ), __( 'Audio Health', 'mattytap-sermons' ), 'manage_wpfc_sm_settings', 'sm-audio-health', array(
+			$this,
+			'audio_health_page',
+		) );
+	}
+
+	/**
 	 * Init the settings page.
 	 */
 	public function settings_page() {
 		SM_Admin_Settings::output();
+	}
+
+	/**
+	 * Init the audio health page.
+	 */
+	public function audio_health_page() {
+		SM_Admin_Audio_Tools::output();
 	}
 
 	/**

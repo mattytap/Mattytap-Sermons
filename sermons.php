@@ -574,10 +574,42 @@ class SermonManager { // phpcs:ignore
 		add_action(
 			'before_delete_post',
 			function ( $id ) {
-				global $post_type;
-
-				if ( 'wpfc_sermon' !== $post_type ) {
+				if ( 'wpfc_sermon' !== get_post_type( $id ) ) {
 					return;
+				}
+
+				// Optionally remove the sermon's audio attachment too. Opt-in,
+				// off by default. Fires on permanent deletion only (not Trash),
+				// so trashed sermons keep their audio and stay recoverable.
+				if ( SermonManager::getOption( 'delete_audio_on_delete' ) ) {
+					$audio_id = (int) get_post_meta( $id, 'sermon_audio_id', true );
+
+					// An empty ID means externally hosted (URL-only) audio with
+					// no Media Library attachment to delete; leave it alone.
+					if ( $audio_id > 0 ) {
+						$shared = new WP_Query(
+							array(
+								'post_type'           => 'wpfc_sermon',
+								'post_status'         => 'any',
+								'posts_per_page'      => 1,
+								'fields'              => 'ids',
+								'post__not_in'        => array( $id ),
+								'meta_query'          => array(
+									'sermon_audio_id_clause' => array(
+										'key'   => 'sermon_audio_id',
+										'value' => $audio_id,
+									),
+								),
+								'no_found_rows'       => true,
+								'ignore_sticky_posts' => true,
+							)
+						);
+
+						// Only delete the file when no other sermon uses it.
+						if ( ! $shared->have_posts() ) {
+							wp_delete_attachment( $audio_id, true );
+						}
+					}
 				}
 
 				$sermons_se = get_option( '_sm_import_se_messages' );

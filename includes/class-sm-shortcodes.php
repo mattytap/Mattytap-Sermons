@@ -404,7 +404,8 @@ class SM_Shortcodes {
 	 *
 	 * @type string $atts ['display'] The taxonomy, possible options: series, preachers.
 	 * @type string $atts ['order'] Sorting order, possible options: ASC, DESC.
-	 * @type string $atts ['ordrerby'] Possible options: id, count, name, slug, term_group, sermon (or date), none.
+	 * @type string $atts ['ordrerby'] Possible options: id, count, name, slug, term_group, sermon (aliases: date,
+	 *       sermon_date) to order by most recently preached, none.
 	 * @type string $atts ['size'] Possible options: sermon_small, sermon_medium, sermon_wide, thumbnail, medium,
 	 *       large, full, or any size added with add_image_size().
 	 * @type bool   $atts ['hide_title'] Should we hide title, default false.
@@ -460,25 +461,47 @@ class SM_Shortcodes {
 			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'mattytap-sermons' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'mattytap-sermons' );
 		}
 
-		// Format args.
-		$args = array(
-			'taxonomy'  => $args['display'],
-			'term_args' => array(
-				'order'   => $args['order'],
-				'orderby' => $args['orderby'],
+		// After conversion above, the requested taxonomy is a valid slug.
+		$taxonomy = $args['display'];
+
+		// Build the term query. We only want terms that have an image
+		// assigned (the whole point of this grid); the image attachment ID
+		// lives in the `sm_term_image_id` term meta, written by the term-image
+		// admin UI and by the 2.16.0 migration from the legacy storage.
+		$term_query_args = array(
+			'taxonomy'   => $taxonomy,
+			'hide_empty' => false,
+			'order'      => $args['order'],
+			'orderby'    => $args['orderby'],
+			'meta_query' => array(
+				'image_clause' => array(
+					'key'     => 'sm_term_image_id',
+					'compare' => 'EXISTS',
+				),
 			),
 		);
 
-		// Order by most recent sermon.
-		if ( in_array( $args['term_args']['orderby'], array( 'sermon', 'date' ) ) ) {
-			$args['term_args']['orderby']      = 'meta_value_num';
-			$args['term_args']['meta_key']     = 'sermon_date';
-			$args['term_args']['meta_value']   = time();
-			$args['term_args']['meta_compare'] = '<';
+		// Order by most recently preached sermon. Each term carries a
+		// `sermon_date` term meta (maintained by SM_Dates_WP::update_term_dates())
+		// holding the newest sermon date in that term. Accept the documented
+		// aliases plus the literal `sermon_date` a user might reasonably try.
+		if ( in_array( $args['orderby'], array( 'sermon', 'date', 'sermon_date' ), true ) ) {
+			$term_query_args['meta_query']['date_clause'] = array(
+				'key'     => 'sermon_date',
+				'compare' => 'EXISTS',
+				'type'    => 'NUMERIC',
+			);
+			$term_query_args['orderby'] = 'date_clause';
 		}
 
-		// Get images.
-		$terms = apply_filters( 'sermon-images-get-terms', '', $args ); // phpcs:ignore
+		// Fetch the terms, then attach the image ID each grid row expects.
+		$terms = get_terms( $term_query_args );
+		if ( is_wp_error( $terms ) ) {
+			$terms = array();
+		}
+		foreach ( $terms as $term ) {
+			$term->image_id = (int) get_term_meta( $term->term_id, 'sm_term_image_id', true );
+		}
 
 		// $terms will always return an array
 		if ( ! empty( $terms ) ) {
@@ -504,9 +527,9 @@ class SM_Shortcodes {
 
 			return $list;
 		} else {
-			// If nothing has been found. $args was reshaped above; the requested
-			// taxonomy now lives under 'taxonomy', not 'display'.
-			return 'No ' . $this->convert_taxonomy_name( $args['taxonomy'], true ) . ' images found.';
+			// Nothing found: no terms in this taxonomy carry an image (or, when
+			// ordering by sermon date, none has a dated sermon yet).
+			return 'No ' . $this->convert_taxonomy_name( $taxonomy, true ) . ' images found.';
 		}
 	}
 

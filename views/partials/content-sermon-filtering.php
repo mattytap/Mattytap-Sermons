@@ -107,11 +107,11 @@ foreach (
 			<div class="sortDate" style="display: inline-block">
 				<form action="<?php echo esc_url( $args['action'] ); ?>" method="get">
 					<select name="wpfc_sermon_month"
-							title="<?php esc_attr_e( 'Month preached', 'mattytap-sermons' ); ?>"
+							title="<?php esc_attr_e( 'Month', 'mattytap-sermons' ); ?>"
 							id="wpfc_sermon_month"
 							onchange="if(this.options[this.selectedIndex].value !== ''){return this.form.submit()}else{window.location = window.location.href.split('?')[0];}"
 							autocomplete="off">
-						<option value=""><?php esc_html_e( 'Month preached', 'mattytap-sermons' ); ?></option>
+						<option value=""><?php esc_html_e( 'Month', 'mattytap-sermons' ); ?></option>
 						<?php echo wp_kses( $sm_month_options, sm_template_allowed_html() ); ?>
 					</select>
 					<noscript>

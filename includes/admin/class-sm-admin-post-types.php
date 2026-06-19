@@ -335,6 +335,16 @@ class SM_Admin_Post_Types {
 		);
 		$output = '';
 
+		// Preached-month filter, in place of WordPress's stock published-date
+		// dropdown and in the same position: before the Sermon Type filter.
+		$months = wpfc_get_month_dropdown();
+		if ( '' !== $months ) {
+			$output .= '<select name="wpfc_sermon_month" id="dropdown_wpfc_sermon_month">';
+			$output .= '<option value="">' . esc_html__( 'All dates', 'mattytap-sermons' ) . '</option>';
+			$output .= $months;
+			$output .= '</select>';
+		}
+
 		$output .= '<select name="wpfc_service_type" id="dropdown_wpfc_service_type">';
 		// translators: %s Taxonomy name. Default: Service Type.
 		$output .= '<option value="">' . wp_sprintf( __( 'Filter by %s', 'mattytap-sermons' ), sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ) . '</option>';
@@ -354,15 +364,6 @@ class SM_Admin_Post_Types {
 		}
 
 		$output .= '</select>';
-
-		// Preached-month filter (replaces the stock published-date dropdown).
-		$months = wpfc_get_month_dropdown();
-		if ( '' !== $months ) {
-			$output .= '<select name="wpfc_sermon_month" id="dropdown_wpfc_sermon_month">';
-			$output .= '<option value="">' . esc_html__( 'All preached months', 'mattytap-sermons' ) . '</option>';
-			$output .= $months;
-			$output .= '</select>';
-		}
 
 		echo wp_kses( apply_filters( 'sm_sermon_filters', $output ), array(
 			'select' => array( 'name' => array(), 'id' => array(), 'class' => array() ),

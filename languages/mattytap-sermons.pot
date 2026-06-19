@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.1.7\n"
+"Project-Id-Version: Mattytap Sermons 3.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-19T05:54:34+00:00\n"
+"POT-Creation-Date: 2026-06-19T18:30:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
 #: sermons.php
-#: sermons.php:904
+#: sermons.php:919
 msgid "Mattytap Sermons"
 msgstr ""
 
@@ -171,123 +171,127 @@ msgid "All Sermons"
 msgstr ""
 
 #. translators: %s: The URL to the sermon.
-#: includes/admin/class-sm-admin-post-types.php:57
+#: includes/admin/class-sm-admin-post-types.php:58
 #, php-format
 msgid "Sermon updated. %s"
 msgstr ""
 
 #. translators: %s: The URL to the sermon.
 #. translators: %s The URL to the sermon.
-#: includes/admin/class-sm-admin-post-types.php:57
-#: includes/admin/class-sm-admin-post-types.php:64
-#: includes/admin/class-sm-admin-post-types.php:76
+#: includes/admin/class-sm-admin-post-types.php:58
+#: includes/admin/class-sm-admin-post-types.php:65
+#: includes/admin/class-sm-admin-post-types.php:77
 #: includes/class-sm-post-types.php:286
 #: includes/class-sm-post-types.php:287
 msgid "View sermon"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:58
+#: includes/admin/class-sm-admin-post-types.php:59
 msgid "Custom field updated."
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:59
+#: includes/admin/class-sm-admin-post-types.php:60
 msgid "Custom field deleted."
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:60
+#: includes/admin/class-sm-admin-post-types.php:61
 msgid "Sermon updated."
 msgstr ""
 
 #. translators: %s: Date and time of the revision.
-#: includes/admin/class-sm-admin-post-types.php:62
+#: includes/admin/class-sm-admin-post-types.php:63
 #, php-format
 msgid "Sermon restored to revision from %s"
 msgstr ""
 
 #. translators: %s: The URL to the sermon.
-#: includes/admin/class-sm-admin-post-types.php:64
+#: includes/admin/class-sm-admin-post-types.php:65
 #, php-format
 msgid "Sermon published. %s"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:65
+#: includes/admin/class-sm-admin-post-types.php:66
 msgid "Sermon saved."
 msgstr ""
 
 #. translators: %s: The URL to the sermon.
-#: includes/admin/class-sm-admin-post-types.php:67
+#: includes/admin/class-sm-admin-post-types.php:68
 #, php-format
 msgid "Sermon submitted. %s"
 msgstr ""
 
 #. translators: %s: The URL to the sermon.
 #. translators: %s: The preview sermon URL.
-#: includes/admin/class-sm-admin-post-types.php:67
-#: includes/admin/class-sm-admin-post-types.php:73
+#: includes/admin/class-sm-admin-post-types.php:68
+#: includes/admin/class-sm-admin-post-types.php:74
 msgid "Preview sermon"
 msgstr ""
 
 #. translators: %1$s: The date and time. %2$s: The preview sermon URL.
-#: includes/admin/class-sm-admin-post-types.php:69
+#: includes/admin/class-sm-admin-post-types.php:70
 #, php-format
 msgid "Sermon scheduled for: %1$s. %2$s"
 msgstr ""
 
 #. translators: %1$s: Date. %2$s: Time.
-#: includes/admin/class-sm-admin-post-types.php:71
+#: includes/admin/class-sm-admin-post-types.php:72
 #, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
 #. translators: %s The URL to the sermon.
-#: includes/admin/class-sm-admin-post-types.php:76
+#: includes/admin/class-sm-admin-post-types.php:77
 #, php-format
 msgid "Sermon draft updated. %s"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:96
+#: includes/admin/class-sm-admin-post-types.php:97
 msgid "Sermon Title"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:98
+#: includes/admin/class-sm-admin-post-types.php:99
 msgid "Sermon Series"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:99
+#: includes/admin/class-sm-admin-post-types.php:100
 #: includes/class-sm-post-types.php:145
 #: includes/class-sm-post-types.php:147
 #: views/partials/content-sermon-single.php:117
 msgid "Topics"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:100
+#: includes/admin/class-sm-admin-post-types.php:101
 msgid "Views"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:102
+#: includes/admin/class-sm-admin-post-types.php:103
 msgid "Preached"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:103
+#: includes/admin/class-sm-admin-post-types.php:104
 msgid "Published"
 msgstr ""
 
 #. translators: %s: The time. Such as "12 hours".
-#: includes/admin/class-sm-admin-post-types.php:138
+#: includes/admin/class-sm-admin-post-types.php:139
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:152
+#: includes/admin/class-sm-admin-post-types.php:153
 msgid "Error"
 msgstr ""
 
-#: includes/admin/class-sm-admin-post-types.php:258
+#: includes/admin/class-sm-admin-post-types.php:259
 msgid "Sermon title"
 msgstr ""
 
+#: includes/admin/class-sm-admin-post-types.php:343
+msgid "All dates"
+msgstr ""
+
 #. translators: %s Taxonomy name. Default: Service Type.
-#: includes/admin/class-sm-admin-post-types.php:313
+#: includes/admin/class-sm-admin-post-types.php:350
 #, php-format
 msgid "Filter by %s"
 msgstr ""
@@ -633,83 +637,91 @@ msgid "If your theme renders its own sermon archive (theme compatibility mode), 
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:97
-msgid "Display Audio Player"
+msgid "Group sermons by month"
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:99
-msgid "Displays audio player on archive pages. Default unchecked."
+msgid "Adds a month heading (e.g. \"March 2023\") on archive pages and in the [sermons] shortcode whenever the preached month changes. Only applies when sermons are ordered by date preached. Default unchecked."
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:104
-msgid "Display Attachments"
+msgid "Display Audio Player"
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:106
-msgid "Displays attachments links on archive pages. Default unchecked."
+msgid "Displays audio player on archive pages. Default unchecked."
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:111
-#: includes/admin/settings/class-sm-settings-display.php:156
-msgid "Disable Sermon Image"
+msgid "Display Attachments"
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:113
-msgid "Disable image output on archive views. Default unchecked."
+msgid "Displays attachments links on archive pages. Default unchecked."
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:118
-msgid "Read More"
+#: includes/admin/settings/class-sm-settings-display.php:163
+msgid "Disable Sermon Image"
 msgstr ""
 
 #: includes/admin/settings/class-sm-settings-display.php:120
+msgid "Disable image output on archive views. Default unchecked."
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:125
+msgid "Read More"
+msgstr ""
+
+#: includes/admin/settings/class-sm-settings-display.php:127
 msgid "Do not show read more when all the text is visible."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:121
+#: includes/admin/settings/class-sm-settings-display.php:128
 msgid "By default, \"Read more...\" text shows up regardless if sermon has or does not have description. By checking this option, it will show only if there is more text to read."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:126
+#: includes/admin/settings/class-sm-settings-display.php:133
 msgid "Hide Filtering"
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:128
+#: includes/admin/settings/class-sm-settings-display.php:135
 msgid "Hide filters on archive pages."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:129
+#: includes/admin/settings/class-sm-settings-display.php:136
 msgid "Currently, the filter dropdowns are shown by default on all archive pages. By checking this option, you can hide them. Default unchecked."
 msgstr ""
 
 #. translators: %s the taxonomy label. Default: Service Type.
-#: includes/admin/settings/class-sm-settings-display.php:135
+#: includes/admin/settings/class-sm-settings-display.php:142
 #, php-format
 msgid "Display %s Filtering"
 msgstr ""
 
 #. translators: %s the taxonomy label. Default: service type.
-#: includes/admin/settings/class-sm-settings-display.php:138
+#: includes/admin/settings/class-sm-settings-display.php:145
 #, php-format
 msgid "Displays %s filtering on archive pages. Default unchecked."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:144
+#: includes/admin/settings/class-sm-settings-display.php:151
 msgid "Use Previous/Next Pagination"
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:146
+#: includes/admin/settings/class-sm-settings-display.php:153
 msgid "Instead of paginated pagination (1,2,3), use previous/next links."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:147
+#: includes/admin/settings/class-sm-settings-display.php:154
 msgid "Some themes do not have styling for paginated pagination, so it's easier for you to use previous/next pagination for them, instead of writing custom CSS. Default unchecked."
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:152
+#: includes/admin/settings/class-sm-settings-display.php:159
 msgid "Single"
 msgstr ""
 
-#: includes/admin/settings/class-sm-settings-display.php:158
+#: includes/admin/settings/class-sm-settings-display.php:165
 msgid "Disable image output on single sermon view. Default unchecked."
 msgstr ""
 
@@ -1823,12 +1835,12 @@ msgstr ""
 msgid "Series:"
 msgstr ""
 
-#: sermons.php:684
+#: sermons.php:699
 msgid "Import done!"
 msgstr ""
 
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
-#: sermons.php:904
+#: sermons.php:919
 #, php-format
 msgid "%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled."
 msgstr ""
@@ -1853,6 +1865,11 @@ msgstr ""
 #: views/partials/content-sermon-attachments.php:37
 #: views/partials/content-sermon-attachments.php:47
 msgid "Notes"
+msgstr ""
+
+#: views/partials/content-sermon-filtering.php:110
+#: views/partials/content-sermon-filtering.php:114
+msgid "Month"
 msgstr ""
 
 #: views/partials/content-sermon-single.php:99

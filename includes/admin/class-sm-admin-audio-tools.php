@@ -2,10 +2,11 @@
 /**
  * Audio Health diagnostic screen.
  *
- * Two read-only reports that surface the audio integrity problems described in
- * issue #49: sermons whose audio reference is broken, and sermon-area audio
- * attachments that no sermon references. Nothing on this screen deletes or
- * changes anything; it is purely diagnostic.
+ * Three read-only reports that surface the audio integrity problems described
+ * in issue #49: sermons whose audio reference is broken, sermon-area audio
+ * attachments that no sermon references, and audio files shared by more than
+ * one sermon. Nothing on this screen deletes or changes anything; it is purely
+ * diagnostic.
  *
  * @package SM/Core/Admin
  */
@@ -23,8 +24,15 @@ class SM_Admin_Audio_Tools {
 	 */
 	public static function output() {
 		$sermon_ids = self::get_sermon_ids_with_audio();
+		$references = self::build_reference_map( $sermon_ids );
 		$broken     = self::get_broken_references( $sermon_ids );
-		$orphans    = self::get_orphaned_audio( $sermon_ids );
+		$orphans    = self::get_orphaned_audio( $references );
+		$shared     = self::get_shared_audio( $references['ids'] );
+
+		// Use the site's own taxonomy labels, so a site that renames Service
+		// Type to (say) Congregation sees its own wording in these columns.
+		$preacher_label = sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' );
+		$service_label  = sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' );
 
 		?>
 		<div class="wrap">
@@ -44,6 +52,9 @@ class SM_Admin_Audio_Tools {
 					<thead>
 						<tr>
 							<th><?php esc_html_e( 'Sermon', 'mattytap-sermons' ); ?></th>
+							<th><?php esc_html_e( 'Date preached', 'mattytap-sermons' ); ?></th>
+							<th><?php echo esc_html( $preacher_label ); ?></th>
+							<th><?php echo esc_html( $service_label ); ?></th>
 							<th><?php esc_html_e( 'Problem', 'mattytap-sermons' ); ?></th>
 						</tr>
 					</thead>
@@ -52,12 +63,12 @@ class SM_Admin_Audio_Tools {
 							<tr>
 								<td>
 									<a href="<?php echo esc_url( get_edit_post_link( $row['id'] ) ); ?>">
-										<?php
-										$sermon_title = get_the_title( $row['id'] );
-										echo esc_html( '' !== $sermon_title ? $sermon_title : __( '(no title)', 'mattytap-sermons' ) );
-										?>
+										<?php echo esc_html( self::sermon_title( $row['id'] ) ); ?>
 									</a>
 								</td>
+								<td><?php echo esc_html( self::or_none( $row['date'] ) ); ?></td>
+								<td><?php echo esc_html( self::or_none( $row['preacher'] ) ); ?></td>
+								<td><?php echo esc_html( self::or_none( $row['service'] ) ); ?></td>
 								<td><?php echo esc_html( $row['problem'] ); ?></td>
 							</tr>
 						<?php endforeach; ?>
@@ -89,6 +100,42 @@ class SM_Admin_Audio_Tools {
 									<a href="<?php echo esc_url( get_edit_post_link( $att_id ) ); ?>">
 										<?php esc_html_e( 'View in Media Library', 'mattytap-sermons' ); ?>
 									</a>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+
+			<h2><?php esc_html_e( 'Audio used by more than one sermon', 'mattytap-sermons' ); ?></h2>
+			<p class="description">
+				<?php esc_html_e( 'Audio attachments that two or more sermons reference. The optional delete-cleanup keeps these on purpose: it never removes a file another sermon still uses. Listed here so you can spot sermons sharing a file, whether on purpose or by accident.', 'mattytap-sermons' ); ?>
+			</p>
+			<?php if ( empty( $shared ) ) : ?>
+				<p><strong><?php esc_html_e( 'No audio is shared between sermons.', 'mattytap-sermons' ); ?></strong></p>
+			<?php else : ?>
+				<table class="widefat striped">
+					<thead>
+						<tr>
+							<th><?php esc_html_e( 'File', 'mattytap-sermons' ); ?></th>
+							<th><?php esc_html_e( 'Used by', 'mattytap-sermons' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $shared as $att_id => $using_ids ) : ?>
+							<tr>
+								<td><?php echo esc_html( self::attachment_relative_path( $att_id ) ); ?></td>
+								<td>
+									<?php foreach ( $using_ids as $index => $using_id ) : ?>
+										<?php echo 0 === $index ? '' : '<br>'; ?>
+										<a href="<?php echo esc_url( get_edit_post_link( $using_id ) ); ?>">
+											<?php echo esc_html( self::sermon_title( $using_id ) ); ?>
+										</a>
+										<?php $using_date = self::sermon_date_display( $using_id ); ?>
+										<?php if ( '' !== $using_date ) : ?>
+											<span class="description"><?php echo esc_html( '(' . $using_date . ')' ); ?></span>
+										<?php endif; ?>
+									<?php endforeach; ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -133,11 +180,48 @@ class SM_Admin_Audio_Tools {
 	}
 
 	/**
+	 * Map every referenced attachment ID to the sermons that reference it, and
+	 * collect the set of referenced audio URLs, in a single pass.
+	 *
+	 * Shared by the orphaned and the shared-audio reports so the sermons are
+	 * only walked once for both.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param int[] $sermon_ids Sermon post IDs that have audio.
+	 *
+	 * @return array{ids: array<int, int[]>, urls: array<string, bool>} Attachment
+	 *               ID to referencing sermon IDs, and the set of referenced URLs.
+	 */
+	private static function build_reference_map( $sermon_ids ) {
+		$by_id  = array();
+		$by_url = array();
+
+		foreach ( $sermon_ids as $sermon_id ) {
+			$audio_id = (int) get_post_meta( $sermon_id, 'sermon_audio_id', true );
+			if ( $audio_id > 0 ) {
+				$by_id[ $audio_id ][] = $sermon_id;
+			}
+
+			$audio_url = (string) get_post_meta( $sermon_id, 'sermon_audio', true );
+			if ( '' !== $audio_url ) {
+				$by_url[ self::normalize_url( $audio_url ) ] = true;
+			}
+		}
+
+		return array(
+			'ids'  => $by_id,
+			'urls' => $by_url,
+		);
+	}
+
+	/**
 	 * Find sermons whose audio attachment or local file is missing.
 	 *
 	 * @param int[] $sermon_ids Sermon post IDs to check.
 	 *
-	 * @return array[] Rows of array( 'id' => int, 'problem' => string ).
+	 * @return array[] Rows of array( 'id' => int, 'problem' => string,
+	 *                 'date' => string, 'preacher' => string, 'service' => string ).
 	 */
 	private static function get_broken_references( $sermon_ids ) {
 		$broken = array();
@@ -172,8 +256,11 @@ class SM_Admin_Audio_Tools {
 
 			if ( '' !== $problem ) {
 				$broken[] = array(
-					'id'      => $sermon_id,
-					'problem' => $problem,
+					'id'       => $sermon_id,
+					'problem'  => $problem,
+					'date'     => self::sermon_date_display( $sermon_id ),
+					'preacher' => self::taxonomy_terms_display( $sermon_id, 'wpfc_preacher' ),
+					'service'  => self::taxonomy_terms_display( $sermon_id, 'wpfc_service_type' ),
 				);
 			}
 		}
@@ -184,26 +271,13 @@ class SM_Admin_Audio_Tools {
 	/**
 	 * Find sermon-area audio attachments that no sermon references.
 	 *
-	 * @param int[] $sermon_ids Sermon post IDs that have audio.
+	 * @param array $references The 'ids' and 'urls' reference map from build_reference_map().
 	 *
 	 * @return int[] Orphaned attachment IDs.
 	 */
-	private static function get_orphaned_audio( $sermon_ids ) {
-		// Build the sets of attachment IDs and URLs that sermons reference.
-		$referenced_ids  = array();
-		$referenced_urls = array();
-
-		foreach ( $sermon_ids as $sermon_id ) {
-			$audio_id = (int) get_post_meta( $sermon_id, 'sermon_audio_id', true );
-			if ( $audio_id > 0 ) {
-				$referenced_ids[ $audio_id ] = true;
-			}
-
-			$audio_url = (string) get_post_meta( $sermon_id, 'sermon_audio', true );
-			if ( '' !== $audio_url ) {
-				$referenced_urls[ self::normalize_url( $audio_url ) ] = true;
-			}
-		}
+	private static function get_orphaned_audio( $references ) {
+		$referenced_ids  = $references['ids'];
+		$referenced_urls = $references['urls'];
 
 		// Audio attachments uploaded under the plugin's /sermons upload area.
 		$attachments = get_posts(
@@ -243,6 +317,94 @@ class SM_Admin_Audio_Tools {
 		}
 
 		return $orphans;
+	}
+
+	/**
+	 * Reduce the reference map to attachments shared by two or more sermons.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param array<int, int[]> $referenced_ids Attachment ID to referencing sermon IDs.
+	 *
+	 * @return array<int, int[]> The subset referenced by more than one sermon.
+	 */
+	private static function get_shared_audio( $referenced_ids ) {
+		$shared = array();
+
+		foreach ( $referenced_ids as $att_id => $using_ids ) {
+			if ( count( $using_ids ) >= 2 ) {
+				$shared[ $att_id ] = $using_ids;
+			}
+		}
+
+		return $shared;
+	}
+
+	/**
+	 * A sermon's title, falling back to a placeholder for untitled sermons.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param int $sermon_id Sermon post ID.
+	 *
+	 * @return string The title, or "(no title)".
+	 */
+	private static function sermon_title( $sermon_id ) {
+		$title = get_the_title( $sermon_id );
+
+		return '' !== $title ? $title : __( '(no title)', 'mattytap-sermons' );
+	}
+
+	/**
+	 * The sermon's preached date, formatted to the site's date format.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param int $sermon_id Sermon post ID.
+	 *
+	 * @return string The formatted date, or an empty string if none is set.
+	 */
+	private static function sermon_date_display( $sermon_id ) {
+		$stamp = get_post_meta( $sermon_id, 'sermon_date', true );
+
+		if ( '' === $stamp ) {
+			return '';
+		}
+
+		return wp_date( (string) get_option( 'date_format' ), (int) $stamp );
+	}
+
+	/**
+	 * A sermon's terms in a taxonomy, as a comma-separated plain-text list.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param int    $sermon_id Sermon post ID.
+	 * @param string $taxonomy  Taxonomy name.
+	 *
+	 * @return string Comma-separated term names, or an empty string if none.
+	 */
+	private static function taxonomy_terms_display( $sermon_id, $taxonomy ) {
+		$terms = get_the_terms( $sermon_id, $taxonomy );
+
+		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			return '';
+		}
+
+		return implode( ', ', wp_list_pluck( $terms, 'name' ) );
+	}
+
+	/**
+	 * A display value, or a "(none)" placeholder when it is empty.
+	 *
+	 * @since 3.1.7
+	 *
+	 * @param string $value The value to show.
+	 *
+	 * @return string The value, or "(none)".
+	 */
+	private static function or_none( $value ) {
+		return '' !== $value ? $value : __( '(none)', 'mattytap-sermons' );
 	}
 
 	/**

@@ -59,6 +59,18 @@ class SM_API {
 		foreach ( $keys as $key ) {
 			$data = isset( $params[ $key ] ) ? $params[ $key ] : null;
 
+			// The REST field names sermon_video_embed and sermon_video_url are
+			// exposed for readability, but the plugin stores and renders these
+			// values under its own meta keys (the CMB2 field IDs). Map them so a
+			// video posted through the API lands where the templates read it,
+			// rather than under a key nothing renders. See #3.
+			$meta_key = $key;
+			if ( 'sermon_video_embed' === $key ) {
+				$meta_key = 'sermon_video';
+			} elseif ( 'sermon_video_url' === $key ) {
+				$meta_key = 'sermon_video_link';
+			}
+
 			if ( ! $data ) {
 				if ( 'sermon_date' === $key ) {
 					update_post_meta( $post->ID, 'sermon_date', strtotime( $post->post_date ) );
@@ -87,14 +99,14 @@ class SM_API {
 				}
 			}
 
-			update_post_meta( $post->ID, $key, $data );
+			update_post_meta( $post->ID, $meta_key, $data );
 
 			if ( 'sermon_date' === $key ) {
 				update_post_meta( $post->ID, 'sermon_date_auto', 0 );
 			}
 
-			add_filter( "cmb2_override_{$key}_meta_remove", '__return_true' );
-			add_filter( "cmb2_override_{$key}_meta_save", '__return_true' );
+			add_filter( "cmb2_override_{$meta_key}_meta_remove", '__return_true' );
+			add_filter( "cmb2_override_{$meta_key}_meta_save", '__return_true' );
 		}
 	}
 

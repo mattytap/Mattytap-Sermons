@@ -686,7 +686,7 @@ class SermonManager { // phpcs:ignore
 					$class->import();
 					add_action(
 						'admin_notices',
-						function () {
+						function () use ( $class ) {
 							if ( ! ! SermonManager::getOption( 'debug_import' ) ) :
 								?>
 								<div class="notice notice-info">
@@ -695,9 +695,15 @@ class SermonManager { // phpcs:ignore
 								</div>
 							<?php endif; ?>
 
-							<div class="notice notice-success">
-								<p><?php esc_html_e( 'Import done!', 'mattytap-sermons' ); ?></p>
-							</div>
+							<?php if ( $class instanceof SM_Import_SM && $class->import_failed ) : ?>
+								<div class="notice notice-error">
+									<p><?php esc_html_e( 'Import failed. Please check that you selected a valid export file, then try again.', 'mattytap-sermons' ); ?></p>
+								</div>
+							<?php else : ?>
+								<div class="notice notice-success">
+									<p><?php esc_html_e( 'Import done!', 'mattytap-sermons' ); ?></p>
+								</div>
+							<?php endif; ?>
 							<?php
 						}
 					);

@@ -35,6 +35,13 @@ class SM_Import_SM {
 	public $start_time = 0;
 
 	/**
+	 * Whether the import failed, e.g. the uploaded file could not be read.
+	 *
+	 * @var bool
+	 */
+	public $import_failed = false;
+
+	/**
 	 * Max. supported WXR version.
 	 *
 	 * @var float
@@ -296,6 +303,7 @@ class SM_Import_SM {
 			$this->log( 'Content import ended.', 0 );
 		} else {
 			/* Notify about failed file upload */
+			$this->import_failed = true;
 			$this->log( 'Error while loading export file', 0 );
 		}
 
@@ -1185,6 +1193,13 @@ class SM_Import_SM {
 
 		wp_defer_term_counting( false );
 		wp_defer_comment_counting( false );
+
+		// An import can add the first sermons (and so the first taxonomy terms)
+		// on a fresh site. Refresh the rewrite rules so the sermon archive and
+		// feed URLs resolve straight away, rather than 404ing until permalinks
+		// are re-saved by hand. Soft flush: regenerates the rules option without
+		// touching .htaccess. See #1.
+		flush_rewrite_rules( false );
 
 		do_action( 'import_end' );
 	}

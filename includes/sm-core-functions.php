@@ -1095,3 +1095,175 @@ function sm_get_taxonomy_field( $taxonomy, $field_name ) {
 
 	return null;
 }
+
+/**
+ * Build a meta_query clause matching sermons preached within a given month or year.
+ *
+ * The preached date lives in the numeric `sermon_date` post meta (a Unix
+ * timestamp). This is the single, canonical way to query it, used by the
+ * front-end archive, the [sermons] shortcode, and the admin list table.
+ *
+ * Three things the original inline range queries got wrong are fixed here:
+ * the upper bound is the last *second* of the period (the originals stopped at
+ * midnight on the last day, silently dropping it); the comparison is NUMERIC
+ * (the originals compared timestamps as strings); and the bounds are computed
+ * with gmmktime rather than cal_days_in_month, which needs the PHP calendar
+ * extension. Bounds are taken at UTC so the month list and the filter results
+ * are always computed on the same basis and cannot disagree.
+ *
+ * @param int $year  Four-digit year.
+ * @param int $month Month 1-12, or 0 for the whole year.
+ *
+ * @return array A single meta_query clause, or an empty array on bad input.
+ *
+ * @since 3.2.0
+ */
+function sm_sermon_month_meta_query( $year, $month = 0 ) {
+	$year  = intval( $year );
+	$month = intval( $month );
+
+	if ( $year < 1 ) {
+		return array();
+	}
+
+	if ( $month >= 1 && $month <= 12 ) {
+		$lower = gmmktime( 0, 0, 0, $month, 1, $year );
+		// gmmktime normalises month 13 to January of the following year.
+		$upper = gmmktime( 0, 0, 0, $month + 1, 1, $year ) - 1;
+	} else {
+		$lower = gmmktime( 0, 0, 0, 1, 1, $year );
+		$upper = gmmktime( 0, 0, 0, 1, 1, $year + 1 ) - 1;
+	}
+
+	return array(
+		'key'     => 'sermon_date',
+		'value'   => array( $lower, $upper ),
+		'compare' => 'BETWEEN',
+		'type'    => 'NUMERIC',
+	);
+}
+
+/**
+ * Return the distinct months that have at least one published sermon.
+ *
+ * Read from the `sermon_date` meta so the list reflects the preached date, not
+ * the published date, and never offers an empty month. Cached in a transient
+ * that is cleared whenever a sermon is saved, trashed, or deleted.
+ *
+ * @return array List of 'Y-m' strings, newest first.
+ *
+ * @since 3.2.0
+ */
+function sm_get_sermon_months() {
+	$cached = get_transient( 'sm_sermon_months' );
+	if ( is_array( $cached ) ) {
+		return $cached;
+	}
+
+	global $wpdb;
+
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- One cached read of distinct preached months; no core API does this.
+	$timestamps = $wpdb->get_col(
+		$wpdb->prepare(
+			"SELECT DISTINCT pm.meta_value
+			FROM {$wpdb->postmeta} pm
+			INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+			WHERE pm.meta_key = %s
+			AND p.post_type = %s
+			AND p.post_status = %s",
+			'sermon_date',
+			'wpfc_sermon',
+			'publish'
+		)
+	);
+
+	$months = array();
+	foreach ( $timestamps as $timestamp ) {
+		$timestamp = intval( $timestamp );
+		if ( $timestamp <= 0 ) {
+			continue;
+		}
+		$months[ gmdate( 'Y-m', $timestamp ) ] = true;
+	}
+
+	$months = array_keys( $months );
+	rsort( $months ); // 'Y-m' strings sort chronologically; newest first.
+
+	set_transient( 'sm_sermon_months', $months, DAY_IN_SECONDS );
+
+	return $months;
+}
+
+/**
+ * Clear the cached sermon-months list.
+ *
+ * @since 3.2.0
+ */
+function sm_flush_sermon_months_cache() {
+	delete_transient( 'sm_sermon_months' );
+}
+
+add_action( 'save_post_wpfc_sermon', 'sm_flush_sermon_months_cache' );
+add_action( 'deleted_post', 'sm_flush_sermon_months_cache' );
+add_action( 'trashed_post', 'sm_flush_sermon_months_cache' );
+add_action( 'untrashed_post', 'sm_flush_sermon_months_cache' );
+
+/**
+ * Human-readable, localised label for a 'Y-m' month key. e.g. "March 2023".
+ *
+ * @param string $ym A 'Y-m' string.
+ *
+ * @return string The localised "F Y" label, or '' on bad input.
+ *
+ * @since 3.2.0
+ */
+function sm_get_sermon_month_label( $ym ) {
+	list( $year, $month ) = array_pad( explode( '-', (string) $ym ), 2, 0 );
+	$year  = intval( $year );
+	$month = intval( $month );
+
+	if ( $year < 1 || $month < 1 || $month > 12 ) {
+		return '';
+	}
+
+	// The 15th avoids any month-boundary drift when the label is localised.
+	return date_i18n( 'F Y', gmmktime( 0, 0, 0, $month, 15, $year ) );
+}
+
+/**
+ * Read and validate the preached-month filter from the request.
+ *
+ * Looks for `wpfc_sermon_month=YYYY-MM` on the query string. This is a public,
+ * read-only browse filter, so it carries no nonce, exactly like the taxonomy
+ * filters alongside it.
+ *
+ * @return array|false array( 'year', 'month', 'ym' ) or false when absent/invalid.
+ *
+ * @since 3.2.0
+ */
+function sm_get_filter_month() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public read-only browse filter, same as the taxonomy filters.
+	if ( empty( $_GET['wpfc_sermon_month'] ) ) {
+		return false;
+	}
+
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Public read-only browse filter.
+	$raw = sanitize_text_field( wp_unslash( $_GET['wpfc_sermon_month'] ) );
+
+	if ( ! preg_match( '/^(\d{4})-(\d{2})$/', $raw, $matches ) ) {
+		return false;
+	}
+
+	$year  = intval( $matches[1] );
+	$month = intval( $matches[2] );
+
+	if ( $month < 1 || $month > 12 ) {
+		return false;
+	}
+
+	return array(
+		'year'  => $year,
+		'month' => $month,
+		'ym'    => sprintf( '%04d-%02d', $year, $month ),
+	);
+}

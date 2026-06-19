@@ -257,6 +257,21 @@ class SermonManager { // phpcs:ignore
 
 				$query->set( 'posts_per_page', SermonManager::getOption( 'sermon_count', get_option( 'posts_per_page' ) ) );
 
+				// Filter by preached month when ?wpfc_sermon_month=YYYY-MM is
+				// present (the front-end "Month preached" dropdown). Appended to
+				// any existing meta_query so it works whatever the sort order,
+				// and queries the preached date, not the published date.
+				$filter_month = sm_get_filter_month();
+				if ( $filter_month ) {
+					$meta_query = $query->get( 'meta_query' );
+					if ( ! is_array( $meta_query ) ) {
+						$meta_query = array();
+					}
+
+					$meta_query[] = sm_sermon_month_meta_query( $filter_month['year'], $filter_month['month'] );
+					$query->set( 'meta_query', $meta_query );
+				}
+
 				/**
 				 * Allows to filter the sermon query.
 				 *

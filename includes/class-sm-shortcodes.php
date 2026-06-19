@@ -896,48 +896,31 @@ class SM_Shortcodes {
 
 		$query_args['orderby'] = $args['orderby'];
 
-		// Add year month etc filter, adjusted for sermon date.
-		if ( 'meta_value_num' === $query_args['orderby'] ) {
-			$date_args = array(
-				'year',
-				'month',
-			);
+		// Filter by preached month/year. A ?wpfc_sermon_month=YYYY-MM request
+		// parameter (from the front-end filter dropdown) overrides the
+		// shortcode attributes, so any [sermons] instance can be filtered by
+		// month. Applied for every ordering, not only preached-date ordering,
+		// and appended to the meta_query rather than resetting it, so it never
+		// clobbers the future-hiding clause set above. Range bounds, NUMERIC
+		// comparison, and the inclusive last day come from the shared helper.
+		$filter_month = sm_get_filter_month();
+		if ( $filter_month ) {
+			$args['year']  = $filter_month['year'];
+			$args['month'] = $filter_month['month'];
+		}
 
-			foreach ( $date_args as $date_arg ) {
-				if ( ! isset( $args[ $date_arg ] ) || ! $args[ $date_arg ] ) {
-					continue;
+		if ( ! empty( $args['month'] ) || ! empty( $args['year'] ) ) {
+			$year  = ! empty( $args['year'] ) ? intval( $args['year'] ) : intval( gmdate( 'Y' ) );
+			$month = ! empty( $args['month'] ) ? intval( $args['month'] ) : 0;
+
+			$date_clause = sm_sermon_month_meta_query( $year, $month );
+
+			if ( ! empty( $date_clause ) ) {
+				if ( ! isset( $query_args['meta_query'] ) || ! is_array( $query_args['meta_query'] ) ) {
+					$query_args['meta_query'] = array();
 				}
 
-				// Reset the query.
-				$query_args['meta_query'] = array();
-
-				switch ( $date_arg ) {
-					case 'year':
-						$year = $args['year'];
-
-						$query_args['meta_query'][] = array(
-							'key'     => 'sermon_date',
-							'value'   => array(
-								strtotime( $year . '-01-01' ),
-								strtotime( $year . '-12-31' ),
-							),
-							'compare' => 'BETWEEN',
-						);
-						break;
-					case 'month':
-						$year  = $args['year'] ?: gmdate( 'Y' );
-						$month = intval( $args['month'] ) ?: gmdate( 'm' );
-
-						$query_args['meta_query'][] = array(
-							'key'     => 'sermon_date',
-							'value'   => array(
-								strtotime( $year . '-' . $args['month'] . '-' . '01' ),
-								strtotime( $year . '-' . $month . '-' . cal_days_in_month( CAL_GREGORIAN, $month, $year ) ),
-							),
-							'compare' => 'BETWEEN',
-						);
-						break;
-				}
+				$query_args['meta_query'][] = $date_clause;
 			}
 		}
 

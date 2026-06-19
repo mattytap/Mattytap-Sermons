@@ -797,6 +797,48 @@ function wpfc_get_term_dropdown( $taxonomy, $default = '' ) {
 }
 
 /**
+ * Build <option> fields for the preached-month <select>.
+ *
+ * Lists only the months that actually have published sermons (from the
+ * `sermon_date` meta), newest first, each labelled "March 2023".
+ *
+ * @param string $selected Currently selected 'Y-m' value. Defaults to the
+ *                         value from the current request.
+ *
+ * @return string HTML <option> fields.
+ *
+ * @since 3.2.0
+ */
+function wpfc_get_month_dropdown( $selected = '' ) {
+	if ( '' === $selected ) {
+		$current  = sm_get_filter_month();
+		$selected = $current ? $current['ym'] : '';
+	}
+
+	$html = '';
+
+	foreach ( sm_get_sermon_months() as $ym ) {
+		$label = sm_get_sermon_month_label( $ym );
+
+		if ( '' === $label ) {
+			continue;
+		}
+
+		$html .= '<option value="' . esc_attr( $ym ) . '"' . selected( $selected, $ym, false ) . '>' . esc_html( $label ) . '</option>';
+	}
+
+	/**
+	 * Allows you to filter the preached-month dropdown options (HTML).
+	 *
+	 * @param string $html     The existing options HTML.
+	 * @param string $selected The selected 'Y-m' value.
+	 *
+	 * @since 3.2.0
+	 */
+	return apply_filters( 'wpfc_get_month_dropdown', $html, $selected );
+}
+
+/**
  * Allows user to override the partial file for rendering by placing it in either:
  * - `/wp-contents/themes/<theme_name>/partials/<partial_name>.php`
  * - `/wp-contents/themes/<theme_name>/template-parts/<partial_name>.php`

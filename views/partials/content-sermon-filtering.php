@@ -97,4 +97,30 @@ foreach (
 			</div>
 		<?php endif; ?>
 	<?php endforeach; ?>
+
+	<?php
+	$sm_hide_dates = isset( $args['hide_dates'] ) ? $args['hide_dates'] : '';
+	if ( ! in_array( $sm_hide_dates, array( 'yes', 'hide', 1, '1', true ), true ) ) :
+		$sm_month_options = wpfc_get_month_dropdown();
+		if ( '' !== $sm_month_options ) :
+			?>
+			<div class="sortDate" style="display: inline-block">
+				<form action="<?php echo esc_url( $args['action'] ); ?>" method="get">
+					<select name="wpfc_sermon_month"
+							title="<?php esc_attr_e( 'Month preached', 'mattytap-sermons' ); ?>"
+							id="wpfc_sermon_month"
+							onchange="if(this.options[this.selectedIndex].value !== ''){return this.form.submit()}else{window.location = window.location.href.split('?')[0];}"
+							autocomplete="off">
+						<option value=""><?php esc_html_e( 'Month preached', 'mattytap-sermons' ); ?></option>
+						<?php echo wp_kses( $sm_month_options, sm_template_allowed_html() ); ?>
+					</select>
+					<noscript>
+						<div><input type="submit" value="Submit"/></div>
+					</noscript>
+				</form>
+			</div>
+			<?php
+		endif;
+	endif;
+	?>
 </div>

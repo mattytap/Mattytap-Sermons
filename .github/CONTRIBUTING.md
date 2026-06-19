@@ -1,6 +1,6 @@
 # Contributing to Mattytap Sermons
 
-Thanks for considering a contribution. Mattytap Sermons is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome, and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
+Thanks for considering a contribution. Mattytap Sermons is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin. The restoration is complete, and the plugin is now in **maintenance mode**: published, live on WordPress.org, and maintained rather than developed. Contributions are welcome, and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions. Bug fixes and security work have the clearest path; most enhancement requests are politely declined unless they make a compelling, well-scoped case. See the [ROADMAP](../ROADMAP.md) for the full posture.
 
 By participating, you agree to abide by the [Code of Conduct](../CODE_OF_CONDUCT.md).
 

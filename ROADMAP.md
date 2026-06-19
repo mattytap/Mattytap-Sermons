@@ -1,51 +1,52 @@
 # ROADMAP
 
-A working backlog of features under consideration for **Mattytap Sermons**. None of these are commitments.
+Mattytap Sermons is a caretaker restoration, and the restoration is complete. This file used to track the features that might come next. It now records the project's settled posture and the short list of things that could still land if someone makes the case.
 
-Mattytap Sermons is a caretaker restoration. The aim is not to be the most-featured sermon plugin in the space, but to keep an abandoned and security-vulnerable codebase running for the churches still relying on it. Best-practice contributions (security hardening, accessibility, performance, Gutenberg block support) have a clear path. Radical scope changes (rebrands, pivots into adjacent niches) do not.
+## Maintenance mode
+
+The restoration is complete. Mattytap Sermons is published, live on WordPress.org, and running in production. The security backlog is cleared, the codebase is modernised, and drop-in compatibility with Sermon Manager 2.30.0 is in place. The job it set out to do is done.
+
+From here the plugin is maintained, not developed:
+
+- **Bugs get fixed.** File it on the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues) and it will be looked at.
+- **Security findings get fixed,** and take priority. Report them privately through [SECURITY.md](SECURITY.md).
+- **Compatibility is kept current.** Each WordPress release, the "Tested up to" version is checked and kept honest.
+
+New features are a different matter. "Fix not change" is the working stance, and a caretaker restoration earns trust by staying stable, not by growing. Enhancement requests are welcome, but most will be politely declined. The door isn't bolted shut: a genuinely compelling, well-scoped contribution that fits the plugin's purpose can still land. But nothing is planned, and a missing feature is not a backlog item waiting its turn.
 
 There is no paid tier and no plan to introduce one. The plugin is, and will remain, free and GPLv2.
 
-For known bugs and security findings, see the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues). For how to propose a new feature, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+## What shipped
 
-## 3.0: restoration release
+The restoration scope, now complete:
 
-The first stable Mattytap Sermons release. Closes out the restoration scope:
-
-- All security audit findings (`#13`–`#37`) shipping with patches.
+- All security audit findings (`#13`–`#37`) shipped with patches, including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002).
 - Codebase modernised against current PHP (8.1+ floor) and WordPress (6.0+ floor) APIs.
-- Drop-in compatibility preserved for existing Sermon Manager 2.15.16 installs (custom post type, taxonomies, option keys, shortcode output).
-- Salvaged upstream bug fixes ingested with attribution from the open-PR backlog: upstream PRs `#300` (RSS ternary), `#274` (shortcode pagination), `#292` (sermons_array defensive check), `#273` (sermon_video_embed REST and import/export), `#264` (French bible verse names).
-- Release candidates (`3.0-rc1`, `3.0-rc2`, ...) until the formal UAT signs off.
+- Drop-in compatibility preserved for existing Sermon Manager 2.30.0 installs: the `wpfc_sermon` custom post type, the `wpfc_*` taxonomies, the core option keys, the six shortcodes, and the view-template surface.
+- Salvaged upstream bug fixes ingested with attribution from the open-PR backlog.
+- Published to WordPress.org as `mattytap-sermons` (approved 2026-06-15), with maintenance releases shipping across the 3.x line since.
 
-## 3.1: first feature release
+## What could still land
 
-Targets after 3.0 stable. Order is rough priority.
+No commitment, no timeline, nothing planned. These are the kinds of contributions that would get a fair hearing if someone brought a compelling, well-scoped pull request:
 
-- **Gutenberg block support.** Blocks for the sermon CPT, preacher and series taxonomies, and the major shortcodes. Closes the largest "modern WordPress plugin" gap.
-- **WP search integration.** Per upstream PR `#159` (sermons searchable from standard WP archive search).
-- **WP Authors integration.** Optional link between preacher taxonomy terms and WordPress user accounts (upstream issue `#194`).
-- **Archive UX.** Per-page count setting (upstream `#143`), frontend sort direction (upstream `#52`), duplicate-sermon button (upstream `#244`).
-- **Good-first-issue wins from upstream.** `#82`, `#113`, `#117`, `#138`, `#155`.
+- **Gutenberg block support** for the sermon post type and the major shortcodes. The largest "modern WordPress" gap, and the most likely candidate to justify itself.
+- **Accessibility.** A WCAG 2.1 AA pass over the front-end templates.
+- **Performance.** Lazy-loaded sermon images, podcast feed caching.
 
-## Beyond 3.1
-
-Areas of interest with no committed timeline.
-
-- Accessibility audit (WCAG 2.1 AA).
-- Performance: lazy-loaded sermon images, podcast feed caching.
-- Wider importer support, e.g. from Church Content plugin (upstream `#239`).
-- Block-theme compatibility for `wpfc_sermon` archives.
-- Unit test pattern building on the existing PHPUnit infrastructure (upstream `#195`).
-- Archived-sermons widget (upstream `#150`).
-- **Namespace the bundled CMB2 library.** Rename `CMB2_*` classes throughout `includes/vendor/CMB2/` to a project-specific prefix (e.g. `SW_CMB2_*`) to prevent runtime collisions with other active plugins that also bundle their own CMB2 copy (GiveWP, MetaBox, WPForms Pro, and many others). The case-sensitivity fix in 3.0-rc3 closed one Linux-host variant of this issue, but a different active plugin shipping a different CMB2 version can still cause class-already-defined or class-not-found fatals depending on load order. Substantial mechanical refactor across the bundled vendor tree; ships when there is appetite.
+The bar is the same in each case: it has to fit a caretaker restoration and earn its place against "fix not change." Best-practice contributions (security, accessibility, performance, modern APIs) have the clearest path; radical scope changes do not.
 
 ## Out of scope
 
-- A paid tier. The original "Pro" pitch is closed; nothing from it carries over.
-- Per-theme compatibility shims, e.g. zerif-lite (upstream PR `#245`).
-- Removing CMB2 (upstream `#190`). CMB2 was upgraded to 2.11.0 during restoration.
+- **A paid tier.** The original "Pro" pitch is closed; nothing from it carries over.
+- **A build-toolchain modernisation (asset pipeline).** The current SCSS and asset build works without a Node commitment; tying the project to a webpack or npm toolchain is not justified for a caretaker restoration. Considered and declined.
+- **Per-theme compatibility shims** (e.g. zerif-lite).
+- **Removing CMB2.** CMB2 is bundled and kept current.
+
+## Known latent risks (not features)
+
+- **CMB2 class collisions.** The bundled `CMB2_*` classes can in principle collide with another active plugin that bundles a different CMB2 version, depending on load order. CMB2's own bootstrap arbitration handles the common cases, and no real-world collision has been reported against Mattytap Sermons. Namespacing the bundled copy would close the gap for good, but it is a substantial mechanical refactor across the vendor tree; it would be revisited if a genuine collision is reported, in keeping with "fix not change."
 
 ## How to nominate a feature
 
-Open an [issue](https://github.com/mattytap/Mattytap-Sermons/issues/new/choose) and make the case. The bar for adding a new feature is higher than the bar for fixing a bug. Mattytap Sermons is a caretaker restoration and "fix not change" is the working stance. Requests aligned with current best practice (accessibility, performance, modern WordPress APIs) have the clearest path; radical scope changes will be declined. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for what makes a strong feature request.
+Open an [issue](https://github.com/mattytap/Mattytap-Sermons/issues/new/choose) and make the case. The bar for adding a feature is higher than the bar for fixing a bug. Mattytap Sermons is a caretaker restoration and "fix not change" is the working stance. Requests aligned with current best practice (accessibility, performance, modern WordPress APIs) have the clearest path; radical scope changes will be declined. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for what makes a strong feature request.

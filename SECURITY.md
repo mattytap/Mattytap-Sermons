@@ -33,7 +33,7 @@ When a fix ships:
 
 ## Supported versions
 
-Mattytap Sermons is in 3.0 release-candidate cycle. The latest commit on `main` is the only supported version; a versioned-release matrix will replace this section at the first stable release.
+Mattytap Sermons follows a single-supported-version policy, as is normal for a WordPress.org plugin: the **latest stable release** is the one that receives security fixes. The right response to a security release is to update to it. Older versions are not patched in place; every fix ships as a new release through the standard WordPress.org update channel.
 
 ## Scope
 

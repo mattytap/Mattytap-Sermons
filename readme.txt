@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.1.7
+Stable tag: 3.2.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,12 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.2.0 =
+
+* New: filter and group sermons by the month they were *preached*, not the date they were published, on both the front end and in the admin sermon list. A "Month preached" dropdown joins the existing speaker, series, topic, and book filters on the archive, and the admin list table gains the same preached-month filter (replacing WordPress's default published-date months dropdown for sermons).
+* New: optional month headings on the sermon archive, grouping sermons under the month they were preached.
+* Fix: the month and year date filters now include the whole of the last day of the range (previously the final day was excluded), compare dates numerically, and no longer depend on the PHP calendar extension.
 
 = 3.1.7 =
 
@@ -255,6 +261,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.2.0 =
+
+Adds the ability to filter and group sermons by the month they were preached, front end and admin, plus fixes to the month/year date range. Read-only over your data: no sermon dates are rewritten.
 
 = 3.1.7 =
 

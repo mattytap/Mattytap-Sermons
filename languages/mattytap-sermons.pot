@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.1.6\n"
+"Project-Id-Version: Mattytap Sermons 3.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-18T18:02:15+00:00\n"
+"POT-Creation-Date: 2026-06-19T05:54:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -41,81 +41,106 @@ msgstr ""
 msgid "https://github.com/mattytap"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:31
+#: includes/admin/class-sm-admin-audio-tools.php:39
 #: includes/admin/class-sm-admin-menus.php:54
 msgid "Audio Health"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:33
+#: includes/admin/class-sm-admin-audio-tools.php:41
 msgid "Read-only checks on the audio attached to your sermons. Nothing here changes or deletes anything."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:36
+#: includes/admin/class-sm-admin-audio-tools.php:44
 msgid "Broken audio references"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:38
+#: includes/admin/class-sm-admin-audio-tools.php:46
 msgid "Sermons whose audio attachment or local file is missing. Their player will be dead even though the sermon still looks fine in the list. Externally hosted (URL-only) audio is not checked here."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:41
+#: includes/admin/class-sm-admin-audio-tools.php:49
 msgid "No broken references found."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:46
+#: includes/admin/class-sm-admin-audio-tools.php:54
 #: includes/class-sm-post-types.php:278
 msgid "Sermon"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:47
+#: includes/admin/class-sm-admin-audio-tools.php:55
+msgid "Date preached"
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:58
 msgid "Problem"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:55
-msgid "(no title)"
-msgstr ""
-
-#: includes/admin/class-sm-admin-audio-tools.php:65
+#: includes/admin/class-sm-admin-audio-tools.php:79
 msgid "Orphaned audio"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:67
+#: includes/admin/class-sm-admin-audio-tools.php:81
 msgid "Audio files in the Media Library, uploaded under the sermons folder, that no sermon currently references. These are safe candidates for tidying up by hand once you have confirmed they are not needed."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:70
+#: includes/admin/class-sm-admin-audio-tools.php:84
 msgid "No orphaned audio found."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:75
+#: includes/admin/class-sm-admin-audio-tools.php:89
+#: includes/admin/class-sm-admin-audio-tools.php:120
 msgid "File"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:76
+#: includes/admin/class-sm-admin-audio-tools.php:90
 msgid "Uploaded"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:77
+#: includes/admin/class-sm-admin-audio-tools.php:91
 #: includes/class-sm-post-types.php:283
 msgid "Edit"
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:87
+#: includes/admin/class-sm-admin-audio-tools.php:101
 msgid "View in Media Library"
 msgstr ""
 
+#: includes/admin/class-sm-admin-audio-tools.php:110
+msgid "Audio used by more than one sermon"
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:112
+msgid "Audio attachments that two or more sermons reference. The optional delete-cleanup keeps these on purpose: it never removes a file another sermon still uses. Listed here so you can spot sermons sharing a file, whether on purpose or by accident."
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:115
+msgid "No audio is shared between sermons."
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:121
+msgid "Used by"
+msgstr ""
+
 #. translators: %d: attachment ID.
-#: includes/admin/class-sm-admin-audio-tools.php:152
+#: includes/admin/class-sm-admin-audio-tools.php:239
 #, php-format
 msgid "Audio attachment (ID %d) no longer exists."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:157
+#: includes/admin/class-sm-admin-audio-tools.php:244
 msgid "Audio file is missing from disk."
 msgstr ""
 
-#: includes/admin/class-sm-admin-audio-tools.php:166
+#: includes/admin/class-sm-admin-audio-tools.php:253
 msgid "Local audio file is missing from disk."
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:355
+msgid "(no title)"
+msgstr ""
+
+#: includes/admin/class-sm-admin-audio-tools.php:407
+msgid "(none)"
 msgstr ""
 
 #: includes/admin/class-sm-admin-menus.php:34

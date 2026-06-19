@@ -807,6 +807,7 @@ class SM_Shortcodes {
 			'exclude'            => '',
 			'hide_service_types' => \SermonManager::getOption( 'service_type_filtering' ) ? '' : 'yes',
 			'layout'             => '', // classic|compact|grid; empty falls back to the Display > Archive setting.
+			'group_by_month'     => '', // yes to group by preached month; empty falls back to the Display setting.
 		);
 
 		// Legacy convert.
@@ -1107,7 +1108,10 @@ class SM_Shortcodes {
 							if ( apply_filters( 'sm_shortcode_output_override', false ) ) {
 								$output = '';
 							} else {
-								$output = '<div class="wpfc-sermon wpfc-sermon-shortcode">' . wpfc_sermon_excerpt_v2( true, $args ) . '</div>';
+								// Month heading (if grouping is on) as a sibling before the card,
+								// not inside the per-sermon wrapper. Survives the wp_kses below
+								// via sm_template_allowed_html() (post context allows <h2>).
+								$output = sm_get_month_heading( $post, $args ) . '<div class="wpfc-sermon wpfc-sermon-shortcode">' . wpfc_sermon_excerpt_v2( true, $args ) . '</div>';
 							}
 
 							echo wp_kses( apply_filters( 'sm_shortcode_sermons_single_output', $output, $post, $args ), sm_template_allowed_html() );

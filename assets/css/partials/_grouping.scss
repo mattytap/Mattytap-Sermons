@@ -1,0 +1,10 @@
+// Month grouping headings on sermon archives and the [sermons] shortcode.
+// Added in 3.2.0 with the "Group sermons by month" feature.
+
+.wpfc-sermon-month-heading {
+	margin: 1.5em 0 0.5em;
+	font-size: 1.25em;
+	line-height: 1.2;
+	padding-bottom: 0.25em;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}

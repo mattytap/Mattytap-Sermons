@@ -94,6 +94,13 @@ class SM_Settings_Display extends SM_Settings_Page {
 				'id'       => 'archive_layout',
 			),
 			array(
+				'title'    => __( 'Group sermons by month', 'mattytap-sermons' ),
+				'type'     => 'checkbox',
+				'desc_tip' => __( 'Adds a month heading (e.g. "March 2023") on archive pages and in the [sermons] shortcode whenever the preached month changes. Only applies when sermons are ordered by date preached. Default unchecked.', 'mattytap-sermons' ),
+				'id'       => 'archive_group_by_month',
+				'default'  => 'no',
+			),
+			array(
 				'title'    => __( 'Display Audio Player', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
 				'desc_tip' => __( 'Displays audio player on archive pages. Default unchecked.', 'mattytap-sermons' ),

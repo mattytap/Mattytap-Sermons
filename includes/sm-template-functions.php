@@ -659,6 +659,7 @@ function wpfc_sermon_excerpt_v2( $return = false, $args = array() ) {
 	$output = apply_filters( 'wpfc_sermon_excerpt_v2', $output, $post, $args );
 
 	if ( ! $return ) {
+		echo wp_kses_post( sm_get_month_heading( $post, $args ) );
 		echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $output is the content-sermon-archive partial with audio player markup; per-site escapers applied inside the partial. wp_kses_post would strip player tags.
 	}
 
@@ -836,6 +837,113 @@ function wpfc_get_month_dropdown( $selected = '' ) {
 	 * @since 3.2.0
 	 */
 	return apply_filters( 'wpfc_get_month_dropdown', $html, $selected );
+}
+
+/**
+ * Whether sermons should be grouped under month headings in the current context.
+ *
+ * Enabled by the "Group sermons by month" display setting or a
+ * group_by_month="yes" shortcode attribute, and only when sermons are ordered
+ * by preached date (headings would be meaningless in any other order).
+ *
+ * @param array $args Rendering args. For the shortcode, 'orderby' is already
+ *                    resolved ('meta_value_num' means preached date).
+ *
+ * @return bool
+ *
+ * @since 3.2.0
+ */
+function sm_group_by_month_enabled( $args = array() ) {
+	if ( isset( $args['group_by_month'] ) && '' !== $args['group_by_month'] ) {
+		$enabled = in_array( $args['group_by_month'], array( 'yes', '1', 1, true ), true );
+	} else {
+		$enabled = 'yes' === SermonManager::getOption( 'archive_group_by_month', 'no' );
+	}
+
+	if ( ! $enabled ) {
+		return false;
+	}
+
+	if ( isset( $args['orderby'] ) && '' !== $args['orderby'] ) {
+		return 'meta_value_num' === $args['orderby'];
+	}
+
+	return 'date_preached' === SermonManager::getOption( 'archive_orderby', 'date_preached' );
+}
+
+/**
+ * Reset the month-grouping tracker at the start of a sermon loop.
+ *
+ * Hooked to loop_start so each archive or shortcode run starts a fresh sequence
+ * of headings. Non-sermon loops are ignored so an unrelated query cannot split
+ * a run in two.
+ *
+ * @param WP_Query|null $query The query starting its loop.
+ *
+ * @since 3.2.0
+ */
+function sm_reset_month_grouping( $query = null ) {
+	if ( $query instanceof WP_Query ) {
+		$post_type = $query->get( 'post_type' );
+		$is_sermon = ( 'wpfc_sermon' === $post_type )
+			|| ( is_array( $post_type ) && in_array( 'wpfc_sermon', $post_type, true ) )
+			|| $query->is_post_type_archive( 'wpfc_sermon' )
+			|| $query->is_tax( sm_get_taxonomies() );
+
+		if ( ! $is_sermon ) {
+			return;
+		}
+	}
+
+	$GLOBALS['sm_grouping_last_month'] = null;
+}
+
+add_action( 'loop_start', 'sm_reset_month_grouping' );
+
+/**
+ * Month heading HTML for a sermon, when grouping is on and the month has changed.
+ *
+ * Returns '' when grouping is off, when this sermon shares the previous one's
+ * preached month, or when no preached date is set. The month is read from the
+ * displayed preached date so a heading always matches the dates on the cards
+ * beneath it.
+ *
+ * @param int|WP_Post|null $post The sermon. Default current post.
+ * @param array            $args Rendering args (shortcode context).
+ *
+ * @return string
+ *
+ * @since 3.2.0
+ */
+function sm_get_month_heading( $post = null, $args = array() ) {
+	if ( ! sm_group_by_month_enabled( $args ) ) {
+		return '';
+	}
+
+	$key = sm_get_the_date( 'Y-m', $post );
+	if ( ! $key ) {
+		return '';
+	}
+
+	if ( isset( $GLOBALS['sm_grouping_last_month'] ) && $GLOBALS['sm_grouping_last_month'] === $key ) {
+		return '';
+	}
+
+	$GLOBALS['sm_grouping_last_month'] = $key;
+
+	$label   = sm_get_the_date( 'F Y', $post );
+	$heading = '<h2 class="wpfc-sermon-month-heading">' . esc_html( $label ) . '</h2>';
+
+	/**
+	 * Filters the month grouping heading HTML.
+	 *
+	 * @param string           $heading The heading HTML.
+	 * @param string           $label   The localised "F Y" label.
+	 * @param int|WP_Post|null $post    The sermon.
+	 *
+	 * @since 3.2.0
+	 */
+	return apply_filters( 'sm_month_heading', $heading, $label, $post );
 }
 
 /**

@@ -33,6 +33,7 @@ class SM_Admin_Post_Types {
 		add_action( 'restrict_manage_posts', array( $this, 'restrict_manage_posts' ) );
 		add_filter( 'request', array( $this, 'request_query' ) );
 		add_filter( 'parse_query', array( $this, 'sermon_filters_query' ) );
+		add_filter( 'disable_months_dropdown', array( $this, 'disable_months_dropdown' ), 10, 2 );
 
 		// Edit post screens.
 		add_filter( 'enter_title_here', array( $this, 'enter_title_here' ), 1, 2 );
@@ -262,6 +263,24 @@ class SM_Admin_Post_Types {
 	}
 
 	/**
+	 * Hide WordPress's default published-date months dropdown for sermons.
+	 *
+	 * Sermons are browsed by the date they were preached, not the date they
+	 * were published, so the preached-month dropdown added by sermon_filters()
+	 * replaces the stock one rather than sitting alongside it.
+	 *
+	 * @param bool   $disable   Whether to disable the dropdown.
+	 * @param string $post_type The post type the dropdown is for.
+	 *
+	 * @return bool
+	 *
+	 * @since 3.2.0
+	 */
+	public function disable_months_dropdown( $disable, $post_type ) {
+		return 'wpfc_sermon' === $post_type ? true : $disable;
+	}
+
+	/**
 	 * Filter the sermons in admin based on options
 	 *
 	 * @param mixed $query The query.
@@ -278,6 +297,14 @@ class SM_Admin_Post_Types {
 						'terms'    => $query->query_vars['wpfc_service_type'],
 					)
 				);
+			}
+
+			// Filter by preached month when the preached-month dropdown is used.
+			$filter_month = sm_get_filter_month();
+			if ( $filter_month ) {
+				$meta_query = isset( $query->query_vars['meta_query'] ) && is_array( $query->query_vars['meta_query'] ) ? $query->query_vars['meta_query'] : array();
+				$meta_query[] = sm_sermon_month_meta_query( $filter_month['year'], $filter_month['month'] );
+				$query->query_vars['meta_query'] = $meta_query;
 			}
 		}
 	}
@@ -327,6 +354,15 @@ class SM_Admin_Post_Types {
 		}
 
 		$output .= '</select>';
+
+		// Preached-month filter (replaces the stock published-date dropdown).
+		$months = wpfc_get_month_dropdown();
+		if ( '' !== $months ) {
+			$output .= '<select name="wpfc_sermon_month" id="dropdown_wpfc_sermon_month">';
+			$output .= '<option value="">' . esc_html__( 'All preached months', 'mattytap-sermons' ) . '</option>';
+			$output .= $months;
+			$output .= '</select>';
+		}
 
 		echo wp_kses( apply_filters( 'sm_sermon_filters', $output ), array(
 			'select' => array( 'name' => array(), 'id' => array(), 'class' => array() ),

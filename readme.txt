@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.2.0
+Stable tag: 3.3.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,13 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.3.0 =
+
+* Fix: the `[sermon_images]` grid works again. It had stopped finding any images after an earlier change removed a third-party dependency; it now reads series, speaker, topic, and book images directly. You can also order the grid by most recently preached with `orderby="sermon"`.
+* Fix: importing now refreshes permalinks automatically, so the sermon archive and feeds work straight after an import instead of needing a manual Settings > Permalinks re-save.
+* Fix: video added to a sermon through the REST API is now saved where the templates read it, so API-posted video embeds and links display correctly.
+* Fix: a failed import now shows an error notice instead of finishing silently.
 
 = 3.2.0 =
 
@@ -261,6 +268,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.3.0 =
+
+A maintenance release: restores the [sermon_images] grid, makes feeds work straight after an import, fixes REST-API video saving, and adds an import-failure notice. No data change.
 
 = 3.2.0 =
 

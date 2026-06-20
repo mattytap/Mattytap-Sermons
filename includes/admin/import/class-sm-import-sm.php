@@ -414,7 +414,13 @@ class SM_Import_SM {
 	 * @return array|WP_Error
 	 */
 	function XMLparse( $file ) {
-		$this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
+		$this->wxr_version = $this->in_post = $this->cdata = $this->in_tag = $this->in_sub_tag = false;
+		// data and sub_data accumulate parsed fields by index, so they start as
+		// arrays. They were previously false, which made the first indexed write
+		// auto-convert false to an array (deprecated in PHP 8.1+). Empty arrays
+		// satisfy the same `! empty()` guards used throughout the parser.
+		$this->data     = array();
+		$this->sub_data = array();
 		$this->authors     = $this->posts = $this->term = $this->category = $this->tag = array();
 
 		$this->log( 'XML parser setup.', 0 );
@@ -1297,7 +1303,7 @@ class SM_Import_SM {
 				if ( ! empty( $this->sub_data ) ) {
 					$this->data['comments'][] = $this->sub_data;
 				}
-				$this->sub_data = false;
+				$this->sub_data = array();
 				break;
 			case 'wp:commentmeta':
 				$this->sub_data['commentmeta'][] = array(
@@ -1310,36 +1316,36 @@ class SM_Import_SM {
 					$this->sub_data['name'] = $this->cdata;
 					$this->data['terms'][]  = $this->sub_data;
 				}
-				$this->sub_data = false;
+				$this->sub_data = array();
 				break;
 			case 'wp:postmeta':
 				if ( ! empty( $this->sub_data ) ) {
 					$this->data['postmeta'][] = $this->sub_data;
 				}
-				$this->sub_data = false;
+				$this->sub_data = array();
 				break;
 			case 'wp:termmeta':
 				if ( ! empty( $this->sub_data ) ) {
 					$this->data['termmeta'][] = $this->sub_data;
 				}
-				$this->sub_data = false;
+				$this->sub_data = array();
 				break;
 			case 'item':
 				$this->posts[] = $this->data;
-				$this->data    = false;
+				$this->data    = array();
 				break;
 			case 'wp:category':
 			case 'wp:tag':
 			case 'wp:term':
 				$n = substr( $tag, 3 );
 				array_push( $this->$n, $this->data );
-				$this->data = false;
+				$this->data = array();
 				break;
 			case 'wp:author':
 				if ( ! empty( $this->data['author_login'] ) ) {
 					$this->authors[ $this->data['author_login'] ] = $this->data;
 				}
-				$this->data = false;
+				$this->data = array();
 				break;
 			case 'wp:base_site_url':
 				$this->base_url = $this->cdata;

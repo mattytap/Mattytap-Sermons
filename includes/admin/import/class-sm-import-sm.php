@@ -10,8 +10,14 @@ defined( 'ABSPATH' ) or die;
 /**
  * Used to import data from XML File
  *
+ * The WXR parser sets many of its working fields dynamically (some by computed
+ * name in the tag handlers), so the class opts in to dynamic properties rather
+ * than declaring each one. This mirrors how WordPress core handles its own
+ * importer classes and silences the PHP 8.2+ dynamic-property deprecations.
+ *
  * @since 2.12.0
  */
+#[AllowDynamicProperties]
 class SM_Import_SM {
 	/**
 	 * If import debug is enabled.
@@ -362,27 +368,35 @@ class SM_Import_SM {
 	 */
 	function handle_upload() {
 		$file     = wp_import_handle_upload();
-		$response = array();
+		$response = array( 'status' => false );
+
+		// Each failure below bails immediately: the old code set a false status
+		// then fell through and dereferenced a WP_Error as an array (fatal), and
+		// a trailing unconditional `status = true` clobbered every failure case
+		// anyway, so the importer could never report a bad upload.
 		if ( isset( $file['error'] ) ) {
-			$response['status'] = false;
 			$this->log( 'Error message: ' . $file['error'], 0 );
-		} elseif ( ! file_exists( $file['file'] ) ) {
-			$response['status'] = false;
-			$this->log( 'The export file could not be found. It is likely that this was caused by a permissions problem.' . $file['error'], 0 );
+			return $response;
+		}
+
+		if ( ! isset( $file['file'] ) || ! file_exists( $file['file'] ) ) {
+			$this->log( 'The export file could not be found. It is likely that this was caused by a permissions problem.', 0 );
+			return $response;
 		}
 
 		$this->id = (int) $file['id'];
 		$this->log( 'Starting XML File parsing.', 0 );
+
 		$import_data = $this->XMLparse( $file['file'] );
 		if ( is_wp_error( $import_data ) ) {
-			$response['status'] = false;
 			$this->log( 'Parsing error: ' . $import_data->get_error_message(), 0 );
+			return $response;
 		}
 
-		$this->version = $import_data['version'];
+		$this->version = isset( $import_data['version'] ) ? $import_data['version'] : '1.0';
 		if ( $this->version > $this->max_wxr_version ) {
-			$response['status'] = false;
 			$this->log( 'This WXR file version may not be supported by this version of the importer. Please consider updating.', 0 );
+			return $response;
 		}
 
 		$response['status'] = true;

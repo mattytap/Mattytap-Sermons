@@ -2,11 +2,11 @@
 
 Audit started 2026-05-09. Stage 1 only — classification, no remediation code.
 
-## Post-audit deviations (introduced after this audit)
+## Post-audit changes affecting the drop-in picture
 
-This audit is a snapshot of `main` against 2.30.0 on 2026-05-09. Changes shipped after that date are not reflected in the surface tables below. One of them is a self-introduced, on-by-default behaviour change relative to 2.30.0 and is recorded here so the drop-in picture stays honest:
+This audit is a snapshot of `main` against 2.30.0 on 2026-05-09. Changes shipped after that date are not reflected in the surface tables below. One produces a visible admin behaviour change relative to 2.30.0 and is recorded here so the drop-in picture stays honest:
 
-- **Admin "months" dropdown now filters by preached date (3.2.0, #50).** We replaced WordPress's native published-date months dropdown on the admin sermon list with a preached-date one, via the `disable_months_dropdown` filter in `includes/admin/class-sm-admin-post-types.php`. A 2.30.0 admin filtering the sermon list by month now filters on the date preached (the `sermon_date` meta), not the publish date, so the same month selection can return a different set of sermons. There is no opt-out. The front-end parallel is the "Month preached" filter, which since 3.4.0 (#52) is hidden by default; the admin dropdown has no equivalent toggle and stays on. Rationale: preached date is the church-relevant axis, and the published-date dropdown filtered on a date the plugin otherwise treats as incidental. This is a documented deviation, not a regression to fix.
+- **Admin "months" dropdown now filters by preached date (3.2.0, #50): a bug-fix.** The plugin substitutes the preached date (the `sermon_date` meta) for display, for ordering, and for the shortcode date params everywhere else; the native published-date months dropdown on the admin sermon list was the one surface still falling through to `post_date`, out of step with the plugin's own date model (2.30.0 carried the same inconsistency). The fix, via the `disable_months_dropdown` filter in `includes/admin/class-sm-admin-post-types.php`, aligns it: filtering the sermon list by month now uses the date preached. The only reason it appears in this drop-in document is that a 2.30.0 admin sees different results for the same month selection, so it is a visible change worth recording. It is not a compatibility break and there is nothing to revert: drop-in continuity is about schema, option keys, and the API surface, not about preserving a stray published-date filter. The front-end parallel is the "Month preached" filter, which since 3.4.0 (#52) is hidden by default; the admin dropdown has no equivalent toggle and stays on.
 
 (The 3.0.1 Bucket 3 cherry-picks below were also shipped after the audit date; see the per-item notes.)
 

@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.1
-Stable tag: 3.4.0
+Stable tag: 3.4.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.4.1 =
+
+* Fix: series, speaker, topic, and book images now appear on the correct items again. A one-time migration from the original Sermon Manager could attach images to the wrong terms (or none at all), so the `[sermon_images]` grid showed some items blank and others with the wrong or a duplicated image. This release repairs the affected images automatically from the preserved original data and backs up the prior state first. No action needed; images you set by hand are left untouched.
 
 = 3.4.0 =
 
@@ -278,6 +282,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.4.1 =
+
+Recommended for any site using series/speaker/topic/book images. Repairs images that an earlier migration could attach to the wrong term, which left some [sermon_images] entries blank or showing the wrong image. The repair runs automatically and backs up the prior state; images set by hand are preserved.
 
 = 3.4.0 =
 

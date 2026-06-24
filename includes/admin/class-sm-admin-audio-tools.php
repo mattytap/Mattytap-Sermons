@@ -432,11 +432,23 @@ class SM_Admin_Audio_Tools {
 	private static function local_url_to_path( $url ) {
 		$uploads = wp_get_upload_dir();
 
-		if ( empty( $uploads['baseurl'] ) || false === strpos( $url, $uploads['baseurl'] ) ) {
+		if ( empty( $uploads['baseurl'] ) ) {
 			return false;
 		}
 
-		return str_replace( $uploads['baseurl'], $uploads['basedir'], $url );
+		// Match scheme-blind. WordPress renders baseurl at the current scheme
+		// (https), so a sermon whose audio URL was saved as http:// before an
+		// SSL migration would never match a literal comparison and its file
+		// would be wrongly reported missing. normalize_url() strips the scheme
+		// (and query string) from both sides so the comparison survives.
+		$needle = self::normalize_url( $uploads['baseurl'] );
+		$url    = self::normalize_url( $url );
+
+		if ( false === strpos( $url, $needle ) ) {
+			return false;
+		}
+
+		return str_replace( $needle, $uploads['basedir'], $url );
 	}
 
 	/**

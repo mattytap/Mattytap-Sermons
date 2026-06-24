@@ -434,6 +434,7 @@ class SM_Shortcodes {
 			'size'             => 'sermon_medium',
 			'hide_title'       => false,
 			'show_description' => false,
+			'show_empty'       => false,
 		);
 
 		// For compatibility.
@@ -454,6 +455,12 @@ class SM_Shortcodes {
 		// Convert to bool.
 		$args['show_description'] = (bool) $args['show_description'];
 
+		// Opt-in: include terms that have no image. Off by default, so existing
+		// grids are byte-for-byte unchanged. When on, an image-less term renders
+		// the Default Image (Settings > Display), or a CSS placeholder if none
+		// is set.
+		$args['show_empty'] = in_array( $args['show_empty'], array( 'yes', '1', 1, true ), true );
+
 		// Check if we are using a SM taxonomy, and if we are, convert to valid taxonomy name.
 		if ( $this->convert_taxonomy_name( $args['display'], true ) ) {
 			$args['display'] = $this->convert_taxonomy_name( $args['display'], false );
@@ -473,13 +480,20 @@ class SM_Shortcodes {
 			'hide_empty' => false,
 			'order'      => $args['order'],
 			'orderby'    => $args['orderby'],
-			'meta_query' => array(
+		);
+
+		// Unless show_empty is on, restrict to terms that actually have an image
+		// (the whole point of the grid). The image attachment ID lives in the
+		// `sm_term_image_id` term meta, written by the term-image admin UI and by
+		// the migration from the legacy storage.
+		if ( ! $args['show_empty'] ) {
+			$term_query_args['meta_query'] = array(
 				'image_clause' => array(
 					'key'     => 'sm_term_image_id',
 					'compare' => 'EXISTS',
 				),
-			),
-		);
+			);
+		}
 
 		// Order by most recently preached sermon. Each term carries a
 		// `sermon_date` term meta (maintained by SM_Dates_WP::update_term_dates())
@@ -510,8 +524,12 @@ class SM_Shortcodes {
 			foreach ( (array) $terms as $term ) {
 				$term_url = esc_url( get_term_link( $term, $term->taxonomy ) );
 
+				$image = $term->image_id
+					? wp_get_attachment_image( $term->image_id, $args['size'] )
+					: $this->grid_placeholder_image();
+
 				$list .= '<li class="wpfc_grid_image">';
-				$list .= '<a href="' . $term_url . '">' . wp_get_attachment_image( $term->image_id, $args['size'] ) . '</a>';
+				$list .= '<a href="' . $term_url . '">' . $image . '</a>';
 				if ( false == $args['hide_title'] || 'no' == $args['hide_title'] ) {
 					$list .= '<h3 class="wpfc_grid_title"><a href="' . $term_url . '">' . $term->name . '</a></h3>';
 				}
@@ -531,6 +549,23 @@ class SM_Shortcodes {
 			// ordering by sermon date, none has a dated sermon yet).
 			return 'No ' . $this->convert_taxonomy_name( $taxonomy, true ) . ' images found.';
 		}
+	}
+
+	/**
+	 * Markup for a grid cell whose term has no image, used when [sermon_images]
+	 * is called with show_empty="yes". Renders the user-set Default Image
+	 * (Settings > Display), or a CSS placeholder box when none is set.
+	 *
+	 * @return string Escaped <img> or placeholder markup.
+	 */
+	private function grid_placeholder_image() {
+		$default = SermonManager::getOption( 'default_image' );
+
+		if ( ! empty( $default ) ) {
+			return '<img class="wpfc_grid_default_image" src="' . esc_url( $default ) . '" alt="" />';
+		}
+
+		return '<span class="wpfc_grid_image_placeholder" aria-hidden="true"></span>';
 	}
 
 	/**

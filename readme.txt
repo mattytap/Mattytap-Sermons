@@ -96,6 +96,7 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 = 3.4.1 =
 
 * Fix: series, speaker, topic, and book images now appear on the correct items again. A one-time migration from the original Sermon Manager could attach images to the wrong terms (or none at all), so the `[sermon_images]` grid showed some items blank and others with the wrong or a duplicated image. This release repairs the affected images automatically from the preserved original data and backs up the prior state first. No action needed; images you set by hand are left untouched.
+* New: the `[sermon_images]` grid can optionally include items that have no image, showing your Default Image (Settings > Display) in their place, or a neutral placeholder if no Default Image is set. Off by default, so existing grids are unchanged; add `show_empty="yes"` to the shortcode to switch it on.
 
 = 3.4.0 =
 

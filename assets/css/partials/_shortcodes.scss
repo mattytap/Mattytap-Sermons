@@ -12,6 +12,23 @@ ul#wpfc_images_grid {
     }
   }
 
+  // Image-less terms shown via [sermon_images show_empty="yes"] when no
+  // Default Image is set. A neutral box keeps the grid aligned.
+  .wpfc_grid_image_placeholder {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 15px;
+    background: #ececec;
+    border: 1px dashed #cfcfcf;
+  }
+
+  .wpfc_grid_default_image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
   .wpfc_grid_title {
     margin: 0;
   }

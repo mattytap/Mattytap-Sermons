@@ -66,6 +66,10 @@ Use the shortcode `[sermons]` in any page or post, or visit `https://yourdomain.
 
 Go to Appearance → Menus. In "Custom Links" add `https://yourdomain.example/?post_type=wpfc_sermon` as the URL and "Sermons" as the label. Click "Add to Menu".
 
+= Is Mattytap Sermons a maintained replacement for Sermon Manager? =
+
+Yes. Sermon Manager is no longer receiving updates, and Mattytap Sermons continues it as a faithful restoration: the same plugin brought up to date for current WordPress and PHP, with security fixes, and actively maintained. Your existing sermons, taxonomies, and settings carry over unchanged. Full credit to the original authors is in the Credits section.
+
 = I'm coming from Sermon Manager. Will my sermons survive? =
 
 Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once. The overlapping schema will conflict.

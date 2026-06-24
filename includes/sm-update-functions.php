@@ -496,36 +496,124 @@ function sm_update_21516_update_term_dates() {
 }
 
 /**
- * Migrate the bundled taxonomy-images library's term→attachment associations
+ * Rebuild `sm_term_image_id` term_meta from the legacy taxonomy-images
+ * `sermon_image_plugin` option, keyed correctly by term_id.
+ *
+ * Background: the bundled taxonomy-images library (removed in the restoration,
+ * see #28) stored series/preacher/topic/book images in its own
+ * `sermon_image_plugin` option, keyed by *term_taxonomy_id*. The original
+ * 2.16.0 migration copied that option into native `sm_term_image_id` term_meta
+ * but treated each key as a *term_id*, so on any site where term_id is not
+ * equal to term_taxonomy_id the image landed on the wrong term (#53). This
+ * helper is the single correct code path shared by the first-run migration and
+ * the repair re-runner.
+ *
+ * Process:
+ *   1. Snapshot every existing `sm_term_image_id` row once into
+ *      `sm_term_image_repair_backup` (term_id => attachment_id) so a bad
+ *      rebuild is recoverable.
+ *   2. Clear stray rows: for each option entry, if the term whose term_id
+ *      equals the mis-used tt_id still holds exactly the value the broken
+ *      migration wrote, delete it. A value a human changed since will not match
+ *      and is left untouched.
+ *   3. Write each image onto the correct term, resolving term_taxonomy_id to
+ *      term_id via get_term_by().
+ *
+ * The original `sermon_image_plugin` option is only read, never modified, so it
+ * remains the source of truth and this helper is safely idempotent.
+ *
+ * @since 3.4.1
+ */
+function sm_migrate_term_images_from_option() {
+	$associations = get_option( 'sermon_image_plugin', array() );
+
+	if ( ! is_array( $associations ) || empty( $associations ) ) {
+		return;
+	}
+
+	// 1. One-time backup of the current term-image rows, before any change.
+	if ( false === get_option( 'sm_term_image_repair_backup', false ) ) {
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-off snapshot of all sm_term_image_id rows for rollback; caching is not applicable to a migration.
+		$rows = $wpdb->get_results( "SELECT term_id, meta_value FROM {$wpdb->termmeta} WHERE meta_key = 'sm_term_image_id'", ARRAY_A );
+
+		$backup = array();
+		foreach ( (array) $rows as $row ) {
+			$backup[ (int) $row['term_id'] ] = (int) $row['meta_value'];
+		}
+
+		update_option( 'sm_term_image_repair_backup', $backup, false );
+	}
+
+	// 2. Remove rows the mis-keyed migration wrote, leaving manual edits alone.
+	foreach ( $associations as $tt_id => $attachment_id ) {
+		$tt_id         = (int) $tt_id;
+		$attachment_id = (int) $attachment_id;
+
+		if ( ! $tt_id || ! $attachment_id ) {
+			continue;
+		}
+
+		if ( (int) get_term_meta( $tt_id, 'sm_term_image_id', true ) === $attachment_id ) {
+			delete_term_meta( $tt_id, 'sm_term_image_id' );
+		}
+	}
+
+	// 3. Write each image onto the correct term (term_taxonomy_id -> term_id).
+	foreach ( $associations as $tt_id => $attachment_id ) {
+		$tt_id         = (int) $tt_id;
+		$attachment_id = (int) $attachment_id;
+
+		if ( ! $tt_id || ! $attachment_id ) {
+			continue;
+		}
+
+		$term = get_term_by( 'term_taxonomy_id', $tt_id );
+
+		if ( $term instanceof WP_Term ) {
+			update_term_meta( $term->term_id, 'sm_term_image_id', $attachment_id );
+		}
+	}
+}
+
+/**
+ * Migrate the bundled taxonomy-images library's term/attachment associations
  * out of the `sermon_image_plugin` option and into per-term `sm_term_image_id`
  * term_meta rows.
  *
- * One-shot: existing values copied; option preserved indefinitely as a
- * rollback / re-migration source. The `sm_term_image_migrated_to_meta`
- * sentinel is set on completion for diagnostics + any future re-runner.
- *
- * Idempotent: re-running overwrites term_meta with whatever the option
- * currently holds, so if a bug is discovered the option-side data can be
- * restored and a 2.16.x re-runner can re-execute this same migration logic.
+ * Delegates to sm_migrate_term_images_from_option(), which keys by term_id
+ * correctly. The `sm_term_image_migrated_to_meta` sentinel is set on completion
+ * for diagnostics and the repair re-runner.
  *
  * @since 2.16.0
  */
 function sm_update_2160_migrate_term_images() {
-	$associations = get_option( 'sermon_image_plugin', array() );
-
-	if ( is_array( $associations ) ) {
-		foreach ( $associations as $term_id => $attachment_id ) {
-			$term_id       = (int) $term_id;
-			$attachment_id = (int) $attachment_id;
-			if ( $term_id && $attachment_id ) {
-				update_term_meta( $term_id, 'sm_term_image_id', $attachment_id );
-			}
-		}
-	}
+	sm_migrate_term_images_from_option();
 
 	// Sentinel for "this site has been migrated", separate from the framework
-	// per-function done-flag so a future re-runner can use a different name.
+	// per-function done-flag so the repair re-runner can use a different name.
 	update_option( 'sm_term_image_migrated_to_meta', 1 );
+
+	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
+	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
+}
+
+/**
+ * Repair re-runner for #53: rebuild `sm_term_image_id` term_meta correctly from
+ * the preserved `sermon_image_plugin` option.
+ *
+ * The original 2.16.0 migration mis-keyed the legacy option by term_id when its
+ * keys are term_taxonomy_ids, scattering series/preacher/topic/book images onto
+ * the wrong terms. Sites that already ran it carry its done-flag, so the
+ * corrected 2.16.0 callback will not re-run for them; this callback has its own
+ * done-flag and so runs once on every existing site to repair it.
+ *
+ * @since 3.4.1
+ */
+function sm_update_341_repair_term_images() {
+	sm_migrate_term_images_from_option();
 
 	// Mark it as done, backup way.
 	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.

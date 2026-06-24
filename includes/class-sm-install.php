@@ -69,6 +69,9 @@ class SM_Install {
 		'2.16.0'  => array(
 			'sm_update_2160_migrate_term_images',
 		),
+		'3.4.1'   => array(
+			'sm_update_341_repair_term_images',
+		),
 	);
 
 	/**

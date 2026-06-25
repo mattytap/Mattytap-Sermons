@@ -660,15 +660,15 @@ function get_sermon_image_url( $fallback = true, $image_size = 'post-thumbnail',
 	$sermon_image = get_the_post_thumbnail_url( $post, $image_size ) ?: null;
 	$series_image = null;
 
-	// Get the series image.
-	foreach (
-		(array) apply_filters( 'sermon-images-get-the-terms', array(), array( // phpcs:ignore
-			'post_id'    => $post->ID,
-			'image_size' => $image_size,
-		) ) as $term
-	) {
-		if ( isset( $term->image_id ) && 0 !== $term->image_id ) {
-			$series_image = wp_get_attachment_image_url( $term->image_id, $image_size );
+	// Get the series image from the sermon's series term(s); the first series
+	// that carries an image wins. Previously this used the
+	// `sermon-images-get-the-terms` filter, whose handler was removed with the
+	// taxonomy-images library (#28), leaving the series fallback dead (#55). The
+	// image attachment ID lives in the `sm_term_image_id` term meta.
+	$series_terms = get_the_terms( $post, 'wpfc_sermon_series' );
+	if ( $series_terms && ! is_wp_error( $series_terms ) ) {
+		foreach ( $series_terms as $series_term ) {
+			$series_image = get_sermon_series_image_url( (int) $series_term->term_id, $image_size );
 
 			if ( $series_image ) {
 				break;

@@ -30,9 +30,11 @@ The restoration scope, now complete:
 
 No commitment, no timeline, nothing planned. These are the kinds of contributions that would get a fair hearing if someone brought a compelling, well-scoped pull request:
 
-- **Gutenberg block support** for the sermon post type and the major shortcodes. The largest "modern WordPress" gap, and the most likely candidate to justify itself.
+- **Per-sermon structured data.** schema.org markup describing each sermon (speaker, date, audio file) so search engines and podcast directories can surface the preaching. Server-side, no toolchain, squarely within the caretaker remit.
 - **Accessibility.** A WCAG 2.1 AA pass over the front-end templates.
 - **Performance.** Lazy-loaded sermon images, podcast feed caching.
+
+(Gutenberg / block-theme support used to head this list. It has not been dropped, it has moved to *Out of scope* below: still wanted, but deliberately delivered as a separate companion plugin rather than baked into the core. See that section for the reasoning.)
 
 The bar is the same in each case: it has to fit a caretaker restoration and earn its place against "fix not change." Best-practice contributions (security, accessibility, performance, modern APIs) have the clearest path; radical scope changes do not.
 
@@ -40,6 +42,7 @@ The bar is the same in each case: it has to fit a caretaker restoration and earn
 
 - **A paid tier.** The original "Pro" pitch is closed; nothing from it carries over.
 - **A build-toolchain modernisation (asset pipeline).** The current SCSS and asset build works without a Node commitment; tying the project to a webpack or npm toolchain is not justified for a caretaker restoration. Considered and declined.
+- **Gutenberg / block-theme support inside the core plugin.** Block themes are where WordPress is heading, and proper block support matters, but it will not be bundled into this plugin. The core stays a faithful, stable, toolchain-free drop-in; folding a JavaScript build pipeline and a fast-moving block layer into it would compromise the very stability and simplicity that make it a trustworthy replacement. If block support is built, it ships as a **separate companion plugin, `mattytap-sermons-blocks`**, that depends on this one. It is demand-led (built when users ask for it, not before) and open for community contributors to lead. The split is deliberately reversible: a separate add-on can be promoted into the core later far more easily than a bundled feature can be pulled back out.
 - **Per-theme compatibility shims** (e.g. zerif-lite).
 - **Removing CMB2.** CMB2 is bundled and kept current.
 

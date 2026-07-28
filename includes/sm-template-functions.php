@@ -359,7 +359,14 @@ function get_wpfc_sermon_meta( $meta_key = '', $post = null ) {
 		global $post;
 	}
 
-	$data = get_post_meta( $post->ID, $meta_key, true );
+	// In block templates the global $post can be null; fall back to get_the_ID().
+	$post_id = $post instanceof WP_Post ? $post->ID : get_the_ID();
+
+	if ( ! $post_id ) {
+		return null;
+	}
+
+	$data = get_post_meta( $post_id, $meta_key, true );
 	if ( '' !== $data ) {
 		return $data;
 	}
@@ -378,7 +385,7 @@ function get_wpfc_sermon_meta( $meta_key = '', $post = null ) {
 function process_wysiwyg_output( $meta_key, $post_id = 0 ) {
 	global $wp_embed;
 
-	$post_id = $post_id ? $post_id : get_the_id();
+	$post_id = $post_id ? $post_id : get_the_ID();
 
 	$content = get_post_meta( $post_id, $meta_key, true );
 	$content = $wp_embed->autoembed( $content );

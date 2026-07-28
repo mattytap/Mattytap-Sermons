@@ -15,6 +15,8 @@ defined( 'ABSPATH' ) or die;
  * templates emit that the default table would strip: data-* attributes for
  * the Plyr player branches, the onchange handler on the sorting-widget
  * select, and the Facebook embed div attributes.
+ *
+ * @since 3.1
  */
 function sm_template_allowed_html() {
 	$allowed = wp_kses_allowed_html( 'post' );

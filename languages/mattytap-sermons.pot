@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.4.2\n"
+"Project-Id-Version: Mattytap Sermons 3.4.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-24T07:17:47+00:00\n"
+"POT-Creation-Date: 2026-07-28T20:26:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -149,7 +149,7 @@ msgid "Mattytap Sermons Settings"
 msgstr ""
 
 #: includes/admin/class-sm-admin-menus.php:34
-#: includes/class-sm-install.php:260
+#: includes/class-sm-install.php:263
 msgid "Settings"
 msgstr ""
 
@@ -1482,11 +1482,11 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: includes/class-sm-install.php:245
+#: includes/class-sm-install.php:248
 msgid "Monthly"
 msgstr ""
 
-#: includes/class-sm-install.php:260
+#: includes/class-sm-install.php:263
 msgid "View Mattytap Sermons settings"
 msgstr ""
 
@@ -1550,7 +1550,7 @@ msgstr ""
 #: includes/class-sm-post-types.php:108
 #: includes/class-sm-post-types.php:110
 #: includes/class-sm-post-types.php:111
-#: includes/sm-template-functions.php:205
+#: includes/sm-template-functions.php:207
 #: views/partials/content-sermon-single.php:55
 msgid "Series"
 msgstr ""
@@ -1589,7 +1589,7 @@ msgid "No series found"
 msgstr ""
 
 #: includes/class-sm-post-types.php:148
-#: includes/sm-template-functions.php:210
+#: includes/sm-template-functions.php:212
 msgid "Topic"
 msgstr ""
 
@@ -1635,7 +1635,7 @@ msgid "Bible books"
 msgstr ""
 
 #: includes/class-sm-post-types.php:185
-#: includes/sm-template-functions.php:215
+#: includes/sm-template-functions.php:217
 msgid "Book"
 msgstr ""
 
@@ -1756,12 +1756,12 @@ msgid "No podcast services have been specified. Please check your include/exclud
 msgstr ""
 
 #: includes/class-sm-shortcodes.php:200
-#: includes/class-sm-shortcodes.php:461
+#: includes/class-sm-shortcodes.php:468
 msgid "Error: Invalid \"list\" parameter."
 msgstr ""
 
 #: includes/class-sm-shortcodes.php:200
-#: includes/class-sm-shortcodes.php:461
+#: includes/class-sm-shortcodes.php:468
 msgid "Possible values are: \"series\", \"preachers\", \"topics\" and \"books\"."
 msgstr ""
 

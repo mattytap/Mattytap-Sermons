@@ -587,6 +587,54 @@ function get_sermon_series_image_url( $series_id = 0, $image_size = 'thumbnail' 
 }
 
 /**
+ * Gets the linked term images for a post, as HTML.
+ *
+ * Reproduces the markup the removed taxonomy-images library used to return
+ * through the `sermon-images-list-the-terms` filter: one linked thumbnail per
+ * term that has an image, in term order, with no wrapping list. The image
+ * attachment ID lives in the `sm_term_image_id` term meta, the same key the
+ * term-image admin UI and the migrator write.
+ *
+ * @param int          $post_id    ID of the post whose terms are read.
+ * @param string       $taxonomy   Taxonomy to read the terms from.
+ * @param string|array $image_size The image size to render. Either a valid image size or array with width and height
+ *                                 in pixels.
+ *
+ * @return string HTML for the linked images; empty string if there are none.
+ *
+ * @since 3.4.4
+ */
+function sm_get_term_image_links( $post_id, $taxonomy, $image_size = 'thumbnail' ) {
+	$terms = get_the_terms( (int) $post_id, $taxonomy );
+
+	if ( empty( $terms ) || is_wp_error( $terms ) ) {
+		return '';
+	}
+
+	$output = '';
+
+	foreach ( $terms as $term ) {
+		$image_id = (int) get_term_meta( $term->term_id, 'sm_term_image_id', true );
+
+		if ( ! $image_id ) {
+			continue;
+		}
+
+		$image = wp_get_attachment_image( $image_id, $image_size );
+
+		if ( ! $image ) {
+			continue;
+		}
+
+		$link = get_term_link( $term, $taxonomy );
+
+		$output .= is_wp_error( $link ) ? $image : '<a href="' . esc_url( $link ) . '">' . $image . '</a>';
+	}
+
+	return $output;
+}
+
+/**
  * Gets dropdown options for a setting in "Debug" tab of Mattytap Sermons Settings.
  *
  * @return array

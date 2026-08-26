@@ -127,19 +127,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 				<?php if ( has_term( '', 'wpfc_preacher', $post->ID ) ) : ?>
 					<div class="wpfc-sermon-meta-item wpfc-sermon-meta-preacher">
 						<?php
-						echo wp_kses_post(
-							apply_filters(
-								'sermon-images-list-the-terms',
-								'',
-								array(
-									'taxonomy'     => 'wpfc_preacher',
-									'after'        => '',
-									'after_image'  => '',
-									'before'       => '',
-									'before_image' => '',
-								)
-							)
-						);
+						echo wp_kses_post( sm_get_term_image_links( $post->ID, 'wpfc_preacher' ) );
 						?>
 						<span class="wpfc-sermon-meta-prefix">
 							<?php echo esc_html( sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' ) ); ?>

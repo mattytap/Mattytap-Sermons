@@ -1135,8 +1135,14 @@ class SM_Shortcodes {
 			return $args['image_size'];
 		} );
 
-		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream constant prefix; drop-in compat with Sermon Manager.
-		define( 'WPFC_SM_SHORTCODE', true );
+		// Guarded: this line is reached more than once in a single request whenever
+		// the shortcode renders twice (two [sermons] on one page, or a theme that
+		// runs the content through more than one render pass), and a bare define()
+		// warns on the second call. Nothing sets the constant to anything but true.
+		if ( ! defined( 'WPFC_SM_SHORTCODE' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream constant prefix; drop-in compat with Sermon Manager.
+			define( 'WPFC_SM_SHORTCODE', true );
+		}
 
 		// Resolve the archive layout: an explicit layout="" attribute wins,
 		// otherwise fall back to the Display > Archive setting. Classic emits

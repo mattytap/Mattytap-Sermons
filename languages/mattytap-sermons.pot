@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.4.3\n"
+"Project-Id-Version: Mattytap Sermons 3.4.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-28T20:26:09+00:00\n"
+"POT-Creation-Date: 2026-08-26T09:53:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -1827,27 +1827,27 @@ msgctxt "slug"
 msgid "sermons"
 msgstr ""
 
-#: includes/sm-core-functions.php:960
+#: includes/sm-core-functions.php:1008
 msgid "URL is empty or not a string."
 msgstr ""
 
-#: includes/sm-core-functions.php:965
+#: includes/sm-core-functions.php:1013
 msgid "URL is malformed."
 msgstr ""
 
-#: includes/sm-core-functions.php:969
+#: includes/sm-core-functions.php:1017
 msgid "Only http and https URLs are allowed."
 msgstr ""
 
-#: includes/sm-core-functions.php:980
+#: includes/sm-core-functions.php:1028
 msgid "Cloud metadata hostnames are blocked."
 msgstr ""
 
-#: includes/sm-core-functions.php:989
+#: includes/sm-core-functions.php:1037
 msgid "Could not resolve host."
 msgstr ""
 
-#: includes/sm-core-functions.php:1007
+#: includes/sm-core-functions.php:1055
 msgid "Address resolves to a private or reserved IP range."
 msgstr ""
 
@@ -1897,7 +1897,7 @@ msgstr ""
 msgid "Continue reading..."
 msgstr ""
 
-#: views/partials/content-sermon-archive.php:153
+#: views/partials/content-sermon-archive.php:141
 #: views/partials/content-sermon-single.php:62
 msgid "Passage"
 msgstr ""

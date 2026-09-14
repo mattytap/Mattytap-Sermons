@@ -1207,13 +1207,19 @@ class SM_Shortcodes {
 									}
 								}
 
-								echo wp_kses_post( paginate_links( array(
+								// paginate_links() returns null when there is only one
+								// page; passing null to wp_kses_post() is deprecated.
+								$pagination = paginate_links( array(
 									'base'     => preg_replace( '/\/\?.*/', '', rtrim( get_permalink( $post_ID ), '/' ) ) . '/%_%',
 									'current'  => $query->get( 'paged' ),
 									'total'    => $query->max_num_pages,
 									'end_size' => 3,
 									'add_args' => !is_front_page() ? $add_args : array(),
-								) ) );
+								) );
+
+								if ( $pagination ) {
+									echo wp_kses_post( $pagination );
+								}
 								?>
 							</div>
 						<?php endif; ?>

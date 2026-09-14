@@ -562,9 +562,16 @@ class SermonManager { // phpcs:ignore
 		// what makes WordPress emit the "Hook contextual_help is deprecated"
 		// notice (PHP/WP 8.x admin). remove_action does not trigger it, and
 		// current_screen fires before the help tabs render.
+		// Unlike contextual_help, current_screen also fires outside admin
+		// requests (e.g. Jetpack Sync calls set_current_screen() from wp-cron),
+		// where the admin functions are not loaded, so bail if they are absent.
 		add_action(
 			'current_screen',
 			function ( $screen ) {
+				if ( ! function_exists( 'sm_get_screen_ids' ) ) {
+					return;
+				}
+
 				if ( $screen && in_array( $screen->id, sm_get_screen_ids(), true ) ) {
 					remove_action( 'contextual_help', 'sb_add_contextual_help' );
 				}

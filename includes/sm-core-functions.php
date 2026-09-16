@@ -1315,3 +1315,59 @@ function sm_get_filter_month() {
 		'ym'    => sprintf( '%04d-%02d', $year, $month ),
 	);
 }
+
+/**
+ * Gets the raw source text for a sermon's description.
+ *
+ * The plugin stores the description in the `sermon_description` meta field, but
+ * Sermon Manager 2.30.0 moved the sermon body to the post's own `post_content`
+ * and left `sermon_description` unwritten. A site arriving from that baseline
+ * therefore has its text in the post body, where nothing in this plugin looked
+ * for it. Falling back to the post body restores those sermons without touching
+ * any data, and changes nothing for a site whose description field is populated.
+ *
+ * Callers that render the result should pass it through `sm_do_sermon_blocks()`
+ * first, because a 2.30.0 post body may hold block markup.
+ *
+ * @param int $post_id ID of the sermon. Defaults to the current post.
+ *
+ * @return string The description source; empty string if there is none.
+ *
+ * @since 3.4.6
+ */
+function sm_get_sermon_description_raw( $post_id = 0 ) {
+	$post_id = $post_id ? $post_id : get_the_ID();
+
+	if ( ! $post_id ) {
+		return '';
+	}
+
+	$description = (string) get_post_meta( $post_id, 'sermon_description', true );
+
+	if ( '' !== trim( $description ) ) {
+		return $description;
+	}
+
+	$sermon = get_post( $post_id );
+
+	return $sermon instanceof WP_Post ? (string) $sermon->post_content : '';
+}
+
+/**
+ * Renders block markup in a sermon description that came from the post body.
+ *
+ * Sermon Manager 2.30.0 enabled the block editor for sermons, so a description
+ * falling back to `post_content` can carry block delimiters. Plain paragraphs
+ * survive without this, but embeds and other dynamic blocks do not. Content
+ * that holds no blocks is returned untouched, so the `sermon_description` path
+ * is unaffected.
+ *
+ * @param string $content The description source.
+ *
+ * @return string The content with any blocks rendered.
+ *
+ * @since 3.4.6
+ */
+function sm_do_sermon_blocks( $content ) {
+	return has_blocks( $content ) ? do_blocks( $content ) : $content;
+}

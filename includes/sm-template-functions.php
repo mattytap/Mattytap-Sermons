@@ -161,7 +161,17 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 				$content = wpfc_sermon_excerpt_v2( true );
 			} elseif ( is_singular() && is_main_query() ) {
 				$content = wpfc_sermon_single_v2( true );
-				if ( '' !== trim( wp_strip_all_tags( $editor_content ) ) ) {
+
+				/*
+				 * Append the editor body only when the description field holds
+				 * something of its own. Where it is empty the sermon template
+				 * has already rendered this same body as the description, via
+				 * sm_get_sermon_description_raw(), so appending it here would
+				 * show it twice.
+				 */
+				$has_description = '' !== trim( (string) get_post_meta( get_the_ID(), 'sermon_description', true ) );
+
+				if ( $has_description && '' !== trim( wp_strip_all_tags( $editor_content ) ) ) {
 					$content .= "\n" . '<div class="wpfc-sermon-editor-content">' . wp_kses_post( $editor_content ) . '</div>';
 				}
 			}
@@ -385,11 +395,28 @@ function get_wpfc_sermon_meta( $meta_key = '', $post = null ) {
  * @return string The processed content
  */
 function process_wysiwyg_output( $meta_key, $post_id = 0 ) {
-	global $wp_embed;
-
 	$post_id = $post_id ? $post_id : get_the_ID();
 
-	$content = get_post_meta( $post_id, $meta_key, true );
+	return sm_process_wysiwyg_string( get_post_meta( $post_id, $meta_key, true ) );
+}
+
+/**
+ * Runs the WYSIWYG output pipeline over a string.
+ *
+ * Holds what `process_wysiwyg_output()` has always done once the meta value has
+ * been read, so the same pipeline can be applied to content that did not come
+ * from a meta field. `process_wysiwyg_output()` keeps its signature and its
+ * behaviour, and remains the entry point for callers that have a meta key.
+ *
+ * @param string $content The content to process.
+ *
+ * @return string The processed content.
+ *
+ * @since 3.4.6
+ */
+function sm_process_wysiwyg_string( $content ) {
+	global $wp_embed;
+
 	$content = $wp_embed->autoembed( $content );
 	$content = $wp_embed->run_shortcode( $content );
 	$content = wpautop( $content );
@@ -408,7 +435,8 @@ function process_wysiwyg_output( $meta_key, $post_id = 0 ) {
  * @return string The HTML, if $return is set to true
  */
 function wpfc_sermon_description( $before = '', $after = '', $return = false ) {
-	$output = $before . wpautop( process_wysiwyg_output( 'sermon_description', get_the_ID() ) ) . $after;
+	$description = sm_do_sermon_blocks( sm_get_sermon_description_raw( get_the_ID() ) );
+	$output      = $before . wpautop( sm_process_wysiwyg_string( $description ) ) . $after;
 
 	if ( ! $return ) {
 		echo wp_kses_post( $output );

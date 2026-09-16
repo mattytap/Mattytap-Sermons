@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.4.5
+Stable tag: 3.4.6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,11 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.4.6 =
+
+* Fix: sermons brought over from Sermon Manager 2.30.0 show their text again. 2.30.0 stored the sermon body in the post itself rather than in the Description field, so after switching to this plugin those sermons appeared with a title and a date and nothing else, in the sermon list, on the sermon's own page and in the podcast feed. The Description field is still used wherever it holds anything; the post body is now read only when it is empty. No sermon data is changed.
+* Fix: text typed into the editor pane on a sermon is displayed again on sites using the plugin's own templates. Since 3.0.2 it had only ever appeared on sites running Theme Compatibility.
 
 = 3.4.5 =
 
@@ -304,6 +309,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.4.6 =
+
+Restores sermon text on sites that moved here from Sermon Manager 2.30.0, where descriptions could appear blank in the sermon list, on the sermon page and in the podcast feed. Recommended for all sites; no data change.
 
 = 3.4.5 =
 

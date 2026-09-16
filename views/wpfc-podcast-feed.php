@@ -314,7 +314,7 @@ $cover_image_url  = $settings['itunes_cover_image'];
 				$post_image        = str_ireplace( 'https://', 'http://', ! empty( $post_image ) ? $post_image : '' );
 				$audio_duration    = get_post_meta( $post->ID, '_wpfc_sermon_duration', true ) ?: '0:00';
 				$audio_file_size   = get_post_meta( $post->ID, '_wpfc_sermon_size', 'true' ) ?: 0;
-				$description       = strip_shortcodes( get_post_meta( $post->ID, 'sermon_description', true ) );
+				$description       = strip_shortcodes( sm_do_sermon_blocks( sm_get_sermon_description_raw( $post->ID ) ) );
 				$description       = str_replace( '&nbsp;', '', $settings['enable_podcast_html_description'] ? stripslashes( wpautop( wp_filter_kses( $description ) ) ) : stripslashes( wp_filter_nohtml_kses( $description ) ) );
 				$description_short = substr( wp_strip_all_tags( $description, true ), 0, 255 );
 				$description_short = strlen( $description_short ) === 255 ? $description_short . '...' : $description_short;

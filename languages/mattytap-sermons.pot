@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.4.6\n"
+"Project-Id-Version: Mattytap Sermons 3.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-16T15:14:30+00:00\n"
+"POT-Creation-Date: 2026-09-18T17:05:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
 #: sermons.php
-#: sermons.php:932
+#: sermons.php:925
 msgid "Mattytap Sermons"
 msgstr ""
 
@@ -1851,6 +1851,16 @@ msgstr ""
 msgid "Address resolves to a private or reserved IP range."
 msgstr ""
 
+#: includes/sm-core-functions.php:1422
+#: includes/sm-core-functions.php:1488
+msgid "Bible Text:"
+msgstr ""
+
+#: includes/sm-core-functions.php:1438
+#: includes/sm-core-functions.php:1488
+msgid "Series:"
+msgstr ""
+
 #. translators: Sermon Title.
 #: includes/sm-deprecated-functions.php:82
 #, php-format
@@ -1867,24 +1877,16 @@ msgstr ""
 msgid "Sermon Topics: "
 msgstr ""
 
-#: sermons.php:164
-msgid "Bible Text:"
-msgstr ""
-
-#: sermons.php:180
-msgid "Series:"
-msgstr ""
-
-#: sermons.php:707
+#: sermons.php:700
 msgid "Import failed. Please check that you selected a valid export file, then try again."
 msgstr ""
 
-#: sermons.php:711
+#: sermons.php:704
 msgid "Import done!"
 msgstr ""
 
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
-#: sermons.php:932
+#: sermons.php:925
 #, php-format
 msgid "%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled."
 msgstr ""

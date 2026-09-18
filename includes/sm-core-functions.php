@@ -1326,6 +1326,11 @@ function sm_get_filter_month() {
  * for it. Falling back to the post body restores those sermons without touching
  * any data, and changes nothing for a site whose description field is populated.
  *
+ * The post body is not always authored text. Where "Automatic Excerpt Creation"
+ * is enabled this plugin writes a generated plaintext excerpt there itself, and
+ * rendering that as a description repeats the sermon's own metadata back at the
+ * reader. Anything this plugin can show it generated is therefore rejected.
+ *
  * Callers that render the result should pass it through `sm_do_sermon_blocks()`
  * first, because a 2.30.0 post body may hold block markup.
  *
@@ -1350,7 +1355,17 @@ function sm_get_sermon_description_raw( $post_id = 0 ) {
 
 	$sermon = get_post( $post_id );
 
-	return $sermon instanceof WP_Post ? (string) $sermon->post_content : '';
+	if ( ! $sermon instanceof WP_Post ) {
+		return '';
+	}
+
+	$content = (string) $sermon->post_content;
+
+	if ( sm_is_generated_sermon_excerpt( $content, $sermon ) ) {
+		return '';
+	}
+
+	return $content;
 }
 
 /**
@@ -1370,4 +1385,128 @@ function sm_get_sermon_description_raw( $post_id = 0 ) {
  */
 function sm_do_sermon_blocks( $content ) {
 	return has_blocks( $content ) ? do_blocks( $content ) : $content;
+}
+
+/**
+ * Builds the plaintext excerpt this plugin stores in a sermon's `post_content`.
+ *
+ * The excerpt exists so core search can match a sermon on its passage, preacher
+ * or series, and is written on save by
+ * `SermonManager::render_sermon_into_content()` when "Automatic Excerpt
+ * Creation" is enabled. It is derived data, not authored content.
+ *
+ * This builds the string only. The write path applies its own filters and
+ * escaping afterwards, so a site filtering `sm_sermon_post_content` will hold a
+ * stored excerpt this does not reproduce exactly; the shape test in
+ * `sm_is_generated_sermon_excerpt()` covers that case.
+ *
+ * @param int|WP_Post $post The sermon.
+ *
+ * @return string The excerpt; empty string if the sermon cannot be resolved.
+ *
+ * @since 3.4.7
+ */
+function sm_build_sermon_excerpt( $post ) {
+	$post = get_post( $post );
+
+	if ( ! $post instanceof WP_Post ) {
+		return '';
+	}
+
+	$content       = '';
+	$bible_passage = get_post_meta( $post->ID, 'bible_passage', true );
+	$has_preachers = has_term( '', 'wpfc_preacher', $post );
+	$has_series    = has_term( '', 'wpfc_sermon_series', $post );
+
+	if ( $bible_passage ) {
+		$content .= __( 'Bible Text:', 'mattytap-sermons' ) . ' ' . $bible_passage;
+	}
+
+	if ( $has_preachers ) {
+		if ( $bible_passage ) {
+			$content .= ' | ';
+		}
+
+		$content .= sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' ) . ': ';
+		$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_preacher', '', ', ', '' ) );
+	}
+
+	if ( $has_series ) {
+		if ( $has_preachers ) {
+			$content .= ' | ';
+		}
+		$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'mattytap-sermons' ) . ' ', ', ', '' ) );
+	}
+
+	$description = wp_strip_all_tags( trim( (string) get_post_meta( $post->ID, 'sermon_description', true ) ) );
+
+	if ( '' !== $description ) {
+		$content .= ' | ' . $description;
+	}
+
+	return $content;
+}
+
+/**
+ * Decides whether a sermon's post body is an excerpt this plugin generated.
+ *
+ * Two tests, both identifying this plugin's own output rather than guessing at
+ * the author's. The first regenerates the excerpt and compares, which settles
+ * it for any sermon whose passage, preacher and series are unchanged since the
+ * save. The second recognises the excerpt's shape, for a row left stale by a
+ * term rename: plain text throughout, every segment carrying one of the labels
+ * the excerpt is built from.
+ *
+ * Content that passes neither test is treated as authored, so the failure this
+ * risks is rendering an excerpt, never suppressing a sermon's real text.
+ *
+ * @param string      $content The post body to judge.
+ * @param int|WP_Post $post    The sermon it belongs to.
+ *
+ * @return bool True if the content is a generated excerpt.
+ *
+ * @since 3.4.7
+ */
+function sm_is_generated_sermon_excerpt( $content, $post ) {
+	$content = trim( (string) $content );
+
+	if ( '' === $content ) {
+		return false;
+	}
+
+	$sermon = get_post( $post );
+
+	if ( $sermon instanceof WP_Post && $content === trim( sm_build_sermon_excerpt( $sermon ) ) ) {
+		return true;
+	}
+
+	// The excerpt is plain text, so any markup means the body was authored.
+	if ( has_blocks( $content ) || $content !== wp_strip_all_tags( $content ) ) {
+		return false;
+	}
+
+	$labels   = array( __( 'Bible Text:', 'mattytap-sermons' ), __( 'Series:', 'mattytap-sermons' ) );
+	$preacher = trim( (string) sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' ) );
+
+	if ( '' !== $preacher ) {
+		$labels[] = $preacher . ':';
+	}
+
+	foreach ( explode( ' | ', $content ) as $segment ) {
+		$segment = trim( $segment );
+		$matched = false;
+
+		foreach ( $labels as $label ) {
+			if ( '' !== $label && 0 === stripos( $segment, $label . ' ' ) ) {
+				$matched = true;
+				break;
+			}
+		}
+
+		if ( ! $matched ) {
+			return false;
+		}
+	}
+
+	return true;
 }

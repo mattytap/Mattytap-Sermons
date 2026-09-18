@@ -155,36 +155,9 @@ class SermonManager { // phpcs:ignore
 			}
 		}
 
-		$content       = '';
-		$bible_passage = get_post_meta( $post_ID, 'bible_passage', true );
-		$has_preachers = has_term( '', 'wpfc_preacher', $post );
-		$has_series    = has_term( '', 'wpfc_sermon_series', $post );
-
-		if ( $bible_passage ) {
-			$content .= __( 'Bible Text:', 'mattytap-sermons' ) . ' ' . $bible_passage;
-		}
-
-		if ( $has_preachers ) {
-			if ( $bible_passage ) {
-				$content .= ' | ';
-			}
-
-			$content .= sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' ) . ': ';
-			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_preacher', '', ', ', '' ) );
-		}
-
-		if ( $has_series ) {
-			if ( $has_preachers ) {
-				$content .= ' | ';
-			}
-			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'mattytap-sermons' ) . ' ', ', ', '' ) );
-		}
-
-		$description = wp_strip_all_tags( trim( get_post_meta( $post->ID, 'sermon_description', true ) ) );
-
-		if ( '' !== $description ) {
-			$content .= ' | ' . $description;
-		}
+		// Built by sm_build_sermon_excerpt() so the render path can recognise
+		// this plugin's own excerpt and decline to show it as a description.
+		$content = sm_build_sermon_excerpt( $post );
 
 		/**
 		 * Allows to modify sermon content that will be saved as "post_content".

@@ -8,9 +8,9 @@ assignees: ''
 
 <!--
 Before opening a bug report, please:
-  - Check existing issues: https://github.com/mattytap/Sermon-Works/issues
+  - Check existing issues: https://github.com/mattytap/Mattytap-Sermons/issues
   - For security findings, do NOT use this template. See SECURITY.md for
-    private disclosure: https://github.com/mattytap/Sermon-Works/security
+    private disclosure: https://github.com/mattytap/Mattytap-Sermons/security
 -->
 
 ### What did you expect to happen?

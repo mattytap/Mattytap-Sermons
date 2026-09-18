@@ -12,7 +12,7 @@ stance for working code. The bar for new features is higher than the bar for fix
 bugs. Before opening a feature request, please:
 
   1. Check the ROADMAP. Many feature ideas are already captured there as
-     no-commitment backlog: https://github.com/mattytap/Sermon-Works/blob/main/ROADMAP.md
+     no-commitment backlog: https://github.com/mattytap/Mattytap-Sermons/blob/main/ROADMAP.md
   2. Check existing issues to avoid duplicates.
   3. Make the case below: what problem this solves, who it's for, and why
      it's a better fit for Mattytap Sermons than for a theme or sibling plugin.

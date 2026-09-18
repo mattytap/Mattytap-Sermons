@@ -147,6 +147,26 @@ class SermonManager { // phpcs:ignore
 			return;
 		}
 
+		/*
+		 * The excerpt built below is derived data. Where the post body holds
+		 * anything this plugin did not generate, it is the author's own text:
+		 * a site arriving from Sermon Manager 2.30.0 keeps its whole sermon
+		 * there, because that release stopped writing the excerpt and left the
+		 * body alone. The write at the end of this method is a direct database
+		 * update with no revision behind it, so overwriting such text destroys
+		 * it beyond recovery. Leave it where it is.
+		 *
+		 * An empty body is always safe to write to, which is what a new sermon
+		 * has, and a body this plugin generated is safe to refresh, which is
+		 * what keeps core search working on sites that have always used the
+		 * description field.
+		 */
+		$existing = (string) $post->post_content;
+
+		if ( '' !== trim( $existing ) && ! sm_is_generated_sermon_excerpt( $existing, $post ) ) {
+			return;
+		}
+
 		if ( ! $skip_check ) {
 			if ( defined( 'SM_SAVING_POST' ) ) {
 				return;

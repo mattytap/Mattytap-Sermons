@@ -95,8 +95,8 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 
 = 3.4.7 =
 
-* Fix: sermon text is no longer overwritten on sites that moved here from Sermon Manager 2.30.0. That version keeps the sermon in the post itself, and this plugin replaced it with the short summary line it writes there for search, both when a sermon was saved and when its own updater ran. The replaced text could not be recovered afterwards. The summary is now written only where the post is empty or already holds a summary this plugin wrote, and anything else is left alone. Sites whose sermons have always used the Description field are unaffected, and WordPress search still matches sermons on preacher, series and passage as before.
-* Fix: a sermon with no description of its own no longer shows its passage, preacher and series in place of the description text. Version 3.4.6 began reading the sermon's post body wherever the Description field is empty, and on most sites that body holds a short summary line the plugin writes there for search purposes rather than any sermon text. That summary is now recognised and left out. Sermons brought over from Sermon Manager 2.30.0 still show their text as they did in 3.4.6.
+* Fix: a sermon with no description of its own no longer shows its passage, preacher and series in place of the description text. Version 3.4.6 began reading the sermon's post body wherever the Description field is empty, and on most sites that body holds a short summary the plugin writes there for search rather than any sermon text. That summary is now recognised and left out. Sermons brought over from Sermon Manager 2.30.0 still show their text as they did in 3.4.6.
+* Fix: that summary is no longer written over text already in the post. This was found while investigating the fault above, and there have been no reports of anyone losing text to it. Sermons whose text is held in the Description field are unaffected, which covers most sites. It is worth a look if you moved here from Sermon Manager 2.30.0, which had no Description field and kept sermon text in the post itself, or if you have typed into a sermon's editor pane, since text replaced this way cannot be recovered. The summary is now written only where the post is empty or already holds a summary the plugin wrote. Search still matches sermons on preacher, series and passage as before.
 
 = 3.4.6 =
 
@@ -317,7 +317,7 @@ For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–201
 
 = 3.4.7 =
 
-Important if you moved here from Sermon Manager 2.30.0: sermon text kept in the post itself is no longer overwritten by the plugin. Also fixes sermons with no description of their own showing their passage, preacher and series where the description text belongs, which 3.4.6 introduced. Recommended for all sites.
+Fixes a sermon with no description of its own showing its passage, preacher and series in place of one, which 3.4.6 introduced. Also closes a fault found while investigating that, with no reports of anyone losing text to it: the same summary line could be written over text already in the post. Sermons whose text is in the Description field are unaffected. Recommended for all sites.
 
 = 3.4.6 =
 

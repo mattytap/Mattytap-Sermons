@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.4.7
+Stable tag: 3.4.8
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.4.8 =
+
+* Fix: videos placed in a sermon's text show on the sermon's own page again. A pasted YouTube embed code was being removed when the page was displayed, and a YouTube link on a line of its own was turned into a player and then removed, leaving a gap. This mostly affects sites that moved here from Sermon Manager 2.30.0, where the video usually sits in the sermon text, and it has done since 3.4.6 began showing that text. Videos added through the Video Link or Video Embed fields were unaffected. No sermon data is changed.
 
 = 3.4.7 =
 
@@ -314,6 +318,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.4.8 =
+
+Restores videos placed in a sermon's text, which were being removed from the sermon's own page. Mostly affects sites that moved here from Sermon Manager 2.30.0. Recommended for all sites; no data change.
 
 = 3.4.7 =
 

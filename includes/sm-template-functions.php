@@ -108,6 +108,25 @@ function sm_template_allowed_html() {
 }
 
 /**
+ * Allowed HTML for a sermon's description, as written by its author.
+ *
+ * The core post list plus provider iframes, so a pasted embed code or an
+ * auto-embedded video URL survives output escaping. Deliberately narrower
+ * than sm_template_allowed_html(), whose template-only additions (such as
+ * the onchange handler on select) have no place in author content. The
+ * iframe attributes are taken from that function so they are defined once.
+ *
+ * @since 3.4.8
+ */
+function sm_description_allowed_html() {
+	$allowed           = wp_kses_allowed_html( 'post' );
+	$template          = sm_template_allowed_html();
+	$allowed['iframe'] = $template['iframe'];
+
+	return $allowed;
+}
+
+/**
  * Append the archive-layout modifier class to the Sermon Manager container.
  *
  * The Display > Archive "Archive layout" setting (classic|compact|grid) is
@@ -439,7 +458,7 @@ function wpfc_sermon_description( $before = '', $after = '', $return = false ) {
 	$output      = $before . wpautop( sm_process_wysiwyg_string( $description ) ) . $after;
 
 	if ( ! $return ) {
-		echo wp_kses_post( $output );
+		echo wp_kses( $output, sm_description_allowed_html() );
 	}
 
 	return $output;

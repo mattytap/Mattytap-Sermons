@@ -81,7 +81,7 @@ global $post;
 				<?php endif; ?>
 				<?php if ( get_wpfc_sermon_meta( 'sermon_video' ) ) : ?>
 					<div class="wpfc-sermon-single-video wpfc-sermon-single-video-embed">
-						<?php echo do_shortcode( get_wpfc_sermon_meta( 'sermon_video' ) ); ?>
+						<?php echo sm_get_sermon_video_embed(); ?>
 					</div>
 				<?php endif; ?>
 

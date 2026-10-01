@@ -90,8 +90,10 @@ class SM_API {
 						$data = sanitize_text_field( $data );
 						break;
 					case 'sermon_description':
-					case 'sermon_video_embed':
 						$data = current_user_can( 'unfiltered_html' ) ? $data : wp_kses_post( $data );
+						break;
+					case 'sermon_video_embed':
+						$data = current_user_can( 'unfiltered_html' ) ? $data : sm_kses_video_embed( $data );
 						break;
 					case 'sermon_date':
 						$data = absint( $data );

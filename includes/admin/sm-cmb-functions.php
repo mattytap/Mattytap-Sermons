@@ -109,8 +109,9 @@ function wpfc_sermon_metaboxes() {
 	$sermon_files_meta->add_field( array(
 		'name' => esc_html__( 'Video Embed Code', 'mattytap-sermons' ),
 		'desc' => esc_html__( 'Paste your embed code for Vimeo, Youtube, Facebook, or direct video file here', 'mattytap-sermons' ),
-		'id'   => 'sermon_video',
-		'type' => 'textarea_code',
+		'id'              => 'sermon_video',
+		'type'            => 'textarea_code',
+		'sanitization_cb' => 'sm_sanitize_video_embed_field',
 	) );
 	$sermon_files_meta->add_field( apply_filters( 'sm_cmb2_field_sermon_video_link', array(
 		'name' => esc_html__( 'Video Link', 'mattytap-sermons' ),
@@ -214,3 +215,29 @@ function sm_cmb2_sanitize_text_number( $null = null, $value = '' ) {
 }
 
 add_filter( 'cmb2_sanitize_text_number', 'sm_cmb2_sanitize_text_number', 10, 2 );
+
+/**
+ * Sanitizes the Video Embed Code field on save.
+ *
+ * CMB2's own textarea_code sanitizer runs first, so the value is unslashed and
+ * decoded exactly as before. Users with unfiltered_html keep that value as it
+ * stands; for everyone else it is filtered by sm_kses_video_embed().
+ *
+ * @since 3.4.9
+ *
+ * @param mixed      $value      The submitted value.
+ * @param array      $field_args The field arguments.
+ * @param CMB2_Field $field      The field object.
+ *
+ * @return string The value to store.
+ */
+function sm_sanitize_video_embed_field( $value, $field_args, $field ) {
+	$sanitizer = new CMB2_Sanitize( $field, $value );
+	$value     = $sanitizer->textarea_code();
+
+	if ( current_user_can( 'unfiltered_html' ) ) {
+		return $value;
+	}
+
+	return sm_kses_video_embed( $value );
+}

@@ -127,6 +127,61 @@ function sm_description_allowed_html() {
 }
 
 /**
+ * Filter a sermon's video embed code for a user who may not post unfiltered HTML.
+ *
+ * WordPress withholds unfiltered_html from Authors and Contributors, so script
+ * in their post content is stripped on save. The Video Embed Code field
+ * (sermon_video) must follow the same rule. This keeps the markup video
+ * providers use, including iframes, and removes script and event handlers.
+ * Every path that writes or prints the field calls this, so the rule is
+ * defined once.
+ *
+ * @since 3.4.9
+ *
+ * @param string $embed The embed code.
+ *
+ * @return string The filtered embed code.
+ */
+function sm_kses_video_embed( $embed ) {
+	return wp_kses( (string) $embed, sm_description_allowed_html() );
+}
+
+/**
+ * Return a sermon's video embed code, ready to print.
+ *
+ * The value is filtered on save for users without unfiltered_html. This also
+ * filters it on output when the sermon's author lacks that capability, which
+ * covers values stored before 3.4.9. Shortcodes in the embed are then run, as
+ * the templates always have. Third-party code should call this rather than
+ * printing the raw sermon_video meta.
+ *
+ * @since 3.4.9
+ *
+ * @param int|WP_Post|null $post The sermon. Defaults to the current post.
+ *
+ * @return string The embed HTML, or an empty string when there is none.
+ */
+function sm_get_sermon_video_embed( $post = null ) {
+	$post = get_post( $post );
+
+	if ( ! $post ) {
+		return '';
+	}
+
+	$embed = get_wpfc_sermon_meta( 'sermon_video', $post );
+
+	if ( ! $embed ) {
+		return '';
+	}
+
+	if ( ! user_can( (int) $post->post_author, 'unfiltered_html' ) ) {
+		$embed = sm_kses_video_embed( $embed );
+	}
+
+	return do_shortcode( $embed );
+}
+
+/**
  * Append the archive-layout modifier class to the Sermon Manager container.
  *
  * The Display > Archive "Archive layout" setting (classic|compact|grid) is

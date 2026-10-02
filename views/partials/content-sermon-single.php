@@ -156,11 +156,9 @@ global $post;
 			<?php endif; ?>
 		</div>
 		<?php
-		if ( 'Divi' === get_option( 'template' ) && function_exists( 'et_get_option' ) ) {
-			if ( ( comments_open() || get_comments_number() ) && 'on' == et_get_option( 'divi_show_postcomments', 'on' ) ) {
-				comments_template( '', true );
-			}
-		}
+		// No comments_template() here: single-wpfc_sermon.php renders comments after this
+		// partial, and with Theme Compatibility on the theme's own template does. A Divi-only
+		// call that lived here made Divi show them twice. See #76.
 		?>
 	</div>
 	<?php if ( ! \SermonManager::getOption( 'theme_compatibility' ) ) : ?>

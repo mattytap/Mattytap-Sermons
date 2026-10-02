@@ -697,7 +697,7 @@ class SM_Shortcodes {
 				$query_args += array(
 					'orderby'      => 'meta_value_num',
 					'meta_key'     => 'sermon_date',
-					'meta_value'   => time(),
+					'meta_value'   => current_time( 'timestamp' ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- sermon_date is stored as site-local wall time. See #75.
 					'meta_compare' => '<=',
 				);
 				break;

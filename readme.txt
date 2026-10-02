@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.4.9
+Stable tag: 3.4.10
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,18 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.4.10 =
+
+Seven fixes, all inherited from the original Sermon Manager.
+
+* Fix: podcast episodes whose audio link carries extra settings after a question mark, such as Dropbox share links, now point podcast apps at the right file.
+* Fix: podcast episode artwork is sent at full size, which podcast directories ask for, rather than as a small thumbnail.
+* Fix: a long sermon description containing accented or other non-English letters no longer leaves that episode's subtitle blank in the podcast feed.
+* Fix: moving a sermon to a different series, preacher or other group now updates that group's latest-sermon date, so `[latest_series]` shows the right series.
+* Fix: on sites whose timezone isn't UTC, the `[sermons]` and `[latest_series]` shortcodes no longer show a future-dated sermon a few hours early, or hold it back a few hours late.
+* Fix: on the Divi theme, comments appear once on a sermon page rather than twice.
+* Fix: on the Twenty Nineteen theme, sermon pages pick up the plugin's container styling, as they do on other themes.
 
 = 3.4.9 =
 
@@ -324,6 +336,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.4.10 =
+
+Seven fixes inherited from Sermon Manager: podcast feed links, artwork and subtitles, series dates, timezones, Divi comments and Twenty Nineteen styling. Recommended for all sites; no data migration.
 
 = 3.4.9 =
 

@@ -199,8 +199,9 @@ class SM_Dates_WP extends SM_Dates {
 				}
 			}
 
-			// Update the main date.
-			self::update_term_dates( $taxonomy, $orig_terms + $new_terms );
+			// Update the main date. Both lists are zero-indexed, so merge them; a union
+			// with + would drop any new term sitting at an index the old list uses. See #74.
+			self::update_term_dates( $taxonomy, array_unique( array_merge( $orig_terms, $new_terms ) ) );
 		}
 	}
 

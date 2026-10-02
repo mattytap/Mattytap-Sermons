@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.4.10
+Stable tag: 3.5.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,14 @@ Yes. Sermon Manager is no longer receiving updates, and Mattytap Sermons continu
 
 Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once. The overlapping schema will conflict.
 
+= I'm coming from Sermon Manager Pro. What carries over? =
+
+Your sermons, series, preachers, topics, books, service types, files and preached dates all carry over, because Pro kept them in Sermon Manager's own format. Your main podcast feed carries on at the same address, so subscribers keep receiving episodes.
+
+Pro's own extras aren't part of Mattytap Sermons. Its custom layouts give way to the plugin's standard templates. Its extra podcast feeds still answer, but carry every sermon rather than their own selection. Its widgets for Elementor, Divi, Beaver Builder and WPBakery, and its blocks, show nothing. Pages that used Pro's `[smpro_archive]` shortcode show the standard sermon list instead, and pages that used `[smpro_tax]` show just their title.
+
+Nothing of Pro's is deleted, so you can switch back if you need to. Deactivate Sermon Manager Pro and Sermon Manager before activating Mattytap Sermons.
+
 = How do I report a bug or request a feature? =
 
 [GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than public issues.
@@ -92,6 +100,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.5.0 =
+
+* New: a landing for sites coming from Sermon Manager Pro. Pages that used Pro's sermon archive shortcode, or its WPBakery and Divi versions, now show the standard sermon list instead of raw shortcode text, and Pro's taxonomy shortcodes no longer show at all. Administrators see a one-time notice explaining what has carried over and what hasn't. Pro's data is left untouched.
 
 = 3.4.10 =
 
@@ -336,6 +348,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.5.0 =
+
+Adds a landing for sites coming from Sermon Manager Pro: no more raw shortcode text, and a one-time notice explaining the switch. Nothing changes on other sites; no data migration.
 
 = 3.4.10 =
 

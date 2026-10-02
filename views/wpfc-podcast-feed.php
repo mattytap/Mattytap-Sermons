@@ -320,8 +320,9 @@ $cover_image_url  = $settings['itunes_cover_image'];
 				$audio_file_size   = get_post_meta( $post->ID, '_wpfc_sermon_size', 'true' ) ?: 0;
 				$description       = strip_shortcodes( sm_do_sermon_blocks( sm_get_sermon_description_raw( $post->ID ) ) );
 				$description       = str_replace( '&nbsp;', '', $settings['enable_podcast_html_description'] ? stripslashes( wpautop( wp_filter_kses( $description ) ) ) : stripslashes( wp_filter_nohtml_kses( $description ) ) );
-				$description_short = substr( wp_strip_all_tags( $description, true ), 0, 255 );
-				$description_short = strlen( $description_short ) === 255 ? $description_short . '...' : $description_short;
+				// Count characters, not bytes, so a multi-byte character is never cut in half. See #73.
+				$description_short = mb_substr( wp_strip_all_tags( $description, true ), 0, 255 );
+				$description_short = mb_strlen( $description_short ) === 255 ? $description_short . '...' : $description_short;
 
 				// Escape any `]]>` so an attacker-supplied description can't break out of the CDATA blocks below.
 				$description       = str_replace( ']]>', ']]]]><![CDATA[>', $description );

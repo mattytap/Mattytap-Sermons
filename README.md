@@ -43,6 +43,8 @@ The name pairs the maintainer's GitHub handle, `mattytap`, with the plain catego
 
 What we're restoring isn't quite the "abandoned 2019 plugin" story it might initially look like. WP-for-Church kept the free version on WordPress.org through eleven releases between 2019 and 2024, alongside a paid Pro tier. Bundled vendor libraries weren't kept current and the security backlog wasn't worked; three CVEs disclosed in late 2025 against the WordPress.org-shipped version remain unpatched. So Mattytap Sermons is more accurately a caretaker for the 2024 plugin than the 2019 one, for the churches and volunteers who relied on the free version.
 
+**What the code is built on.** Upstream's public history on GitHub stops at the 2.15 line in 2019; the releases from 2.16 to 2.30.0 only ever appeared on WordPress.org, as finished packages with no history behind them. So Mattytap Sermons is built on that last public source, restored, security-fixed and modernised, with the parts of 2.30.0 that sites depend on brought across after a compatibility audit against it ([`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md)). The result reads and displays a 2.30.0 site's data as 2.30.0 did, without being a copy of 2.30.0's code.
+
 ## Principles
 
 These shape what gets accepted and what gets shipped.

@@ -8,7 +8,7 @@ Every code contribution from an upstream Pull Request is preserved in the git co
 
 ## Original authors and maintainers (pre-fork)
 
-The Sermon Manager plugin was created and maintained by contributors to the [WP-for-Church](https://github.com/WP-for-Church) organisation before falling dormant in 2019. All of their work is the foundation of Mattytap Sermons. Full historical git log preserved in this repository's commit history.
+The Sermon Manager plugin was created and maintained by contributors to the [WP-for-Church](https://github.com/WP-for-Church) organisation, with public development on GitHub to 2019 and releases on WordPress.org until 2024. All of their work is the foundation of Mattytap Sermons. Full historical git log preserved in this repository's commit history.
 
 ## Ingested upstream Pull Requests
 

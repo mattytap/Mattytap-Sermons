@@ -86,6 +86,7 @@ class SermonManager { // phpcs:ignore
 		include SM_PATH . 'includes/class-sm-widget-recent-sermons.php'; // Recent sermons widget.
 		include SM_PATH . 'includes/sm-template-functions.php'; // Template functions.
 		include SM_PATH . 'includes/sm-podcast-functions.php'; // Podcast Functions.
+		include SM_PATH . 'includes/sm-pro-compat-functions.php'; // Landing for sites coming from Sermon Manager Pro.
 
 		/**
 		 * Admin only includes.

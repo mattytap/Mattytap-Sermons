@@ -302,9 +302,13 @@ $cover_image_url  = $settings['itunes_cover_image'];
 				$audio_url_wp      = $audio_id ? wp_get_attachment_url( intval( $audio_id ) ) : false;
 				$audio_url         = $audio_id && $audio_url_wp ? $audio_url_wp : get_post_meta( $post->ID, 'sermon_audio', true );
 				$audio_raw         = str_ireplace( 'https://', 'http://', $audio_url );
+				// Keep any query string (Dropbox-style ?rlkey=...&dl=1) out of the filename encoding below. See #71.
+				$audio_query_p     = strpos( $audio_raw, '?' );
+				$audio_query       = false !== $audio_query_p ? substr( $audio_raw, $audio_query_p ) : '';
+				$audio_raw         = false !== $audio_query_p ? substr( $audio_raw, 0, $audio_query_p ) : $audio_raw;
 				$audio_p           = strrpos( $audio_raw, '/' ) + 1;
 				$audio_raw         = urldecode( $audio_raw );
-				$audio             = substr( $audio_raw, 0, $audio_p ) . rawurlencode( substr( $audio_raw, $audio_p ) );
+				$audio             = substr( $audio_raw, 0, $audio_p ) . rawurlencode( substr( $audio_raw, $audio_p ) ) . $audio_query;
 				$speakers          = wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_preacher', '', ' &amp; ', '' ) );
 				$speakers_terms    = get_the_terms( $post->ID, 'wpfc_preacher' );
 				$speaker           = $speakers_terms ? $speakers_terms[0]->name : '';

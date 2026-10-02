@@ -44,7 +44,7 @@ switch ( $template ) {
 		echo '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentyseventeen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentynineteen':
-		echo '<section id="primary" class="content-area"><main id="main" class="site-main wpfc-twentynineteen ' . esc_attr( $additional_classes ) . '">';
+		echo '<section id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentynineteen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentytwentyfour':
 		echo '<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentytwentyfour ' . esc_attr( $additional_classes ) . '">';

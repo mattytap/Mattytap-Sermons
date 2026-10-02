@@ -232,7 +232,8 @@ class SermonManager { // phpcs:ignore
 				switch ( $orderby ) {
 					case 'date_preached':
 						$query->set( 'meta_key', 'sermon_date' );
-						$query->set( 'meta_value_num', time() );
+						// sermon_date is stored as site-local wall time, so compare with site-local "now". See #75.
+						$query->set( 'meta_value_num', current_time( 'timestamp' ) ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Matches how sermon_date is stored.
 						$query->set( 'meta_compare', '<=' );
 						$query->set( 'orderby', 'meta_value_num' );
 						break;

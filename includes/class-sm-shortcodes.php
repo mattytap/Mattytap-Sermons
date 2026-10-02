@@ -938,7 +938,8 @@ class SM_Shortcodes {
 				$query_args['meta_query'] = array(
 					array(
 						'key'     => 'sermon_date',
-						'value'   => time(),
+						// sermon_date is stored as site-local wall time, so compare with site-local "now". See #75.
+						'value'   => current_time( 'timestamp' ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Matches how sermon_date is stored.
 						'type'    => 'numeric',
 						'compare' => '<=',
 					),

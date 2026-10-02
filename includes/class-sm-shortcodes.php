@@ -1061,31 +1061,18 @@ class SM_Shortcodes {
 			$terms = explode( ',', $args['filter_value'] );
 
 			if ( ! empty( $terms ) ) {
-				$field = 'slug';
+				$terms = array_map( 'trim', $terms );
+				$field = is_numeric( $terms[0] ) ? 'term_id' : 'slug';
 
-				if ( is_numeric( $terms[0] ) ) {
-					$field = 'id';
-				}
-
-				foreach ( $terms as &$term ) {
-					$term = trim( $term );
-
-					if ( 'id' === $field ) {
-						// Remove if it's not an ID.
-						if ( ! is_numeric( $term ) ) {
-							unset( $term );
-							continue;
-						}
-
-						// Convert to int.
-						$term = intval( $term );
-					}
+				if ( 'term_id' === $field ) {
+					// Keep only the IDs. See #78.
+					$terms = array_map( 'intval', array_values( array_filter( $terms, 'is_numeric' ) ) );
 				}
 
 				$query_args['tax_query'] = array(
 					array(
 						'taxonomy' => $this->convert_taxonomy_name( $args['filter_by'], false ),
-						'field'    => 'slug',
+						'field'    => $field,
 						'terms'    => $terms,
 					),
 				);

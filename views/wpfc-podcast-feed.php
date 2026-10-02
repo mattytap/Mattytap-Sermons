@@ -99,7 +99,7 @@ switch ( SermonManager::getOption( 'archive_orderby' ) ) {
 	case 'date_preached':
 		$args += array(
 			'meta_key'       => 'sermon_date',
-			'meta_value_num' => time(),
+			'meta_value_num' => current_time( 'timestamp' ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- sermon_date is stored as site-local wall time. See #75.
 			'meta_compare'   => '<=',
 			'orderby'        => 'meta_value_num',
 		);

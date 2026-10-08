@@ -296,6 +296,48 @@ function sm_block_template_is_sermon_specific() {
 }
 
 /**
+ * Whether the theme already shows this sermon's featured image.
+ *
+ * True on a block theme whose template holds a Featured Image block and the
+ * sermon has a featured image, and on Twenty Nineteen when its header is
+ * showing the image. The sermon view then leaves its own image out rather
+ * than show it twice.
+ *
+ * @since 3.6.0
+ *
+ * @return bool True when the theme shows the featured image itself.
+ */
+function sm_theme_shows_featured_image() {
+	global $_wp_current_template_content;
+
+	if ( sm_is_block_theme_rendering() ) {
+		// Without a featured image the block shows nothing, and the view's series-image fallback is still wanted.
+		return has_post_thumbnail()
+			&& is_string( $_wp_current_template_content )
+			&& false !== strpos( $_wp_current_template_content, '<!-- wp:post-featured-image' );
+	}
+
+	return sm_twentynineteen_shows_sermon_header();
+}
+
+/**
+ * Whether Twenty Nineteen's header is showing this sermon's title and image.
+ *
+ * On a singular page with a featured image, Twenty Nineteen puts both in its
+ * site header, ahead of the sermon view.
+ *
+ * @since 3.6.0
+ *
+ * @return bool True on a Twenty Nineteen single sermon with a featured image.
+ */
+function sm_twentynineteen_shows_sermon_header() {
+	return 'twentynineteen' === get_option( 'template' )
+		&& is_singular( 'wpfc_sermon' )
+		&& function_exists( 'twentynineteen_can_show_post_thumbnail' )
+		&& twentynineteen_can_show_post_thumbnail();
+}
+
+/**
  * Whether a block renders a post's content through the content filter.
  *
  * The Excerpt block counts too: with no hand-written excerpt, WordPress builds

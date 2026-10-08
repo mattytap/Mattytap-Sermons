@@ -24,7 +24,7 @@ global $post;
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php endif; ?>
 	<div class="wpfc-sermon-single-inner">
-		<?php if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_single' ) ) : ?>
+		<?php if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_single' ) && ! sm_theme_shows_featured_image() ) : ?>
 			<div class="wpfc-sermon-single-image">
 				<img class="wpfc-sermon-single-image-img" alt="<?php the_title(); ?>"
 						src="<?php echo esc_url( get_sermon_image_url() ); ?>">
@@ -39,7 +39,7 @@ global $post;
 						<?php echo esc_html( SM_Dates::get() ); ?>
 					<?php endif; ?>
 				</div>
-				<?php if ( ! \SermonManager::getOption( 'theme_compatibility' ) ) : ?>
+				<?php if ( ! \SermonManager::getOption( 'theme_compatibility' ) && ! sm_twentynineteen_shows_sermon_header() ) : ?>
 					<h2 class="wpfc-sermon-single-title"><?php the_title(); ?></h2>
 				<?php endif; ?>
 				<div class="wpfc-sermon-single-meta">

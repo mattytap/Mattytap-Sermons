@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.5.0
+Stable tag: 3.6.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,13 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.6.0 =
+
+* Improved: sermon pages are brought up to date with the themes WordPress has shipped since Sermon Manager's templates were written. On block themes (Twenty Twenty-Two onwards, including the current default, Twenty Twenty-Five), sermon pages now use the theme's own layout instead of WordPress's long-retired fallback header and sidebar, and a sermon template built in the Site Editor is now used. Other themes are unchanged.
+* Fix: on Twenty Nineteen and on block themes, a sermon's featured image no longer shows twice.
+* Fix: on Twenty Twenty and Twenty Twenty-One, sermon pages no longer end with WordPress's fallback sidebar.
+* Fix: the `[sermons]` shortcode's `filter_value` now accepts term IDs, as documented.
 
 = 3.5.0 =
 
@@ -348,6 +355,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.6.0 =
+
+Brings Sermon Manager's sermon pages up to date with WordPress's newer default themes, including the block themes from Twenty Twenty-Two onwards. Sites on other themes see no change; no data migration.
 
 = 3.5.0 =
 

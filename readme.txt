@@ -107,6 +107,7 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 * Fix: on Twenty Nineteen and on block themes, a sermon's featured image no longer shows twice.
 * Fix: on Twenty Twenty and Twenty Twenty-One, sermon pages no longer end with WordPress's fallback sidebar.
 * Fix: the `[sermons]` shortcode's `filter_value` now accepts term IDs, as documented.
+* Tested on WordPress 7.1.3, 6.2 and 6.0.
 
 = 3.5.0 =
 

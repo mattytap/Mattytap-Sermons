@@ -315,7 +315,13 @@ switch ( $template ) {
 	default:
 		if ( SM_OB_ENABLED ) {
 			ob_start();
-			if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			/*
+			 * Without a sidebar.php, get_sidebar() falls back to WordPress's
+			 * deprecated theme-compat sidebar. locate_template() finds that
+			 * fallback too, so it doesn't count as the theme having one.
+			 */
+			$sm_theme_sidebar = locate_template( 'sidebar.php' );
+			if ( ! apply_filters( 'sm_disable_sidebar', false ) && $sm_theme_sidebar && false === strpos( wp_normalize_path( $sm_theme_sidebar ), '/' . WPINC . '/theme-compat/' ) ) {
 				get_sidebar();
 			}
 			$sidebar = ob_get_clean();

@@ -209,6 +209,171 @@ function sm_archive_layout_container_class( $classes ) {
 
 add_filter( 'sm_templates_additional_classes', 'sm_archive_layout_container_class' );
 
+/**
+ * Whether sermon pages are being drawn by a block theme's own templates.
+ *
+ * Block themes have no header.php, sidebar.php or footer.php, so the plugin's
+ * PHP views would fall back to WordPress's long-deprecated theme-compat files.
+ * On a block theme the plugin instead leaves template choice to WordPress (the
+ * theme's template, or one the site built in the Site Editor) and renders as
+ * Theme Compatibility does. "Force Plugin Views" keeps the old behaviour.
+ *
+ * Returns false until the theme is set up, and in the admin.
+ *
+ * @since 3.6.0
+ *
+ * @return bool True on the front end of a block theme.
+ */
+function sm_is_block_theme_rendering() {
+	if ( is_admin() || ! did_action( 'setup_theme' ) || ! function_exists( 'wp_is_block_theme' ) ) {
+		return false;
+	}
+
+	return wp_is_block_theme() && ! SermonManager::getOption( 'force_layouts' );
+}
+
+/**
+ * Block themes render as though Theme Compatibility were ticked.
+ *
+ * Applied to the option's value on the front end only, so the Settings screen
+ * still shows and saves what the site chose, and partials a theme has copied
+ * pick it up too.
+ *
+ * @since 3.6.0
+ *
+ * @param mixed $value The short-circuit value, false to carry on.
+ *
+ * @return mixed 'yes' on a block theme, otherwise unchanged.
+ */
+function sm_block_theme_compatibility_option( $value ) {
+	return sm_is_block_theme_rendering() ? 'yes' : $value;
+}
+
+add_filter( 'pre_option_sermonmanager_theme_compatibility', 'sm_block_theme_compatibility_option' );
+
+/**
+ * The slug of the block template drawing this page, when WordPress says.
+ *
+ * WordPress 6.3 and later record it; earlier versions return an empty string.
+ *
+ * @since 3.6.0
+ *
+ * @return string The template slug, e.g. "single" or "single-wpfc_sermon".
+ */
+function sm_current_block_template_slug() {
+	global $_wp_current_template_id;
+
+	if ( empty( $_wp_current_template_id ) || ! is_string( $_wp_current_template_id ) ) {
+		return '';
+	}
+
+	$parts = explode( '//', $_wp_current_template_id );
+
+	return (string) end( $parts );
+}
+
+/**
+ * Whether the site has laid this sermon page out itself with a block template.
+ *
+ * A template made for sermons (single-wpfc_sermon, archive-wpfc_sermon or a
+ * sermon taxonomy) places its own blocks, so the plugin doesn't add its sermon
+ * view into the content block as well.
+ *
+ * @since 3.6.0
+ *
+ * @return bool True when the template in use is sermon-specific.
+ */
+function sm_block_template_is_sermon_specific() {
+	if ( ! sm_is_block_theme_rendering() ) {
+		return false;
+	}
+
+	$slug = sm_current_block_template_slug();
+
+	return 0 === strpos( $slug, 'single-wpfc_sermon' )
+		|| 0 === strpos( $slug, 'archive-wpfc_sermon' )
+		|| 0 === strpos( $slug, 'taxonomy-wpfc_' );
+}
+
+/**
+ * Whether a block renders a post's content through the content filter.
+ *
+ * The Excerpt block counts too: with no hand-written excerpt, WordPress builds
+ * one by running the content filter over the post body.
+ *
+ * @since 3.6.0
+ *
+ * @param array $parsed_block The block.
+ *
+ * @return bool True for the Post Content and Post Excerpt blocks.
+ */
+function sm_is_post_content_block( $parsed_block ) {
+	return isset( $parsed_block['blockName'] ) && in_array( $parsed_block['blockName'], array( 'core/post-content', 'core/post-excerpt' ), true );
+}
+
+/**
+ * Tracks when a Post Content or Post Excerpt block is rendering.
+ *
+ * @since 3.6.0
+ *
+ * @param string|null $pre_render   The pre-rendered content, null to carry on.
+ * @param array       $parsed_block The block being rendered.
+ *
+ * @return string|null Unchanged.
+ */
+function sm_post_content_block_start( $pre_render, $parsed_block ) {
+	if ( sm_is_post_content_block( $parsed_block ) ) {
+		$GLOBALS['sm_post_content_depth'] = ( isset( $GLOBALS['sm_post_content_depth'] ) ? $GLOBALS['sm_post_content_depth'] : 0 ) + 1;
+	}
+
+	return $pre_render;
+}
+
+/**
+ * Tracks when a Post Content or Post Excerpt block has finished rendering.
+ *
+ * @since 3.6.0
+ *
+ * @param string $block_content The rendered block.
+ * @param array  $parsed_block  The block that was rendered.
+ *
+ * @return string Unchanged.
+ */
+function sm_post_content_block_end( $block_content, $parsed_block ) {
+	if ( sm_is_post_content_block( $parsed_block ) && ! empty( $GLOBALS['sm_post_content_depth'] ) ) {
+		--$GLOBALS['sm_post_content_depth'];
+	}
+
+	return $block_content;
+}
+
+add_filter( 'pre_render_block', 'sm_post_content_block_start', 10, 2 );
+add_filter( 'render_block', 'sm_post_content_block_end', 10, 2 );
+
+/**
+ * Whether a sermon's content or excerpt block is rendering on a block theme.
+ *
+ * Lets the sermon view render there when in_the_loop() alone would refuse:
+ * on a single sermon when another block has ended the main loop, and on
+ * archives where WordPress before 6.2 runs the Query Loop outside the main
+ * loop. On a single sermon only the viewed sermon's own content counts.
+ *
+ * @since 3.6.0
+ *
+ * @return bool True inside a sermon's content or excerpt block on a sermon page.
+ */
+function sm_in_sermon_post_content_block() {
+	if ( ! sm_is_block_theme_rendering() || empty( $GLOBALS['sm_post_content_depth'] ) ) {
+		return false;
+	}
+
+	if ( is_singular() ) {
+		return is_singular( 'wpfc_sermon' ) && get_the_ID() === get_queried_object_id();
+	}
+
+	return is_archive() || is_search();
+}
+
 if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	/**
 	 * Include template files.
@@ -217,6 +382,11 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 		add_filter(
 			'template_include',
 			function ( $template ) {
+				// Block themes keep the template WordPress chose. See sm_is_block_theme_rendering().
+				if ( sm_is_block_theme_rendering() ) {
+					return $template;
+				}
+
 				return sm_get_views_path( $template );
 			}
 		);
@@ -230,7 +400,12 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	 * @return string The modified content if it's Sermon related data.
 	 */
 	function add_wpfc_sermon_content( $content ) {
-		if ( 'wpfc_sermon' === get_post_type() && in_the_loop() == true ) {
+		// A sermon template the site built itself places its own blocks.
+		if ( sm_block_template_is_sermon_specific() ) {
+			return $content;
+		}
+
+		if ( 'wpfc_sermon' === get_post_type() && ( in_the_loop() == true || sm_in_sermon_post_content_block() ) ) {
 			$editor_content = $content;
 			if ( ! is_feed() && ( is_archive() || is_search() ) ) {
 				$content = wpfc_sermon_excerpt_v2( true );

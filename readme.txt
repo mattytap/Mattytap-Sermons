@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.6.0
+Stable tag: 3.6.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,10 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.6.1 =
+
+* Fix: the `[sermons]` shortcode's `exclude` now leaves out every sermon ID given, not just the first, and no longer shows a PHP warning. Inherited from Sermon Manager.
 
 = 3.6.0 =
 
@@ -356,6 +360,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.6.1 =
+
+Fixes the `[sermons]` shortcode's `exclude` option, which only left out the first sermon and showed a PHP warning. Sites not using `exclude` see no change; no data migration.
 
 = 3.6.0 =
 

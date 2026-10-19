@@ -1048,7 +1048,7 @@ class SM_Shortcodes {
 					}
 
 					// Convert to int.
-					$posts_in = intval( trim( $post_in ) );
+					$post_in = intval( trim( $post_in ) );
 				}
 
 				$query_args['post__not_in'] = (array) $posts_in;

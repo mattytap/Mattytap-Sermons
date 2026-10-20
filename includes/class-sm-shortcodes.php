@@ -84,7 +84,7 @@ class SM_Shortcodes {
 		// Default options.
 		$args = array(
 			'include' => 'itunes, android, overcast',
-			'exclude' => null,
+			'exclude' => '',
 		);
 
 		// Init var.

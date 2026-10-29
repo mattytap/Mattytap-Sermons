@@ -1,4 +1,11 @@
 .fixed {
+  // Let the browser size columns to their content. Under core's fixed layout,
+  // our widths plus core's Author and Date widths leave nothing for columns
+  // other plugins add, and they collapse to zero width (#84).
+  &.wp-list-table {
+    table-layout: auto;
+  }
+
   .column-title {
     width: 40%;
   }

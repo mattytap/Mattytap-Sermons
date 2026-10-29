@@ -14,6 +14,7 @@
  *
  * @since   2.13.0 - added
  * @since   2.15.0 - fix audio URL edge case
+ * @since   3.6.3 - the title heading tag is filterable (`wpfc_sermon_single_title_tag`)
  */
 
 defined( 'ABSPATH' ) or die;
@@ -40,7 +41,24 @@ global $post;
 					<?php endif; ?>
 				</div>
 				<?php if ( ! \SermonManager::getOption( 'theme_compatibility' ) && ! sm_twentynineteen_shows_sermon_header() ) : ?>
-					<h2 class="wpfc-sermon-single-title"><?php the_title(); ?></h2>
+					<?php
+					/**
+					 * Filters the heading tag for the sermon title on single sermon pages.
+					 *
+					 * Some themes print no page heading of their own, so a site may want an h1 here.
+					 * Anything other than h1 to h6 falls back to the default.
+					 *
+					 * @since 3.6.3
+					 *
+					 * @param string  $tag  The heading tag. Default 'h2'.
+					 * @param WP_Post $post The sermon being displayed.
+					 */
+					$wpfc_title_tag = strtolower( (string) apply_filters( 'wpfc_sermon_single_title_tag', 'h2', $post ) );
+					if ( ! in_array( $wpfc_title_tag, array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ) {
+						$wpfc_title_tag = 'h2';
+					}
+					?>
+					<<?php echo tag_escape( $wpfc_title_tag ); ?> class="wpfc-sermon-single-title"><?php the_title(); ?></<?php echo tag_escape( $wpfc_title_tag ); ?>>
 				<?php endif; ?>
 				<div class="wpfc-sermon-single-meta">
 					<?php if ( has_term( '', 'wpfc_preacher', $post->ID ) ) : ?>

@@ -9,10 +9,20 @@ if ( typeof sm_data === 'undefined' ) {
 }
 
 window.addEventListener( 'DOMContentLoaded', function () {
-	const players = Plyr.setup( document.querySelectorAll( '.wpfc-sermon-player,.wpfc-sermon-video-player' ), {
+	const options = {
 		debug: sm_data.debug,
 		enabled: sm_data.use_native_player_safari ? ( !/Safari/.test( navigator.userAgent ) || ( /Safari/.test( navigator.userAgent ) && /Chrome|OPR/.test( navigator.userAgent ) ) ) : true,
-	} );
+		// Ask YouTube and Vimeo to track visitors less: YouTube plays from youtube-nocookie.com.
+		youtube: { noCookie: true },
+		vimeo: { dnt: true },
+	};
+
+	// Load Plyr's icons from this site, when the plugin says where they are.
+	if ( sm_data.icon_url ) {
+		options.iconUrl = sm_data.icon_url;
+	}
+
+	const players = Plyr.setup( document.querySelectorAll( '.wpfc-sermon-player,.wpfc-sermon-video-player' ), options );
 
 	for ( let p in players ) {
 		if ( players.hasOwnProperty( p ) ) {

@@ -336,6 +336,8 @@ class SermonManager { // phpcs:ignore
 				$sm_data = array(
 					'debug'                    => defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 1 : 0,
 					'use_native_player_safari' => SermonManager::getOption( 'use_native_player_safari', false ) ? 1 : 0,
+					// Plyr's own icons, served from here rather than from cdn.plyr.io.
+					'icon_url'                 => SM_URL . 'assets/vendor/svg/plyr.svg',
 				);
 				wp_add_inline_script(
 					'wpfc-sm-plyr-loader',

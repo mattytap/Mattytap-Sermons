@@ -1474,6 +1474,11 @@ function sm_is_generated_sermon_excerpt( $content, $post ) {
 		return false;
 	}
 
+	// The placeholder the Sermon Browser and Series Engine importers insert, waiting for an excerpt.
+	if ( '%todo_render%' === $content ) {
+		return true;
+	}
+
 	$sermon = get_post( $post );
 
 	if ( $sermon instanceof WP_Post && $content === trim( sm_build_sermon_excerpt( $sermon ) ) ) {

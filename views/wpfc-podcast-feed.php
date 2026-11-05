@@ -343,6 +343,16 @@ $cover_image_url  = $settings['itunes_cover_image'];
 					// http://www.rssboard.org/rss-specification#ltenclosuregtSubelementOfLtitemgt .
 					$audio = preg_replace( '/^https:/i', 'http:', $audio );
 				}
+
+				// Name the file's real type, from the types Apple Podcasts accepts; MP3 when it can't be told.
+				$audio_types = array(
+					'm4a' => 'audio/x-m4a',
+					'mp4' => 'video/mp4',
+					'm4v' => 'video/x-m4v',
+					'mov' => 'video/quicktime',
+				);
+				$audio_ext   = strtolower( pathinfo( (string) wp_parse_url( $audio, PHP_URL_PATH ), PATHINFO_EXTENSION ) );
+				$audio_type  = isset( $audio_types[ $audio_ext ] ) ? $audio_types[ $audio_ext ] : 'audio/mpeg';
 				?>
 
 				<item>
@@ -375,7 +385,7 @@ $cover_image_url  = $settings['itunes_cover_image'];
 						<!--suppress CheckEmptyScriptTag -->
 						<enclosure url="<?php echo esc_url( $audio ); ?>"
 								length="<?php echo esc_attr( $audio_file_size ); ?>"
-								type="audio/mpeg"/>
+								type="<?php echo esc_attr( $audio_type ); ?>"/>
 					<?php endif; ?>
 
 					<itunes:duration><?php echo esc_html( $audio_duration ); ?></itunes:duration>

@@ -82,6 +82,18 @@ Pro's own extras aren't part of Mattytap Sermons. Its custom layouts give way to
 
 Nothing of Pro's is deleted, so you can switch back if you need to. Deactivate Sermon Manager Pro and Sermon Manager before activating Mattytap Sermons.
 
+= I'm coming from Church Sermon Manager. What carries over? =
+
+Church Sermon Manager is built on Sermon Manager and includes Sermon Manager Pro's features, so the switch works the same way. Deactivate Church Sermon Manager first, then activate Mattytap Sermons. WordPress won't activate it while the other is still running, though nothing is harmed if you try.
+
+Your sermons, series, preachers, topics, books, service types, images, settings and main podcast feed all carry over. Pages using its sermon archive shortcodes or its sermon grid block show the standard sermon list. Its custom layouts, page-builder widgets and extra podcast feeds behave as described for Sermon Manager Pro above. Nothing is deleted, so you can switch back.
+
+= Can I show my sermons on another website or in a podcast app? =
+
+Yes. Your sermons are published as a podcast feed at your sermon archive's address with `feed/` added, for example `https://example.com/sermons/feed/`. Each series, preacher, topic and book has its own feed too: add `feed/` to the end of its page's address. Podcast apps can subscribe to any of these, and website builders with a podcast or RSS block can show them on another site.
+
+For developers, the same sermons are available as data through the WordPress REST API at `/wp-json/wp/v2/wpfc_sermon`.
+
 = How do I report a bug or request a feature? =
 
 [GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than public issues.

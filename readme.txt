@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.6.3
+Stable tag: 3.7.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,16 @@ The Plyr player's icons are part of the plugin and load from your own site.
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.7.0 =
+
+* Improved: with the Plyr player, YouTube sermons now play from youtube-nocookie.com, YouTube's reduced-tracking address, and Vimeo is asked not to track visitors. The player's icons now load from your own site instead of cdn.plyr.io. The player looks and works as before.
+* Improved: for sites coming from Church Sermon Manager, its sermon grid block now shows the standard sermon list instead of nothing, keeping the block's number of sermons and sort order. Its taxonomy grid block shows nothing, as Sermon Manager Pro's taxonomy shortcode already does.
+* Fix: the podcast feed now gives its explicit-content flag as `false`, the form Apple Podcasts currently documents, rather than the older `no`. The meaning is unchanged.
+* Fix: podcast episodes in M4A, MP4, M4V or MOV format are now labelled with their own file type in the feed, rather than as MP3. Inherited from Sermon Manager.
+* Fix: sermons imported from Sermon Browser or Series Engine with no description no longer show "%todo_render%" as their text. This covers sermons already imported too; the next save replaces it with the usual search summary. Inherited from Sermon Manager.
+* Fix: the "Use native player on Safari" setting under Settings > Debug works again. Since 3.1 it had no effect.
+* New: readme sections on the outside services the plugin can reach, on showing your sermons elsewhere, and on switching from Church Sermon Manager.
 
 = 3.6.3 =
 
@@ -393,6 +403,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.7.0 =
+
+Privacy and podcast feed improvements, a landing for sites coming from Church Sermon Manager, and three fixes. Sermon pages look the same as before; no data migration.
 
 = 3.6.3 =
 

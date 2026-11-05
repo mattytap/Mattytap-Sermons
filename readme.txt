@@ -90,6 +90,18 @@ Nothing of Pro's is deleted, so you can switch back if you need to. Deactivate S
 
 No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.
 
+== External services ==
+
+Mattytap Sermons doesn't need any outside service to work. A few features do reach one, either in a visitor's browser or from your own site. Each is listed here with what is sent, when, and how to avoid it.
+
+* **Bible verse popups (Faithlife Reftagger).** On sermon pages, the visitor's browser loads a script from api.reftagger.com, which turns Bible references into links that show the verse when hovered. It's on by default, as it was in Sermon Manager. Turn it off under Sermons > Settings > Verse > Verse Popups. Faithlife [terms](https://faithlife.com/terms) and [privacy](https://faithlife.com/privacy).
+* **YouTube and Vimeo.** A sermon given a YouTube or Vimeo address in its Video Link field plays in that service's own player, which the visitor's browser loads from YouTube or Vimeo when the sermon is opened. With the Plyr player, the default, YouTube videos come from youtube-nocookie.com, YouTube's reduced-tracking address, though YouTube may still set cookies of its own, and Vimeo is asked not to track the visitor. Plyr also asks noembed.com for a YouTube video's title. A video pasted into the Video Embed Code field plays exactly as pasted. Nothing is embedded unless a sermon has a video. YouTube [terms](https://www.youtube.com/t/terms) and [privacy](https://policies.google.com/privacy). Vimeo [terms](https://vimeo.com/terms) and [privacy](https://vimeo.com/privacy). [noembed](https://noembed.com/).
+* **Audio file size.** When a sermon is saved with an audio file address rather than an uploaded file, your site sends a single request to that address to read the file's size for the podcast feed. Only public web addresses are checked, and nothing about your site is sent.
+* **PodTrac.** Off by default. If you turn on PodTrac Tracking under Sermons > Settings > Podcast, the audio links in your podcast feed pass through dts.podtrac.com, so podcast apps fetch each episode by way of PodTrac, which counts the download. PodTrac [privacy](https://www.podtrac.com/privacy-policy/).
+* **Importing a Sermon Manager export file.** When you import an export file under Sermons > Import/Export, your site downloads each attached file from the address recorded in the export. Only public web addresses are fetched.
+
+The Plyr player's icons are part of the plugin and load from your own site.
+
 == Screenshots ==
 
 1. Sermon Details

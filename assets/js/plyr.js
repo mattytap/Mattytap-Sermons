@@ -4,8 +4,9 @@ if ( typeof sm_data === 'undefined' ) {
 		use_native_player_safari: false,
 	};
 } else {
-	sm_data.debug = sm_data.debug === '1';
-	sm_data.use_native_player_safari = sm_data.use_native_player_safari === '1';
+	// The plugin sends 1 or 0; Sermon Manager sent '1' or '0'. Accept both.
+	sm_data.debug = String( sm_data.debug ) === '1';
+	sm_data.use_native_player_safari = String( sm_data.use_native_player_safari ) === '1';
 }
 
 window.addEventListener( 'DOMContentLoaded', function () {

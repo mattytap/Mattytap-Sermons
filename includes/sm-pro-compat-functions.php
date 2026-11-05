@@ -148,6 +148,60 @@ function sm_pro_compat_register_shortcodes() {
 add_action( 'wp_loaded', 'sm_pro_compat_register_shortcodes' );
 
 /**
+ * Renders the Pro-style sermon grid block, as found on sites coming from
+ * Church Sermon Manager, as the plugin's own sermon list.
+ *
+ * The block's count and sort settings carry across; its layout settings don't.
+ *
+ * @since 3.7.0
+ *
+ * @param array $attributes Block attributes, as saved in the post.
+ *
+ * @return string The sermon list HTML.
+ */
+function sm_pro_compat_sermon_grid_block( $attributes ) {
+	$attributes = (array) $attributes;
+	$atts       = array();
+
+	if ( isset( $attributes['postscount'] ) ) {
+		$atts['count'] = $attributes['postscount'];
+	}
+
+	foreach ( array( 'order' => 'order', 'orderBy' => 'orderby' ) as $from => $to ) {
+		if ( isset( $attributes[ $from ] ) ) {
+			$atts[ $to ] = $attributes[ $from ];
+		}
+	}
+
+	return sm_pro_compat_archive_shortcode( $atts );
+}
+
+/**
+ * Registers the Pro-style sermon blocks, each only if nothing else has claimed it.
+ *
+ * @since 3.7.0
+ */
+function sm_pro_compat_register_blocks() {
+	if ( ! function_exists( 'register_block_type' ) ) {
+		return;
+	}
+
+	$blocks = array(
+		'sermons-blog-layout/sermons-grid'     => 'sm_pro_compat_sermon_grid_block',
+		'sermons-taxonomy-layout/sermons-grid' => 'sm_pro_compat_taxonomy_shortcode',
+	);
+
+	foreach ( $blocks as $name => $callback ) {
+		if ( ! WP_Block_Type_Registry::get_instance()->is_registered( $name ) ) {
+			register_block_type( $name, array( 'render_callback' => $callback ) );
+		}
+	}
+}
+
+// Late, so that a plugin that owns one of these names keeps it.
+add_action( 'init', 'sm_pro_compat_register_blocks', 99 );
+
+/**
  * Whether Sermon Manager Pro has left its data on this site.
  *
  * @since 3.5.0

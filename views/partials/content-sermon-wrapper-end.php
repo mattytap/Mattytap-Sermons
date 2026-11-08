@@ -473,6 +473,12 @@ switch ( $template ) {
 			echo '</div></div></div></div>';
 		}
 		break;
+	case 'twentyten':
+		echo '</div></div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

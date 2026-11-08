@@ -1002,6 +1002,10 @@ switch ( $template ) {
 		}
 		echo '<div class="' . esc_attr( $hestia_col ) . ' wpfc-sermon-container wpfc-hestia ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'twentyten':
+		// Twenty Ten's own single.php and archive.php markup (single.php:12-13).
+		echo '<div id="container"><div id="content" role="main" class="wpfc-sermon-container wpfc-twentyten ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

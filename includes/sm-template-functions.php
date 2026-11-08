@@ -310,12 +310,12 @@ function sm_block_template_is_sermon_specific() {
  * Whether the theme already shows this sermon's featured image.
  *
  * True on a block theme whose template holds a Featured Image block and the
- * sermon has a featured image, and on Twenty Nineteen, Twenty Eleven and
- * Twenty Seventeen when their header is showing the image. The sermon view
+ * sermon has a featured image, and on Twenty Nineteen, Twenty Ten, Twenty
+ * Eleven and Twenty Seventeen when their header is showing the image. The sermon view
  * then leaves its own image out rather than show it twice.
  *
  * @since 3.6.0
- * @since 3.8.0 Twenty Eleven and Twenty Seventeen.
+ * @since 3.8.0 Twenty Ten, Twenty Eleven and Twenty Seventeen.
  *
  * @return bool True when the theme shows the featured image itself.
  */
@@ -333,9 +333,9 @@ function sm_theme_shows_featured_image() {
 }
 
 /**
- * Whether Twenty Eleven's or Twenty Seventeen's header shows this sermon's featured image.
+ * Whether Twenty Ten's, Twenty Eleven's or Twenty Seventeen's header shows this sermon's featured image.
  *
- * Each theme's own test, from its header.php: Twenty Eleven uses a featured
+ * Each theme's own test, from its header.php: Twenty Ten and Twenty Eleven use a featured
  * image at least as wide as its header image; Twenty Seventeen shows it below
  * the header on singles.
  *
@@ -349,9 +349,11 @@ function sm_classic_header_shows_sermon_image() {
 	}
 
 	switch ( get_option( 'template' ) ) {
+		case 'twentyten':
 		case 'twentyeleven':
 			$post_id = get_queried_object_id();
-			if ( ! get_header_image() || ! has_post_thumbnail( $post_id ) ) {
+			// Twenty Eleven skips the whole header image block when the header image is removed; Twenty Ten doesn't.
+			if ( ! has_post_thumbnail( $post_id ) || ( 'twentyeleven' === get_option( 'template' ) && ! get_header_image() ) ) {
 				return false;
 			}
 			$width = (int) get_theme_support( 'custom-header', 'width' );

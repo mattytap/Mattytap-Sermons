@@ -124,7 +124,18 @@
   }
 }
 
-@media (min-width: 801px) {
+// The card switches to image beside text on its own width, not the screen's, so a
+// narrow card in a theme's grid stacks instead of squeezing the image into a strip (#103).
+:has(> .wpfc-sermon-inner) {
+  container-type: inline-size;
+}
+
+// Stacked by default, so a browser without container queries gets the phone layout.
+.wpfc-sermon-image-img {
+  padding-top: 56.25%;
+}
+
+@container (min-width: 540px) {
   .wpfc-sermon {
     &-inner {
       display: flex;
@@ -134,19 +145,14 @@
     &-image {
       flex: 0 30%;
     }
-    
+
     &-image-img {
       height: 100%;
+      padding-top: 0;
     }
 
     &-main {
       flex: 1;
     }
-  }
-}
-
-@media(max-width: 800px) {
-  .wpfc-sermon-image-img {
-    padding-top: 56.25%;
   }
 }

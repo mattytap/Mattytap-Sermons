@@ -252,6 +252,17 @@ function sm_block_theme_compatibility_option( $value ) {
 add_filter( 'pre_option_sermonmanager_theme_compatibility', 'sm_block_theme_compatibility_option' );
 
 /**
+ * Reads Theme Compatibility as on, while a sermon card renders inside a theme's search result.
+ *
+ * @since 3.8.0
+ *
+ * @return string Always 'yes'.
+ */
+function sm_theme_compatibility_yes() {
+	return 'yes';
+}
+
+/**
  * The slug of the block template drawing this page, when WordPress says.
  *
  * WordPress 6.3 and later record it; earlier versions return an empty string.
@@ -484,7 +495,22 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 		if ( 'wpfc_sermon' === get_post_type() && ( in_the_loop() == true || sm_in_sermon_post_content_block() ) ) {
 			$editor_content = $content;
 			if ( ! is_feed() && ( is_archive() || is_search() ) ) {
+				/*
+				 * The theme's own template draws search results, title and image
+				 * included, whatever the setting. So the card takes the form it has
+				 * with Theme Compatibility on, rather than repeat them (#100).
+				 */
+				$theme_draws_result = is_search() && ! SermonManager::getOption( 'theme_compatibility' );
+
+				if ( $theme_draws_result ) {
+					add_filter( 'pre_option_sermonmanager_theme_compatibility', 'sm_theme_compatibility_yes', 20 );
+				}
+
 				$content = wpfc_sermon_excerpt_v2( true );
+
+				if ( $theme_draws_result ) {
+					remove_filter( 'pre_option_sermonmanager_theme_compatibility', 'sm_theme_compatibility_yes', 20 );
+				}
 			} elseif ( is_singular() && is_main_query() ) {
 				$content = wpfc_sermon_single_v2( true );
 

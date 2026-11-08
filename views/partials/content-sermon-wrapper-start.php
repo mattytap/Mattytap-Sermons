@@ -44,7 +44,8 @@ switch ( $template ) {
 		echo '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentyseventeen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentynineteen':
-		echo '<section id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentynineteen ' . esc_attr( $additional_classes ) . '">';
+		// Twenty Nineteen's single.php:15-16. Its column lives on .entry .entry-content, so the loop sits inside that pair.
+		echo '<div id="primary" class="content-area"><main id="main" class="site-main"><div class="entry"><div class="entry-content wpfc-sermon-container wpfc-twentynineteen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentytwentyfour':
 		echo '<div class="wp-block-group has-global-padding is-layout-constrained wp-block-group-is-layout-constrained"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentytwentyfour ' . esc_attr( $additional_classes ) . '">';

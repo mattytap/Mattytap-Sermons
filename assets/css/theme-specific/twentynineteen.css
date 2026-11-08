@@ -1,3 +1,26 @@
 .smpro-items {
     margin: calc(3 * 1rem) calc(10% + 60px) calc(1rem / 2);
 }
+
+/*
+ * With Theme Compatibility off our articles sit inside the theme's .entry-content, and the theme
+ * gives a nested .entry its parent's width and padding. These put back the column the theme gives
+ * a post's own content (style.css, "Block styles").
+ */
+.entry .entry-content.wpfc-twentynineteen > .entry {
+    margin: 32px 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .entry .entry-content.wpfc-twentynineteen > .entry {
+        max-width: calc(8 * (100vw / 12) - 28px);
+    }
+}
+
+@media only screen and (min-width: 1168px) {
+    .entry .entry-content.wpfc-twentynineteen > .entry {
+        max-width: calc(6 * (100vw / 12) - 28px);
+    }
+}

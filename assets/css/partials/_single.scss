@@ -181,3 +181,8 @@
     padding: 0 .75rem;
   }
 }
+
+// Closes the default wrapper, so floated theme columns don't let the footer ride up (#95).
+.wpfc-sermon-clear {
+  clear: both;
+}

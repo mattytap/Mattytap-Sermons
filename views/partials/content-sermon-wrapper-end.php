@@ -339,7 +339,8 @@ switch ( $template ) {
 			if ( $sm_show_sidebar ) {
 				get_sidebar();
 			}
-			echo '</div>';
+			// Clears floated columns, so the theme's footer can't ride up behind the sermon.
+			echo '<div class="wpfc-sermon-clear"></div></div>';
 		} else {
 			if ( SM_OB_ENABLED && $sm_show_sidebar ) {
 				ob_start();

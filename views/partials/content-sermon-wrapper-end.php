@@ -411,6 +411,13 @@ switch ( $template ) {
 		}
 		echo '</div></div>';
 		break;
+	case 'popularfx':
+		echo '</div></main>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			// sidebar.php prints nothing when popularfx_sidebar() says off.
+			get_sidebar();
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

@@ -912,6 +912,11 @@ switch ( $template ) {
 		}
 		echo '<div class="' . esc_attr( $neve_inner ) . ' wpfc-sermon-container wpfc-neve ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'popularfx':
+		// PopularFX's single.php and archive.php: a bare main, sidebar beside it.
+		// Its content box is the .article class on each post, so our container carries it.
+		echo '<main id="primary" class="site-main"><div class="article wpfc-sermon-container wpfc-popularfx ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

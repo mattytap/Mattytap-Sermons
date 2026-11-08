@@ -959,6 +959,26 @@ switch ( $template ) {
 			echo '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-lightning ' . esc_attr( $additional_classes ) . '">';
 		}
 		break;
+	case 'sydney':
+		// Sydney's sydney_single_template() and sydney_archive_template() (inc/extras.php),
+		// inside the container and row its header.php opens.
+		if ( function_exists( 'sydney_sidebar_position' ) ) {
+			$sydney_classes = sydney_sidebar_position();
+			if ( is_singular() ) {
+				$sydney_classes .= ' ' . apply_filters( 'sydney_content_area_class', get_theme_mod( 'fullwidth_single' ) ? 'fullwidth' : 'col-md-9' );
+			} else {
+				$sydney_classes .= ' archive-wrapper ' . ( function_exists( 'sydney_blog_layout' ) ? sydney_blog_layout() : '' ) . ' ' . apply_filters( 'sydney_content_area_class', 'col-md-9' );
+			}
+		} else {
+			$sydney_classes = 'col-md-9';
+		}
+		echo '<div id="primary" class="content-area ' . esc_attr( $sydney_classes ) . '">';
+		if ( is_singular() && function_exists( 'sydney_yoast_seo_breadcrumbs' ) ) {
+			// Prints only when Yoast breadcrumbs are available.
+			sydney_yoast_seo_breadcrumbs();
+		}
+		echo '<main id="main" class="post-wrap wpfc-sermon-container wpfc-sydney ' . esc_attr( $additional_classes ) . '" role="main">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

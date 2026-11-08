@@ -451,6 +451,13 @@ switch ( $template ) {
 			echo '</div>';
 		}
 		break;
+	case 'sydney':
+		echo '</main></div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			// Sydney's single.php:16 and archive.php:36; honours its sidebar toggles.
+			do_action( 'sydney_get_sidebar' );
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

@@ -360,6 +360,23 @@ switch ( $template ) {
 		}
 		echo '</section>';
 		break;
+	case 'kubio':
+		// Kubio's comments.php prints only the list. Its single template prints the form
+		// separately, after the comments (template-parts/content/single.php lines 137 to 139).
+		if (
+			is_singular()
+			&& comments_open()
+			&& ! post_password_required()
+			&& ! apply_filters( 'single-wpfc_sermon-disable-comments', false )
+			&& wp_normalize_path( get_template_directory() . '/comments.php' ) === wp_normalize_path( locate_template( 'comments.php' ) )
+		) {
+			echo '<div class="wp-block wp-block-kubio-post-comments-form position-relative wp-block-kubio-post-comments-form__container kubio-single__k__single-oXoikmHxB-container kubio-local-542-container" data-kubio="kubio/post-comments-form">';
+			comment_form();
+			echo '</div>';
+		}
+		// Kubio draws no sidebar on posts or archives.
+		echo '</div></div></div></div></div></div></div></div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

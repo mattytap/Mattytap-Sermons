@@ -24,6 +24,12 @@
     padding: 0;
   }
 
+  // Held to its column where the theme doesn't cap images itself (#98).
+  &-image-img {
+    max-width: 100%;
+    height: auto;
+  }
+
   .wp-video {
     margin: auto;
   }

@@ -348,6 +348,18 @@ switch ( $template ) {
 		}
 		echo '</div>';
 		break;
+	case 'mantra':
+		if ( function_exists( 'cryout_after_content_hook' ) ) {
+			// The Below Content widget area (single.php:68, archive.php:70).
+			cryout_after_content_hook();
+		}
+		echo '</div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			// Mantra's sidebar.php reads the layout option itself, including one column.
+			get_sidebar();
+		}
+		echo '</section>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

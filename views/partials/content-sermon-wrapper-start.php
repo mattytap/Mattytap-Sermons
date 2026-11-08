@@ -838,6 +838,14 @@ switch ( $template ) {
 		}
 		echo '<div class="' . esc_attr( $sm_total_container ) . ' ht-clearfix"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-total ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'mantra':
+		// Mantra's own markup (single.php:12-15, archive.php:17-20). Its #primary is the sidebar, so we mustn't use that id.
+		echo '<section id="container"><div id="content" role="main" class="wpfc-sermon-container wpfc-mantra ' . esc_attr( $additional_classes ) . '">';
+		if ( function_exists( 'cryout_before_content_hook' ) ) {
+			// Breadcrumbs and the Above Content widget area.
+			cryout_before_content_hook();
+		}
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

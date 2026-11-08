@@ -34,6 +34,7 @@ switch ( $template ) {
 		echo '</div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
 			get_sidebar( 'content' );
+			get_sidebar();
 		}
 		break;
 	case 'twentyfifteen':

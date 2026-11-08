@@ -3,8 +3,9 @@
     text-align: center;
   }
 
+  // No negative side margins: they overflow where the column meets the screen edge (#87).
   &-meta {
-    margin: 8px -8px 0 -8px;
+    margin: 8px 0 0;
   }
 
   &-meta-item {

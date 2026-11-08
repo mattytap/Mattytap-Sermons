@@ -245,7 +245,8 @@ class SM_Install {
 	public static function cron_schedules( $schedules ) {
 		$schedules['monthly'] = array(
 			'interval' => 2635200,
-			'display'  => __( 'Monthly', 'mattytap-sermons' ),
+			// A theme can schedule events before init, when translating is too early (#93).
+			'display'  => did_action( 'init' ) ? __( 'Monthly', 'mattytap-sermons' ) : 'Monthly',
 		);
 
 		return $schedules;

@@ -461,6 +461,26 @@ function sm_in_sermon_post_content_block() {
 	return is_archive() || is_search();
 }
 
+/**
+ * Whether Kubio is printing the viewed sermon's content.
+ *
+ * Kubio's single template calls the_content() without the_post(), so
+ * in_the_loop() never turns true and the sermon view was left out (#89).
+ * Only the viewed sermon counts, and only in the page body, so content
+ * filters run from the page head (SEO plugins) are left alone.
+ *
+ * @since 3.8.0
+ *
+ * @return bool True while Kubio prints a single sermon's content.
+ */
+function sm_kubio_sermon_content() {
+	return 'kubio' === get_option( 'template' )
+		&& is_singular( 'wpfc_sermon' )
+		&& get_the_ID() === get_queried_object_id()
+		&& did_action( 'wp_body_open' )
+		&& ! doing_action( 'wp_head' );
+}
+
 if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	/**
 	 * Include template files.
@@ -492,7 +512,7 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 			return $content;
 		}
 
-		if ( 'wpfc_sermon' === get_post_type() && ( in_the_loop() == true || sm_in_sermon_post_content_block() ) ) {
+		if ( 'wpfc_sermon' === get_post_type() && ( in_the_loop() == true || sm_in_sermon_post_content_block() || sm_kubio_sermon_content() ) ) {
 			$editor_content = $content;
 
 			/*

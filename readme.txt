@@ -98,6 +98,12 @@ For developers, the same sermons are available as data through the WordPress RES
 
 [GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than public issues.
 
+= Does it work with my theme? =
+
+Before 3.8.0 we tested the plugin with 70 free themes from WordPress.org, with Theme Compatibility on and off. The list is on the [3.8.0 release](https://github.com/mattytap/Mattytap-Sermons/releases/tag/v3.8.0). We can't test paid themes, because we don't buy them. Several popular paid themes are add-ons to a free theme we did test (Astra, GeneratePress, Kadence, Neve and OceanWP, for example), so their core has been through the same checks.
+
+If your sermon pages look wrong, first turn on Theme Compatibility under Sermons > Settings > Advanced. It lets your theme draw the page and fixes most layout problems straight away. If that doesn't help, open a support topic. Include the theme's name and version, a link to a sermon page, a screenshot, and what you expected to see. If you're willing to try the fix on your site before it's released, we'll fix it.
+
 = Is there a paid version or commercial support? =
 
 No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.

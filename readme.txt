@@ -133,7 +133,7 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 
 = 3.8.0 =
 
-rodneyholloman's support topic about the Kadence theme prompted a review of how sermon pages sit inside themes. We tested the plugin with 70 free themes, including every default Twenty theme, with Theme Compatibility on and off, and the fixes below came from that. Most of the faults were inherited from Sermon Manager; the sidebar fault was ours. The full list of themes is on the GitHub release.
+A support topic about the Kadence theme prompted a review of how sermon pages sit inside themes. We tested the plugin with 70 free themes, including every default Twenty theme, with Theme Compatibility on and off, and the fixes below came from that. Most of the faults were inherited from Sermon Manager; the sidebar fault was ours. The full list of themes is on the GitHub release.
 
 * Fix: with Theme Compatibility off, search boxes, dropdowns and other widgets in the theme's sidebar were damaged on sermon pages, and some printed their code as text. This was our fault, from 3.0.
 * Fix: on Hueman, a single sermon with a comment caused a critical error, and Customizr showed an empty comment list.
@@ -153,7 +153,7 @@ rodneyholloman's support topic about the Kadence theme prompted a review of how 
 
 = 3.7.1 =
 
-* Fix: with Theme Compatibility off, sermon pages on the Kadence theme now use Kadence's own layout and settings, instead of running edge to edge. Reported by rodneyholloman. Inherited from Sermon Manager.
+* Fix: with Theme Compatibility off, sermon pages on the Kadence theme now use Kadence's own layout and settings, instead of running edge to edge. Inherited from Sermon Manager.
 
 = 3.7.0 =
 

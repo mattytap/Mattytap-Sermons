@@ -341,6 +341,13 @@ switch ( $template ) {
 		}
 		echo '</div>';
 		break;
+	case 'total':
+		echo '</main></div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		echo '</div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

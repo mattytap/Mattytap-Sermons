@@ -821,6 +821,23 @@ switch ( $template ) {
 			echo '<div class="row"><div class="col-md-' . esc_attr( $sm_envo_columns ) . ' wpfc-sermon-container wpfc-envo-royal ' . esc_attr( $additional_classes ) . '">';
 		}
 		break;
+	case 'total':
+		// Total's own page markup (inc/hooks/single.php and archive.php), so its container and sidebar CSS apply.
+		if ( is_singular() ) {
+			if ( function_exists( 'total_single_header' ) ) {
+				// The theme's title bar and breadcrumbs, as single.php prints them.
+				total_single_header();
+			}
+			$sm_total_container = function_exists( 'total_content_container_class' ) ? total_content_container_class() : 'ht-container';
+		} else {
+			if ( function_exists( 'total_archive_header' ) ) {
+				// The archive title bar and breadcrumbs, as archive.php prints them.
+				total_archive_header();
+			}
+			$sm_total_container = 'ht-container';
+		}
+		echo '<div class="' . esc_attr( $sm_total_container ) . ' ht-clearfix"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-total ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

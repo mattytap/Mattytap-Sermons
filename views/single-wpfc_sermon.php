@@ -27,7 +27,8 @@ while ( have_posts() ) :
 
 	if ( comments_open() || get_comments_number() ) :
 		if ( ! apply_filters( 'single-wpfc_sermon-disable-comments', false ) ) {
-			comments_template();
+			// Separated by type, as the themes' own templates ask; Hueman and Customizr need it (#97).
+			comments_template( '', true );
 		}
 	endif;
 endwhile;

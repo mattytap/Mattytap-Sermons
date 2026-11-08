@@ -1006,6 +1006,12 @@ switch ( $template ) {
 		// Twenty Ten's own single.php and archive.php markup (single.php:12-13).
 		echo '<div id="container"><div id="content" role="main" class="wpfc-sermon-container wpfc-twentyten ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'colibri-wp':
+		// Colibri's own content markup (inc/src/Components/SingleContent.php and MainContent.php, via View::printIn).
+		// The .content div matters: the footer parallax script lifts #page-top > .content above the fixed footer.
+		$sm_colibri_type = is_singular() ? 'single' : 'archive';
+		echo '<div class="content position-relative colibri-main-content-' . esc_attr( $sm_colibri_type ) . '" id="content"><div class="d-flex h-section h-section-global-spacing position-relative main-section"><div class="h-section-grid-container h-section-boxed-container main-section-inner"><div class="h-row-container main-row"><div class="h-row gutters-col-0 main-row-inner"><div class="h-col h-col-12 h-col-md h-col-lg wpfc-sermon-container wpfc-colibri-wp ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

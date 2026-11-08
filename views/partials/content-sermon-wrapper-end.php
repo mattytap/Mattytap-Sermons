@@ -479,6 +479,16 @@ switch ( $template ) {
 			get_sidebar();
 		}
 		break;
+	case 'colibri-wp':
+		echo '</div>';
+		// Same test as SingleContent::printRightSidebarColumn(): the theme's sidebar filter and an active widget area.
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) && function_exists( 'colibriwp_theme' ) && apply_filters( 'colibriwp_theme_blog_sidebar_enabled', true, 'right' ) && is_active_sidebar( 'colibri-sidebar-1' ) ) {
+			echo '<div data-colibri-main-sidebar-col="1" class="h-col h-col-12 h-col-lg-3 h-col-md-4 colibri-sidebar blog-sidebar-right">';
+			get_sidebar();
+			echo '</div>';
+		}
+		echo '</div></div></div></div></div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

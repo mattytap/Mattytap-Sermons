@@ -917,6 +917,48 @@ switch ( $template ) {
 		// Its content box is the .article class on each post, so our container carries it.
 		echo '<main id="primary" class="site-main"><div class="article wpfc-sermon-container wpfc-popularfx ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'lightning':
+		if ( function_exists( 'lightning_is_g3' ) && lightning_is_g3() && function_exists( 'lightning_get_the_class_name' ) ) {
+			// Lightning G3 prints its site header, page header and breadcrumb from _g3/index.php:43-104,
+			// not header.php, so the wrapper prints them through the theme's own parts and hooks.
+			do_action( 'lightning_site_header_before', 'lightning_site_header_before' );
+			if ( apply_filters( 'lightning_is_site_header', true, 'site_header' ) ) {
+				lightning_get_template_part( 'template-parts/site-header' );
+			}
+			do_action( 'lightning_site_header_after', 'lightning_site_header_after' );
+
+			do_action( 'lightning_page_header_before', 'lightning_page_header_before' );
+			if ( apply_filters( 'lightning_is_page_header', true, 'page_header' ) ) {
+				lightning_get_template_part( 'template-parts/page-header' );
+			}
+			do_action( 'lightning_page_header_after', 'lightning_page_header_after' );
+
+			do_action( 'lightning_breadcrumb_before', 'lightning_breadcrumb_before' );
+			if ( apply_filters( 'lightning_is_breadcrumb_position_normal', true, 'breadcrumb_position_normal' ) && apply_filters( 'lightning_is_breadcrumb', true, 'breadcrumb' ) && class_exists( '\VektorInc\VK_Breadcrumb\VkBreadcrumb' ) ) {
+				$lightning_breadcrumb = new \VektorInc\VK_Breadcrumb\VkBreadcrumb();
+				$lightning_breadcrumb->the_breadcrumb(
+					array(
+						'id_outer'        => 'breadcrumb',
+						'class_outer'     => 'breadcrumb',
+						'class_inner'     => 'container',
+						'class_list'      => 'breadcrumb-list',
+						'class_list_item' => 'breadcrumb-list__item',
+					)
+				);
+			}
+			do_action( 'lightning_breadcrumb_after', 'lightning_breadcrumb_after' );
+
+			do_action( 'lightning_site_body_before', 'lightning_site_body_before' );
+			echo '<div class="' . esc_attr( lightning_get_the_class_name( 'site-body' ) ) . '">';
+			do_action( 'lightning_site_body_prepend', 'lightning_site_body_prepend' );
+			echo '<div class="' . esc_attr( lightning_get_the_class_name( 'site-body-container' ) ) . ' container">';
+			echo '<div class="' . esc_attr( lightning_get_the_class_name( 'main-section' ) ) . ' wpfc-sermon-container wpfc-lightning ' . esc_attr( $additional_classes ) . '" id="main" role="main">';
+			do_action( 'lightning_main_section_prepend', 'lightning_main_section_prepend' );
+		} else {
+			// Lightning G2 prints its site header from header.php; keep the generic markup for now.
+			echo '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-lightning ' . esc_attr( $additional_classes ) . '">';
+		}
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

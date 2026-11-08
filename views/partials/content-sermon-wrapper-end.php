@@ -418,6 +418,39 @@ switch ( $template ) {
 			get_sidebar();
 		}
 		break;
+	case 'lightning':
+		if ( function_exists( 'lightning_is_g3' ) && lightning_is_g3() && function_exists( 'lightning_get_the_class_name' ) ) {
+			// _g3/index.php:124-158.
+			do_action( 'lightning_main_section_append', 'lightning_main_section_append' );
+			echo '</div>';
+			do_action( 'lightning_sub_section_before', 'lightning_sub_section_before' );
+			if ( ! apply_filters( 'sm_disable_sidebar', false ) && function_exists( 'lightning_is_subsection' ) && lightning_is_subsection() ) {
+				lightning_get_template_part( 'sidebar', get_post_type() );
+			}
+			do_action( 'lightning_sub_section_after', 'lightning_sub_section_after' );
+			echo '</div>';
+			do_action( 'lightning_site_body_append', 'lightning_site_body_append' );
+			echo '</div>';
+
+			if ( is_active_sidebar( 'footer-before-widget' ) ) {
+				echo '<div class="site-body-bottom"><div class="container">';
+				dynamic_sidebar( 'footer-before-widget' );
+				echo '</div></div>';
+			}
+
+			do_action( 'lightning_site_footer_before', 'lightning_site_footer_before' );
+			if ( apply_filters( 'lightning_is_site_footer', true, 'site_footer' ) ) {
+				lightning_get_template_part( 'template-parts/site-footer' );
+			}
+			do_action( 'lightning_site_footer_after', 'lightning_site_footer_after' );
+		} else {
+			echo '</main></div>';
+			if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+				get_sidebar();
+			}
+			echo '</div>';
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

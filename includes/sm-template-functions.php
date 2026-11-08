@@ -299,11 +299,12 @@ function sm_block_template_is_sermon_specific() {
  * Whether the theme already shows this sermon's featured image.
  *
  * True on a block theme whose template holds a Featured Image block and the
- * sermon has a featured image, and on Twenty Nineteen when its header is
- * showing the image. The sermon view then leaves its own image out rather
- * than show it twice.
+ * sermon has a featured image, and on Twenty Nineteen, Twenty Eleven and
+ * Twenty Seventeen when their header is showing the image. The sermon view
+ * then leaves its own image out rather than show it twice.
  *
  * @since 3.6.0
+ * @since 3.8.0 Twenty Eleven and Twenty Seventeen.
  *
  * @return bool True when the theme shows the featured image itself.
  */
@@ -317,7 +318,40 @@ function sm_theme_shows_featured_image() {
 			&& false !== strpos( $_wp_current_template_content, '<!-- wp:post-featured-image' );
 	}
 
-	return sm_twentynineteen_shows_sermon_header();
+	return sm_twentynineteen_shows_sermon_header() || sm_classic_header_shows_sermon_image();
+}
+
+/**
+ * Whether Twenty Eleven's or Twenty Seventeen's header shows this sermon's featured image.
+ *
+ * Each theme's own test, from its header.php: Twenty Eleven uses a featured
+ * image at least as wide as its header image; Twenty Seventeen shows it below
+ * the header on singles.
+ *
+ * @since 3.8.0
+ *
+ * @return bool True when the theme's header shows the featured image.
+ */
+function sm_classic_header_shows_sermon_image() {
+	if ( ! is_singular( 'wpfc_sermon' ) ) {
+		return false;
+	}
+
+	switch ( get_option( 'template' ) ) {
+		case 'twentyeleven':
+			$post_id = get_queried_object_id();
+			if ( ! get_header_image() || ! has_post_thumbnail( $post_id ) ) {
+				return false;
+			}
+			$width = (int) get_theme_support( 'custom-header', 'width' );
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), array( $width, $width ) );
+
+			return $image && $image[1] >= $width;
+		case 'twentyseventeen':
+			return function_exists( 'twentyseventeen_should_show_featured_image' ) && twentyseventeen_should_show_featured_image();
+	}
+
+	return false;
 }
 
 /**

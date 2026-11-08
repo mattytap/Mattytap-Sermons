@@ -1,0 +1,26 @@
+/* Twenty Twelve sets body line-height to 1 and restores it only on .entry-content (style.css:763). */
+.wpfc-twentytwelve .wpfc-sermon-single-inner,
+.wpfc-twentytwelve .wpfc-sermon-inner {
+    line-height: 1.714285714;
+}
+
+/* Sermon description paragraphs and lists, as .entry-content p/ul/ol/li (style.css:821-870). */
+.wpfc-twentytwelve .wpfc-sermon-single-description p,
+.wpfc-twentytwelve .wpfc-sermon-single-description ul,
+.wpfc-twentytwelve .wpfc-sermon-single-description ol {
+    margin: 0 0 24px;
+    margin: 0 0 1.714285714rem;
+}
+
+.wpfc-twentytwelve .wpfc-sermon-single-description ul {
+    list-style: disc outside;
+}
+
+.wpfc-twentytwelve .wpfc-sermon-single-description ol {
+    list-style: decimal outside;
+}
+
+.wpfc-twentytwelve .wpfc-sermon-single-description li {
+    margin: 0 0 0 36px;
+    margin: 0 0 0 2.571428571rem;
+}

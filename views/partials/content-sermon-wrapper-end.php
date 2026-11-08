@@ -395,6 +395,14 @@ switch ( $template ) {
 			generate_construct_sidebars();
 		}
 		break;
+	case 'blocksy':
+		echo '</section>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		do_action( is_singular() ? 'blocksy:single:container:bottom' : 'blocksy:archive:container:bottom' );
+		echo '</div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

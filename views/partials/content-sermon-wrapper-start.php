@@ -879,6 +879,27 @@ switch ( $template ) {
 		// The theme's content box, as in content-single.php:13.
 		echo '<div class="inside-article wpfc-sermon-container wpfc-generatepress ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'blocksy':
+		// Blocksy opens main in header.php. This is template-parts/archive.php:146-156, and the plain-container branch of template-parts/single.php:58-63.
+		$sm_blocksy_class = 'ct-container';
+		$sm_blocksy_attrs = array();
+		if ( is_singular() && function_exists( 'blocksy_get_page_structure' ) && 'narrow' === blocksy_get_page_structure() ) {
+			$sm_blocksy_class = 'ct-container-narrow';
+		}
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) && function_exists( 'blocksy_sidebar_position_attr' ) ) {
+			$sm_blocksy_attrs = blocksy_sidebar_position_attr( array( 'array' => true ) );
+		}
+		if ( function_exists( 'blocksy_get_v_spacing' ) ) {
+			$sm_blocksy_attrs = array_merge( $sm_blocksy_attrs, blocksy_get_v_spacing( array( 'array' => true ) ) );
+		}
+		echo '<div class="' . esc_attr( $sm_blocksy_class ) . '"';
+		foreach ( $sm_blocksy_attrs as $sm_attr => $sm_value ) {
+			echo ' ' . esc_attr( $sm_attr ) . '="' . esc_attr( $sm_value ) . '"';
+		}
+		echo '>';
+		do_action( is_singular() ? 'blocksy:single:container:top' : 'blocksy:archive:container:top' );
+		echo '<section class="wpfc-sermon-container wpfc-blocksy ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

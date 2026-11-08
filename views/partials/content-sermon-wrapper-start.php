@@ -38,7 +38,9 @@ switch ( $template ) {
 		echo '<div id="primary" class="content-area"><div id="main" role="main" class="site-main wpfc-sermon-container wpfc-twentyfifteen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentysixteen':
-		echo '<div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentysixteen ' . esc_attr( $additional_classes ) . '" role="main">';
+		// Twenty Sixteen's single.php:12-13. Its gutters sit on content blocks, not the column,
+		// so .page-content (gutters only, used by its 404 template) gives our content the same margins.
+		echo '<div id="primary" class="content-area"><main id="main" class="site-main"><div class="page-content wpfc-sermon-container wpfc-twentysixteen ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'twentyseventeen':
 		echo '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-twentyseventeen ' . esc_attr( $additional_classes ) . '">';

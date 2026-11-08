@@ -1,0 +1,7 @@
+/* Our container already carries Twenty Sixteen's gutter (.page-content); don't add it twice. */
+.page-content.wpfc-twentysixteen .comments-area,
+.page-content.wpfc-twentysixteen .pagination,
+.page-content.wpfc-twentysixteen .post-navigation {
+    margin-right: 0;
+    margin-left: 0;
+}

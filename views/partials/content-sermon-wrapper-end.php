@@ -44,7 +44,12 @@ switch ( $template ) {
 		echo '</div></div>';
 		break;
 	case 'twentysixteen':
-		echo '</main></div>';
+		echo '</div></main>';
+		if ( is_singular() ) {
+			// single.php prints the content-bottom widget areas inside .content-area.
+			get_sidebar( 'content-bottom' );
+		}
+		echo '</div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
 			get_sidebar();
 		}

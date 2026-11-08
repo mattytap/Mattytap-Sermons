@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.7.1
+Stable tag: 3.8.0
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,6 +130,26 @@ The Plyr player's icons are part of the plugin and load from your own site.
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.8.0 =
+
+rodneyholloman's support topic about the Kadence theme prompted a review of how sermon pages sit inside themes. We tested the plugin with 70 free themes, including every default Twenty theme, with Theme Compatibility on and off, and the fixes below came from that. Most of the faults were inherited from Sermon Manager; the sidebar fault was ours. The full list of themes is on the GitHub release.
+
+* Fix: with Theme Compatibility off, search boxes, dropdowns and other widgets in the theme's sidebar were damaged on sermon pages, and some printed their code as text. This was our fault, from 3.0.
+* Fix: on Hueman, a single sermon with a comment caused a critical error, and Customizr showed an empty comment list.
+* Fix: with Theme Compatibility off, sermon pages now use the theme's own layout on Blocksy, Colibri, Envo Royal, GeneratePress, Hestia, Kubio, Lightning, Mantra, Neve, OnePress, PopularFX, Sydney, Total, Twenty Ten, Twenty Nineteen, Twenty Twenty and Twenty Twenty-One. Before, they could run edge to edge, drop the sidebar below the sermon, lose the theme's header and footer, or let the footer cover the sermon.
+* Fix: with Theme Compatibility off, sermon pages on the other default themes now match their posts: the width on Twenty Eleven and Twenty Thirteen, line spacing on Twenty Twelve, the sidebars on Twenty Thirteen and Twenty Fourteen, the title on Twenty Fifteen, and the margins on Twenty Sixteen phones. On Hueman, sermon content is padded again.
+* Fix: on any other theme that floats its columns, the footer no longer rides up behind sermon pages.
+* Fix: on phones, the audio player's seek bar no longer shrinks to nothing; on a narrow player the volume slider hides instead. On block themes the player now fills the column.
+* Fix: theme button styles no longer reach the audio player (a second play button, square or dark buttons, a seek bar stopping halfway).
+* Fix: with Theme Compatibility off, search results showed every sermon twice.
+* Fix: on block themes and some others, sermon listings showed each sermon's details as one run-on line. They now show the sermon's description or, where it has none, its date, passage and preacher.
+* Fix: on Kubio, sermon pages showed no player or details with Theme Compatibility on, and no reply form with it off.
+* Fix: single sermon pages could scroll sideways on phones, from the details row and from large sermon images.
+* Fix: the featured image showed twice on Twenty Ten, Twenty Eleven and Twenty Seventeen.
+* Fix: on Twenty Fourteen with Theme Compatibility on, sermon pages were squeezed narrower than posts.
+* Fix: sermon cards were unreadable on dark themes, and the card image became a narrow strip where a theme lays results out in a grid.
+* Fix: a debug notice about loading translations too early, when another theme schedules events while it loads.
 
 = 3.7.1 =
 
@@ -413,6 +433,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.8.0 =
+
+Fixes for sermon pages on many themes, from testing 70 free themes after a user's report about Kadence. Includes a crash on Hueman, and sidebar search boxes we broke in 3.0. Some pages will look different; see the changelog. No data changes.
 
 = 3.7.1 =
 

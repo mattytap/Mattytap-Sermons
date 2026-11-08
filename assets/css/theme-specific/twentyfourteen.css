@@ -1,19 +1,28 @@
+/* Scoped to our own markup: the theme's own article carries these classes too (#104). */
+.wpfc-twentyfourteen .wpfc-sermon,
+#wpfc-sermons-container .wpfc-sermon {
+    margin: 0;
+}
+
 #wpfc_sermon_sorting {
     margin: 0 auto 48px auto !important;
 }
 
 #wpfc_sermon_sorting,
-.wpfc-sermon,
-.wpfc-sermon-single {
+.wpfc-twentyfourteen .wpfc-sermon,
+.wpfc-twentyfourteen .wpfc-sermon-single,
+#wpfc-sermons-container .wpfc-sermon {
     max-width: 474px !important;
 }
 
-.wpfc-sermon,
-.wpfc-sermon-single {
+.wpfc-twentyfourteen .wpfc-sermon,
+.wpfc-twentyfourteen .wpfc-sermon-single,
+#wpfc-sermons-container .wpfc-sermon {
     margin: 0 auto;
 }
 
-.wpfc-sermon:last-child {
+.wpfc-twentyfourteen .wpfc-sermon:last-child,
+#wpfc-sermons-container .wpfc-sermon:last-child {
     margin-bottom: 48px;
 }
 

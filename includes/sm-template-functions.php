@@ -494,6 +494,17 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 
 		if ( 'wpfc_sermon' === get_post_type() && ( in_the_loop() == true || sm_in_sermon_post_content_block() ) ) {
 			$editor_content = $content;
+
+			/*
+			 * WordPress is building an excerpt from the content: a theme or the
+			 * Post Excerpt block called get_the_excerpt(). Core strips the tags
+			 * from whatever comes back, which would flatten the sermon view into
+			 * one run-on line, so give it the sermon's own text instead (#101).
+			 */
+			if ( doing_filter( 'get_the_excerpt' ) ) {
+				return strip_shortcodes( sm_get_sermon_description_raw() );
+			}
+
 			if ( ! is_feed() && ( is_archive() || is_search() ) ) {
 				/*
 				 * The theme's own template draws search results, title and image

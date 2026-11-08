@@ -14,3 +14,50 @@
 .wpfc-twentyfifteen .hentry {
     padding-top: 0;
 }
+
+/* The theme's .entry-title sizes (style.css:1658 and its breakpoints). */
+.wpfc-twentyfifteen .wpfc-sermon-single-title {
+    font-size: 26px;
+    font-size: 2.6rem;
+    line-height: 1.1538;
+}
+
+@media screen and (min-width: 46.25em) {
+    .wpfc-twentyfifteen .wpfc-sermon-single-title {
+        font-size: 35px;
+        font-size: 3.5rem;
+        line-height: 1.2;
+    }
+}
+
+@media screen and (min-width: 55em) {
+    .wpfc-twentyfifteen .wpfc-sermon-single-title {
+        font-size: 39px;
+        font-size: 3.9rem;
+        line-height: 1.2308;
+    }
+}
+
+@media screen and (min-width: 59.6875em) {
+    .wpfc-twentyfifteen .wpfc-sermon-single-title {
+        font-size: 31px;
+        font-size: 3.1rem;
+        line-height: 1.1613;
+    }
+}
+
+@media screen and (min-width: 68.75em) {
+    .wpfc-twentyfifteen .wpfc-sermon-single-title {
+        font-size: 35px;
+        font-size: 3.5rem;
+        line-height: 1.2;
+    }
+}
+
+@media screen and (min-width: 77.5em) {
+    .wpfc-twentyfifteen .wpfc-sermon-single-title {
+        font-size: 39px;
+        font-size: 3.9rem;
+        line-height: 1.2308;
+    }
+}

@@ -900,6 +900,18 @@ switch ( $template ) {
 		do_action( is_singular() ? 'blocksy:single:container:top' : 'blocksy:archive:container:top' );
 		echo '<section class="wpfc-sermon-container wpfc-blocksy ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'neve':
+		// Neve's single.php:9-18 and index.php:63-97, so its container and sidebar settings apply.
+		$neve_context = is_singular() ? 'single-post' : 'blog-archive';
+		$neve_outer   = is_singular() ? 'single-post-container' : 'archive-container';
+		$neve_inner   = is_singular() ? 'nv-single-post-wrap col' : 'nv-index-posts blog col';
+		echo '<div class="' . esc_attr( apply_filters( 'neve_container_class_filter', 'container', $neve_context ) . ' ' . $neve_outer ) . '"><div class="row">';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			// Prints only when the Customizer puts the sidebar on the left.
+			do_action( 'neve_do_sidebar', $neve_context, 'left' );
+		}
+		echo '<div class="' . esc_attr( $neve_inner ) . ' wpfc-sermon-container wpfc-neve ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

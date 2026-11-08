@@ -403,6 +403,14 @@ switch ( $template ) {
 		do_action( is_singular() ? 'blocksy:single:container:bottom' : 'blocksy:archive:container:bottom' );
 		echo '</div>';
 		break;
+	case 'neve':
+		echo '</div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			// Neve's single.php:44 and index.php:223.
+			do_action( 'neve_do_sidebar', is_singular() ? 'single-post' : 'blog-archive', 'right' );
+		}
+		echo '</div></div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

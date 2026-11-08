@@ -1,0 +1,29 @@
+/* Twenty Eleven gives post text a 68.9% measure inside the column (style.css:113). */
+.singular .wpfc-twentyeleven .wpfc-sermon-single-inner {
+    margin: 0 auto;
+    width: 68.9%;
+}
+
+.one-column.singular .wpfc-twentyeleven .wpfc-sermon-single-inner {
+    width: 100%;
+}
+
+/* The theme's single-post title (style.css:1134). */
+.singular .wpfc-twentyeleven .wpfc-sermon-single-title {
+    color: #000;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 48px;
+}
+
+@media (max-width: 800px) {
+    .singular .wpfc-twentyeleven .wpfc-sermon-single-inner {
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .singular .wpfc-twentyeleven .wpfc-sermon-single-title {
+        font-size: 28px;
+    }
+}

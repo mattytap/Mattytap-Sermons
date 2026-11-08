@@ -385,6 +385,16 @@ switch ( $template ) {
 	case 'twentytwentyone':
 		echo '</div>';
 		break;
+	case 'generatepress':
+		echo '</div>';
+		do_action( 'generate_after_main_content' );
+		echo '</main></div>';
+		do_action( 'generate_after_primary_content_area' );
+		// The theme's own sidebar logic, so its left, right, both and none settings apply (single.php:52).
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) && function_exists( 'generate_construct_sidebars' ) ) {
+			generate_construct_sidebars();
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

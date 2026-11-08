@@ -864,6 +864,21 @@ switch ( $template ) {
 		// Twenty Twenty-One opens #primary and #main in header.php. Its post column is the .default-max-width utility (style.css:695).
 		echo '<div class="default-max-width wpfc-sermon-container wpfc-twentytwentyone ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'generatepress':
+		// GeneratePress's single.php:14-22 and archive.php:68-76. Its attribute helper adds the layout classes, including the old float grid.
+		if ( function_exists( 'generate_do_attr' ) ) {
+			echo '<div ';
+			generate_do_attr( 'content' );
+			echo '><main ';
+			generate_do_attr( 'main' );
+			echo '>';
+		} else {
+			echo '<div id="primary" class="content-area"><main id="main" class="site-main">';
+		}
+		do_action( 'generate_before_main_content' );
+		// The theme's content box, as in content-single.php:13.
+		echo '<div class="inside-article wpfc-sermon-container wpfc-generatepress ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

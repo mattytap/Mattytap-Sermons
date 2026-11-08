@@ -102,8 +102,10 @@
     vertical-align: middle;
   }
 
+  // A white card needs dark text of its own, or a dark theme's pale text vanishes on it (#102).
   > .wpfc-sermon-inner {
     background: white;
+    color: #333;
     border: 1px solid #ddd;
   }
 

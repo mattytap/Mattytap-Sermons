@@ -57,6 +57,7 @@
   &-audio {
     display: flex;
     justify-content: center;
+    container: sm-audio / inline-size;
   }
 
   &-audio-download {
@@ -112,8 +113,11 @@
     }
   }
 
-  .player-plyr .plyr {
+  // Stretched by its own row: .wpfc-sermon-single reaches the page only through
+  // post_class, which block themes and some classic themes never print (#99).
+  &-audio.player-plyr .plyr {
     flex: 1;
+    min-width: 0;
   }
 
   &-description {
@@ -163,5 +167,17 @@
     .next-sermon {
       text-align: right;
     }
+  }
+}
+
+// On a narrow player the seek bar is the only thing that gives, so the volume slider
+// goes (phones have their own volume buttons) and the download cell slims (#99).
+@container sm-audio (max-width: 480px) {
+  .wpfc-sermon-single-audio .plyr__volume input[type="range"] {
+    display: none;
+  }
+
+  .wpfc-sermon-single-audio-download {
+    padding: 0 .75rem;
   }
 }

@@ -317,6 +317,14 @@ switch ( $template ) {
 			echo wp_kses_post( uncode_remove_p_tag( $the_content ) ) . '</div></div></div></article>';
 		}
 		break;
+	case 'onepress':
+		echo '</main></div>';
+		$sm_onepress_layout = function_exists( 'onepress_get_layout' ) ? onepress_get_layout() : 'right-sidebar';
+		if ( 'no-sidebar' !== $sm_onepress_layout && ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		echo '</div></div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

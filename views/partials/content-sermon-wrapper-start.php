@@ -797,6 +797,15 @@ switch ( $template ) {
 			ob_start();
 		}
 		break;
+	case 'onepress':
+		// OnePress's own markup (single.php and archive.php), so its sidebar layout setting applies.
+		$sm_onepress_layout = function_exists( 'onepress_get_layout' ) ? onepress_get_layout() : 'right-sidebar';
+		echo '<div id="content" class="site-content">';
+		if ( function_exists( 'onepress_breadcrumb' ) ) {
+			onepress_breadcrumb();
+		}
+		echo '<div id="content-inside" class="container ' . esc_attr( $sm_onepress_layout ) . '"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-onepress ' . esc_attr( $additional_classes ) . '" role="main">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

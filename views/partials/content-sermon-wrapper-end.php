@@ -325,6 +325,22 @@ switch ( $template ) {
 		}
 		echo '</div></div>';
 		break;
+	case 'envo-royal':
+		if ( is_singular() ) {
+			echo '</div></article>';
+			if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+				// single.php:24. Honours Envo Extra's per-post "hide sidebar" setting.
+				do_action( 'envo_royal_sidebar' );
+			}
+		} else {
+			echo '</div>';
+			if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+				// archive.php:16. With no sidebar-right.php this loads sidebar.php.
+				get_sidebar( 'right' );
+			}
+		}
+		echo '</div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

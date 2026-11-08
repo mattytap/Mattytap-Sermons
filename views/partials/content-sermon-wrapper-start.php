@@ -806,6 +806,21 @@ switch ( $template ) {
 		}
 		echo '<div id="content-inside" class="container ' . esc_attr( $sm_onepress_layout ) . '"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container wpfc-onepress ' . esc_attr( $additional_classes ) . '" role="main">';
 		break;
+	case 'envo-royal':
+		// Envo Royal's own markup (single.php:4-8, archive.php:4-5). Its header already opens .container.
+		$sm_envo_columns = '12';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) && function_exists( 'envo_royal_main_content_width_columns' ) ) {
+			// Echoes 9 with the right sidebar active, else 12 (functions.php:337).
+			ob_start();
+			envo_royal_main_content_width_columns();
+			$sm_envo_columns = (string) absint( ob_get_clean() );
+		}
+		if ( is_singular() ) {
+			echo '<div class="row single-post"><article class="col-md-' . esc_attr( $sm_envo_columns ) . '"><div class="single-post-content wpfc-sermon-container wpfc-envo-royal ' . esc_attr( $additional_classes ) . '">';
+		} else {
+			echo '<div class="row"><div class="col-md-' . esc_attr( $sm_envo_columns ) . ' wpfc-sermon-container wpfc-envo-royal ' . esc_attr( $additional_classes ) . '">';
+		}
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

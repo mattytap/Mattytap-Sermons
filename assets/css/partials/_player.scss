@@ -6,3 +6,36 @@
 .plyr--audio.plyr {
   border: 1px solid #dbe3e8;
 }
+
+// Themes style button, [type=button] and range inputs broadly, and some of those rules
+// outweigh Plyr's own. These put Plyr's look back on our audio player only (#96).
+.plyr--audio:has(.wpfc-sermon-player) {
+  .plyr__controls > .plyr__control,
+  .plyr__controls > * > .plyr__control {
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .plyr__controls > .plyr__control:not(:hover):not(.plyr__tab-focus):not([aria-expanded="true"]),
+  .plyr__controls > * > .plyr__control:not(:hover):not(.plyr__tab-focus):not([aria-expanded="true"]) {
+    background: transparent;
+    color: inherit;
+  }
+
+  .plyr__control--overlaid {
+    display: none;
+  }
+
+  .plyr__progress input[type="range"] {
+    max-width: none;
+  }
+}
+
+// The download link beside the player is ours too; some themes underline links with a box shadow.
+.wpfc-sermon-single-audio a.wpfc-sermon-single-audio-download,
+.wpfc-sermon-single-audio a.wpfc-sermon-single-audio-download:hover {
+  box-shadow: none;
+  text-decoration: none;
+}

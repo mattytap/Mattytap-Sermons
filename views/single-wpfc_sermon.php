@@ -36,7 +36,15 @@ echo wp_kses_post( apply_filters( 'single-wpfc_sermon-after-sermons', '' ) );
 
 ?>
 
-<?php echo wp_kses( wpfc_get_partial( 'content-sermon-wrapper-end' ), sm_template_allowed_html() ); ?>
+<?php
+if ( has_filter( 'wpfc_get_partial' ) ) {
+	// Filtered markup belongs to whoever filtered it, so it keeps its escaping.
+	echo wp_kses( wpfc_get_partial( 'content-sermon-wrapper-end' ), sm_template_allowed_html() );
+} else {
+	// Printed as is, like the wrapper start: kses would strip the theme's sidebar forms and scripts (#86).
+	wpfc_print_partial( 'content-sermon-wrapper-end' );
+}
+?>
 
 <?php
 get_footer();

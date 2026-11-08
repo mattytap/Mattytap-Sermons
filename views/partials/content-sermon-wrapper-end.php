@@ -320,21 +320,31 @@ switch ( $template ) {
 		echo '</div></div>';
 		break;
 	default:
-		if ( SM_OB_ENABLED ) {
-			ob_start();
-			/*
-			 * Without a sidebar.php, get_sidebar() falls back to WordPress's
-			 * deprecated theme-compat sidebar. locate_template() finds that
-			 * fallback too, so it doesn't count as the theme having one.
-			 */
-			$sm_theme_sidebar = locate_template( 'sidebar.php' );
-			if ( ! apply_filters( 'sm_disable_sidebar', false ) && $sm_theme_sidebar && false === strpos( wp_normalize_path( $sm_theme_sidebar ), '/' . WPINC . '/theme-compat/' ) ) {
+		/*
+		 * Without a sidebar.php, get_sidebar() falls back to WordPress's
+		 * deprecated theme-compat sidebar. locate_template() finds that
+		 * fallback too, so it doesn't count as the theme having one.
+		 */
+		$sm_theme_sidebar = locate_template( 'sidebar.php' );
+		$sm_show_sidebar  = ! apply_filters( 'sm_disable_sidebar', false ) && $sm_theme_sidebar && false === strpos( wp_normalize_path( $sm_theme_sidebar ), '/' . WPINC . '/theme-compat/' );
+
+		if ( ! has_filter( 'sm_templates_wrapper_end' ) ) {
+			// The sidebar is the theme's own escaped output; kses would strip its forms and scripts (#86).
+			echo '</main></div>';
+			if ( $sm_show_sidebar ) {
 				get_sidebar();
 			}
-			$sidebar = ob_get_clean();
+			echo '</div>';
 		} else {
-			$sidebar = '';
+			if ( SM_OB_ENABLED && $sm_show_sidebar ) {
+				ob_start();
+				get_sidebar();
+				$sidebar = ob_get_clean();
+			} else {
+				$sidebar = '';
+			}
+			// Filtered markup belongs to whoever filtered it, so it keeps its escaping.
+			echo wp_kses_post( apply_filters( 'sm_templates_wrapper_end', '</main></div>' . $sidebar . '</div>' ) );
 		}
-		echo wp_kses_post( apply_filters( 'sm_templates_wrapper_end', '</main></div>' . $sidebar . '</div>' ) );
 		break;
 }

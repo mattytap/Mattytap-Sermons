@@ -96,7 +96,7 @@ switch ( $template ) {
 		break;
 	case 'hueman':
 	case 'hueman-pro':
-		echo '<section class="content"><div class="pad group wpfc-sermon-container wpfc-hueman ' . esc_attr( $additional_classes ) . '">';
+		echo '<section class="content"><div class="pad hu-pad group wpfc-sermon-container wpfc-hueman ' . esc_attr( $additional_classes ) . '">';
 		break;
 	case 'NativeChurch':
 		echo '<div id="content" class="content full"><div class="container"><div class="row"><div class="col-md-12 posts-archive wpfc-sermon-container wpfc-NativeChurch ' . esc_attr( $additional_classes ) . '" id="content-col">';

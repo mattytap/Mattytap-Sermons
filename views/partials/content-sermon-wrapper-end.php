@@ -312,6 +312,13 @@ switch ( $template ) {
 			echo wp_kses_post( uncode_remove_p_tag( $the_content ) ) . '</div></div></div></article>';
 		}
 		break;
+	case 'kadence':
+		echo '</div></div></div></div>';
+		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		echo '</div></div>';
+		break;
 	default:
 		if ( SM_OB_ENABLED ) {
 			ob_start();

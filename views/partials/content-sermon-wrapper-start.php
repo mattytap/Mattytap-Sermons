@@ -797,6 +797,14 @@ switch ( $template ) {
 			ob_start();
 		}
 		break;
+	case 'kadence':
+		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
+		if ( function_exists( 'Kadence\kadence' ) ) {
+			// Kadence loads its content styles from the page template, not the header.
+			\Kadence\kadence()->print_styles( 'kadence-content' );
+		}
+		echo '<div id="primary" class="content-area"><div class="content-container site-container"><div id="main" class="site-main"><div class="content-wrap"><div class="entry content-bg single-entry"><div class="entry-content-wrap wpfc-sermon-container wpfc-kadence ' . esc_attr( $additional_classes ) . '">';
+		break;
 	default:
 		echo wp_kses_post( apply_filters( 'sm_templates_wrapper_start', '<div class="wrap"><div id="primary" class="content-area"><main id="main" class="site-main wpfc-sermon-container ' . esc_attr( $additional_classes ) . '">' ) );
 		break;

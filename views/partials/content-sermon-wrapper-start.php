@@ -979,6 +979,29 @@ switch ( $template ) {
 		}
 		echo '<main id="main" class="post-wrap wpfc-sermon-container wpfc-sydney ' . esc_attr( $additional_classes ) . '" role="main">';
 		break;
+	case 'hestia':
+		// Hestia's single.php:11-16 with template-parts/content-single.php:11-22, and archive.php:55-72.
+		$hestia_sidebar = 'sidebar-right';
+		if ( function_exists( 'hestia_get_blog_layout_default' ) ) {
+			$hestia_sidebar = apply_filters( 'hestia_sidebar_layout', get_theme_mod( 'hestia_blog_sidebar_layout', hestia_get_blog_layout_default() ) );
+		}
+		$hestia_main = function_exists( 'hestia_layout' ) ? hestia_layout() : 'main main-raised';
+		if ( is_singular() ) {
+			// The hero, with the title in the default header layout.
+			do_action( 'hestia_before_single_post_wrapper' );
+			$hestia_col = apply_filters( 'hestia_filter_single_post_content_classes', 'col-md-8 single-post-container' );
+			echo '<div class="' . esc_attr( $hestia_main ) . '"><div class="blog-post blog-post-wrapper"><div class="container"><div class="section section-text"><div class="row">';
+		} else {
+			// The hero, with the archive title.
+			do_action( 'hestia_before_archive_content' );
+			$hestia_col = apply_filters( 'hestia_filter_archive_content_classes', 'col-md-8 archive-post-wrap' );
+			echo '<div class="' . esc_attr( $hestia_main ) . '"><div class="hestia-blogs" data-layout="' . esc_attr( $hestia_sidebar ) . '"><div class="container"><div class="row">';
+		}
+		if ( 'sidebar-left' === $hestia_sidebar && ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		echo '<div class="' . esc_attr( $hestia_col ) . ' wpfc-sermon-container wpfc-hestia ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

@@ -458,6 +458,21 @@ switch ( $template ) {
 			do_action( 'sydney_get_sidebar' );
 		}
 		break;
+	case 'hestia':
+		echo '</div>';
+		$hestia_sidebar = 'sidebar-right';
+		if ( function_exists( 'hestia_get_blog_layout_default' ) ) {
+			$hestia_sidebar = apply_filters( 'hestia_sidebar_layout', get_theme_mod( 'hestia_blog_sidebar_layout', hestia_get_blog_layout_default() ) );
+		}
+		if ( 'sidebar-right' === $hestia_sidebar && ! apply_filters( 'sm_disable_sidebar', false ) ) {
+			get_sidebar();
+		}
+		if ( is_singular() ) {
+			echo '</div></div></div></div></div>';
+		} else {
+			echo '</div></div></div></div>';
+		}
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

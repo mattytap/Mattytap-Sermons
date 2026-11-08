@@ -135,6 +135,8 @@ Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://word
 
 A support topic about the Kadence theme prompted a review of how sermon pages sit inside themes. We tested the plugin with 70 free themes, including every default Twenty theme, with Theme Compatibility on and off, and the fixes below came from that. Most of the faults were inherited from Sermon Manager; the sidebar fault was ours. The full list of themes is on the GitHub release.
 
+If a sermon page looks wrong after updating, turn on Theme Compatibility under Sermons > Settings > Advanced, then open a support topic so we can fix it.
+
 * Fix: with Theme Compatibility off, search boxes, dropdowns and other widgets in the theme's sidebar were damaged on sermon pages, and some printed their code as text. This was our fault, from 3.0.
 * Fix: on Hueman, a single sermon with a comment caused a critical error, and Customizr showed an empty comment list.
 * Fix: with Theme Compatibility off, sermon pages now use the theme's own layout on Blocksy, Colibri, Envo Royal, GeneratePress, Hestia, Kubio, Lightning, Mantra, Neve, OnePress, PopularFX, Sydney, Total, Twenty Ten, Twenty Nineteen, Twenty Twenty and Twenty Twenty-One. Before, they could run edge to edge, drop the sidebar below the sermon, lose the theme's header and footer, or let the footer cover the sermon.
@@ -317,7 +319,7 @@ Earlier versions, from the 3.0 restoration to the 3.1 release candidates, are in
 
 = 3.8.0 =
 
-Fixes for sermon pages on many themes, from testing 70 free themes after a user's report about Kadence. Includes a crash on Hueman, and sidebar search boxes we broke in 3.0. Some pages will look different; see the changelog. No data changes.
+Sermon pages change on many themes, from testing 70 free themes. Fixes a crash on Hueman and sidebar search boxes we broke in 3.0. No data changes. If a sermon page looks wrong, turn on Theme Compatibility (Sermons > Settings > Advanced) and open a support topic.
 
 = 3.7.1 =
 

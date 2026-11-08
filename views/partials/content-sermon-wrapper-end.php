@@ -382,6 +382,9 @@ switch ( $template ) {
 		// The theme prints its footer menus and widgets here, not in footer.php (singular.php:32).
 		get_template_part( 'template-parts/footer-menus-widgets' );
 		break;
+	case 'twentytwentyone':
+		echo '</div>';
+		break;
 	case 'kadence':
 		echo '</div></div></div></div>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {

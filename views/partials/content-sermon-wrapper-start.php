@@ -860,6 +860,10 @@ switch ( $template ) {
 		// Twenty Twenty's singular.php:15 and template-parts/content.php:28. The column is the theme's own .section-inner.thin (58rem).
 		echo '<main id="site-content"><div class="post-inner"><div class="section-inner thin wpfc-sermon-container wpfc-twentytwenty ' . esc_attr( $additional_classes ) . '">';
 		break;
+	case 'twentytwentyone':
+		// Twenty Twenty-One opens #primary and #main in header.php. Its post column is the .default-max-width utility (style.css:695).
+		echo '<div class="default-max-width wpfc-sermon-container wpfc-twentytwentyone ' . esc_attr( $additional_classes ) . '">';
+		break;
 	case 'kadence':
 		// Kadence's own page markup (template-parts/content/single.php), so its layout settings apply.
 		if ( function_exists( 'Kadence\kadence' ) ) {

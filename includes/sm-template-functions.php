@@ -522,13 +522,19 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 			 * Post Excerpt block called get_the_excerpt(). Core strips the tags
 			 * from whatever comes back, which would flatten the sermon view into
 			 * one run-on line, so give it plain text instead: the description,
-			 * or where there is none, the passage, preacher and series (#101).
-			 * Feeds are left as they were.
+			 * or where there is none, the preached date, passage, preacher and
+			 * series (#101). Feeds are left as they were.
 			 */
 			if ( doing_filter( 'get_the_excerpt' ) && ! is_feed() ) {
 				$description = strip_shortcodes( sm_get_sermon_description_raw() );
 
-				return '' !== trim( wp_strip_all_tags( $description ) ) ? $description : sm_build_sermon_excerpt( get_the_ID() );
+				if ( '' !== trim( wp_strip_all_tags( $description ) ) ) {
+					return $description;
+				}
+
+				$summary = array_filter( array( (string) sm_get_the_date(), sm_build_sermon_excerpt( get_the_ID() ) ) );
+
+				return implode( ' | ', $summary );
 			}
 
 			if ( ! is_feed() && ( is_archive() || is_search() ) ) {

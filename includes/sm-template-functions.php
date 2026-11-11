@@ -555,6 +555,11 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 					remove_filter( 'pre_option_sermonmanager_theme_compatibility', 'sm_theme_compatibility_yes', 20 );
 				}
 			} elseif ( is_singular() && is_main_query() ) {
+				// Core has put its password form in $content; keep it, as our own template does.
+				if ( post_password_required() ) {
+					return $content;
+				}
+
 				$content = wpfc_sermon_single_v2( true );
 
 				/*

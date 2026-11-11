@@ -81,6 +81,8 @@ $args = array(
 	'posts_per_page' => $settings['podcasts_per_page'],
 	'order'          => strtoupper( SermonManager::getOption( 'archive_order' ) ),
 	'paged'          => isset( $_GET['paged'] ) ? intval( $_GET['paged'] ) : 1,
+	// A password-protected sermon isn't meant for podcast apps, and an episode stripped of its audio would be broken.
+	'has_password'   => false,
 	'meta_query'     => array(
 		'relation' => 'AND',
 		array(

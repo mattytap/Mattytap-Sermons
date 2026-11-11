@@ -32,6 +32,9 @@ $args = $GLOBALS['wpfc_partial_args'];
 
 $theme = get_option( 'template' );
 
+// A protected sermon lists its title, date, preacher and series, but none of its content.
+$sm_locked = post_password_required( $post );
+
 $sm_image_html = '';
 
 if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archive' ) ) {
@@ -53,7 +56,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 		<?php endif; ?>
 
 		<div class="wpfc-sermon-main <?php echo get_sermon_image_url() ? '' : 'no-image'; ?>">
-			<div class="wpfc-sermon-header <?php echo \SermonManager::getOption( 'archive_meta' ) ? 'aside-exists' : ''; ?>">
+			<div class="wpfc-sermon-header <?php echo \SermonManager::getOption( 'archive_meta' ) && ! $sm_locked ? 'aside-exists' : ''; ?>">
 				<div class="wpfc-sermon-header-main">
 					<?php if ( has_term( '', 'wpfc_sermon_series', $post->ID ) ) : ?>
 						<div class="wpfc-sermon-meta-item wpfc-sermon-meta-series">
@@ -73,7 +76,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 						<?php endif; ?>
 					</div>
 				</div>
-				<?php if ( \SermonManager::getOption( 'archive_meta' ) ) : ?>
+				<?php if ( \SermonManager::getOption( 'archive_meta' ) && ! $sm_locked ) : ?>
 					<div class="wpfc-sermon-header-aside">
 						<?php if ( get_wpfc_sermon_meta( 'sermon_audio' ) ) : ?>
 							<a class="wpfc-sermon-att-audio dashicons dashicons-media-audio"
@@ -97,7 +100,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 				<?php endif; ?>
 			</div>
 
-			<?php if ( ! post_password_required( $post ) ) : ?>
+			<?php if ( ! $sm_locked ) : ?>
 				<?php $sm_description = sm_do_sermon_blocks( sm_get_sermon_description_raw( $post->ID ) ); ?>
 				<div class="wpfc-sermon-description">
 					<div class="sermon-description-content">
@@ -136,7 +139,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 						<span class="wpfc-sermon-meta-text"><?php the_terms( $post->ID, 'wpfc_preacher' ); ?></span>
 					</div>
 				<?php endif; ?>
-				<?php if ( get_post_meta( $post->ID, 'bible_passage', true ) ) : ?>
+				<?php if ( ! $sm_locked && get_post_meta( $post->ID, 'bible_passage', true ) ) : ?>
 					<div class="wpfc-sermon-meta-item wpfc-sermon-meta-passage">
 						<span class="wpfc-sermon-meta-prefix">
 							<?php echo esc_html__( 'Passage', 'mattytap-sermons' ); ?>:</span>

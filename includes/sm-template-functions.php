@@ -678,7 +678,10 @@ function render_wpfc_sorting( $args = array() ) {
 			if ( get_query_var( 'paged' ) === 0 ) {
 				$args['action'] = '';
 			} else {
-				$args['action'] = str_replace( wp_parse_url( get_pagenum_link(), PHP_URL_QUERY ), '', get_pagenum_link() );
+				// A paged URL often has no query string; str_replace() deprecates a null search on PHP 8.1+.
+				$pagenum_link   = get_pagenum_link();
+				$pagenum_query  = wp_parse_url( $pagenum_link, PHP_URL_QUERY );
+				$args['action'] = is_string( $pagenum_query ) ? str_replace( $pagenum_query, '', $pagenum_link ) : $pagenum_link;
 			}
 			break;
 	}

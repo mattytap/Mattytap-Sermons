@@ -864,7 +864,7 @@ function wpfc_render_video( $url = '', $seek = true ) {
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script handle; drop-in compat with Sermon Manager.
 		wp_enqueue_script( 'wpfc-sm-fb-player' );
 
-		parse_str( wp_parse_url( $url, PHP_URL_QUERY ), $query );
+		parse_str( (string) wp_parse_url( $url, PHP_URL_QUERY ), $query );
 
 		return '<div class="fb-video" data-href="' . esc_url( $url ) . '" data-width="' . ( isset( $query['width'] ) ? ( is_numeric( $query['width'] ) ? $query['width'] : '600' ) : '600' ) . '" data-allowfullscreen="' . ( isset( $query['fullscreen'] ) ? ( 'yes' === $query['width'] ? 'true' : 'false' ) : 'true' ) . '"></div>';
 	}

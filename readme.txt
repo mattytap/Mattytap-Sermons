@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.8.0
+Stable tag: 3.8.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,6 +130,11 @@ The Plyr player's icons are part of the plugin and load from your own site.
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.8.1 =
+
+* Fix: with WordPress debugging switched on, page 2 and later of a sermon list showed a PHP "Deprecated" notice about `str_replace()` on PHP 8.1 and later. Inherited from Sermon Manager.
+* Fix: the same kind of notice, about `parse_str()`, for a Facebook video link with no settings after a `?` in its address. Nobody reported this one; we found it while fixing the first. Inherited from Sermon Manager.
 
 = 3.8.0 =
 
@@ -316,6 +321,10 @@ First stable release of the renamed Mattytap Sermons line, and the first WordPre
 Earlier versions, from the 3.0 restoration to the 3.1 release candidates, are in [changelog.txt](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt).
 
 == Upgrade Notice ==
+
+= 3.8.1 =
+
+Stops two PHP notices that show only with debugging switched on. Nothing on your pages changes; no data changes.
 
 = 3.8.0 =
 

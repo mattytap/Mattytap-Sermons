@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mattytap Sermons 3.8.0\n"
+"Project-Id-Version: Mattytap Sermons 3.8.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mattytap-sermons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-08T16:02:42+00:00\n"
+"POT-Creation-Date: 2026-11-11T21:31:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mattytap-sermons\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
 #: sermons.php
-#: sermons.php:929
+#: sermons.php:928
 msgid "Mattytap Sermons"
 msgstr ""
 
@@ -1893,16 +1893,16 @@ msgstr ""
 msgid "Dismiss this notice"
 msgstr ""
 
-#: sermons.php:704
+#: sermons.php:703
 msgid "Import failed. Please check that you selected a valid export file, then try again."
 msgstr ""
 
-#: sermons.php:708
+#: sermons.php:707
 msgid "Import done!"
 msgstr ""
 
 #. translators: %s: The plugin name. Effectively "<strong>Mattytap Sermons</strong>".
-#: sermons.php:929
+#: sermons.php:928
 #, php-format
 msgid "%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled."
 msgstr ""

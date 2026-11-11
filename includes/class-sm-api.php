@@ -23,7 +23,7 @@ class SM_API {
 		add_action( 'rest_wpfc_sermon_collection_params', array( $this, 'modify_query_params' ) );
 
 		// Add custom data to the response.
-		add_filter( 'rest_prepare_wpfc_sermon', array( $this, 'add_custom_data' ) );
+		add_filter( 'rest_prepare_wpfc_sermon', array( $this, 'add_custom_data' ), 10, 3 );
 
 		// Fix ordering.
 		add_filter( 'rest_wpfc_sermon_query', array( $this, 'fix_ordering' ) );
@@ -153,11 +153,16 @@ class SM_API {
 	/**
 	 * Add custom data to the response, such as audio, passage, etc.
 	 *
-	 * @param WP_REST_Response $response The response object.
+	 * A password-protected sermon gets these fields empty, as core empties its content, unless the
+	 * user can edit it or the request carries the right `password`, as core's own check allows.
+	 *
+	 * @param WP_REST_Response     $response The response object.
+	 * @param WP_Post|null         $post     The sermon. Looked up from the response if not given.
+	 * @param WP_REST_Request|null $request  The request.
 	 *
 	 * @return WP_REST_Response Modified response,
 	 */
-	public function add_custom_data( $response ) {
+	public function add_custom_data( $response, $post = null, $request = null ) {
 		$data = &$response->data;
 
 		$post_meta = wp_parse_args( get_post_meta( $data['id'] ), array(
@@ -193,7 +198,44 @@ class SM_API {
 			$data['_sermon_date_auto'] = 1 == $post_meta['sermon_date_auto'][0] ? true : false;
 		}
 
+		if ( ! $post instanceof WP_Post ) {
+			$post = get_post( $data['id'] );
+		}
+
+		if ( $this->sermon_details_locked( $post, $request ) ) {
+			foreach ( array( 'sermon_audio', 'sermon_audio_duration', 'bible_passage', 'sermon_description', 'sermon_video_embed', 'sermon_video_url', 'sermon_bulletin' ) as $field ) {
+				$data[ $field ] = '';
+			}
+		}
+
 		return $response;
+	}
+
+	/**
+	 * Whether a sermon's details are hidden from this REST request by its password.
+	 *
+	 * Mirrors core's check for a protected post's content: open to users who can edit the
+	 * sermon, and to a request whose `password` parameter matches.
+	 *
+	 * @param WP_Post|null         $post    The sermon.
+	 * @param WP_REST_Request|null $request The request.
+	 *
+	 * @return bool True to hide the details.
+	 *
+	 * @since 3.8.2
+	 */
+	private function sermon_details_locked( $post, $request ) {
+		if ( ! $post instanceof WP_Post || '' === (string) $post->post_password ) {
+			return false;
+		}
+
+		if ( current_user_can( 'edit_post', $post->ID ) ) {
+			return false;
+		}
+
+		$password = $request instanceof WP_REST_Request ? $request->get_param( 'password' ) : null;
+
+		return ! ( is_string( $password ) && '' !== $password && hash_equals( (string) $post->post_password, $password ) );
 	}
 }
 

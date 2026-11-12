@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.8.1
+Stable tag: 3.8.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -130,6 +130,10 @@ The Plyr player's icons are part of the plugin and load from your own site.
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.8.2 =
+
+* Security: the details of a password-protected sermon could be seen without its password. Sites with no password-protected sermons were never affected. The passage, description, audio, video, notes and bulletin showed through the REST API, in sermon listings and feeds, and on the sermon page itself on block themes or with Theme Compatibility on. They now stay hidden until the password is given, as WordPress does for a protected post, and protected sermons are left out of the podcast feed. Partly inherited from Sermon Manager.
 
 = 3.8.1 =
 
@@ -321,6 +325,10 @@ First stable release of the renamed Mattytap Sermons line, and the first WordPre
 Earlier versions, from the 3.0 restoration to the 3.1 release candidates, are in [changelog.txt](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt).
 
 == Upgrade Notice ==
+
+= 3.8.2 =
+
+Security fix: a password-protected sermon's details could be seen without its password. Please update if any of your sermons has a password. No data changes.
 
 = 3.8.1 =
 

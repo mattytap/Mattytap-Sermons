@@ -31,8 +31,8 @@ trouble before users find it.
   Twenty theme among them, with Theme Compatibility on and off. 3.8.0 fixed what turned up,
   most of it inherited. 3.6.0 had already brought sermon pages up to date with block themes,
   WordPress's default since Twenty Twenty-Two.
-- **Sites moving across.** Pages built with Sermon Manager Pro's shortcodes (3.5.0) or Church
-  Sermon Manager's sermon grid block (3.7.0) now show the standard sermon list, where before
+- **Sites moving across.** Pages built with Sermon Manager Pro's shortcodes (3.5.0) or another
+  fork's sermon grid block (3.7.0) now show the standard sermon list, where before
   they showed raw shortcode text or nothing.
 - **Privacy.** With the Plyr player, YouTube sermons play from YouTube's reduced-tracking
   address, and the player's icons load from the site itself rather than a third-party server

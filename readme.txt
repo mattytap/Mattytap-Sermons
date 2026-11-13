@@ -103,6 +103,10 @@ Open a topic on this plugin's [support forum](https://wordpress.org/support/plug
 
 For a security issue, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than either of those.
 
+= Are there blocks for the block editor? =
+
+Not in Mattytap Sermons itself. [Blocks for Sermon Manager](https://wordpress.org/plugins/blocks-for-sermon-manager/) is a separate plugin that adds sermon blocks and works with Mattytap Sermons. Its developer has reported seven bugs in our plugin since July, each one clear and well documented, and all are now fixed: Mattytap Sermons is better for his care. We keep the parts of our plugin his relies on stable.
+
 = Does it work with my theme? =
 
 Before 3.8.0 we tested the plugin with 70 free themes from WordPress.org, with Theme Compatibility on and off. The list is on the [3.8.0 release](https://github.com/mattytap/Mattytap-Sermons/releases/tag/v3.8.0). We can't test paid themes, because we don't buy them. Several popular paid themes are add-ons to a free theme we did test (Astra, GeneratePress, Kadence, Neve and OceanWP, for example), so their core has been through the same checks.

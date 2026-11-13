@@ -42,7 +42,7 @@ The bar is the same in each case: it has to fit a caretaker restoration and earn
 
 - **A paid tier.** The original "Pro" pitch is closed; nothing from it carries over.
 - **A build-toolchain modernisation (asset pipeline).** The current SCSS and asset build works without a Node commitment; tying the project to a webpack or npm toolchain is not justified for a caretaker restoration. Considered and declined.
-- **Editor blocks.** Sermon blocks for the block editor won't be added to this plugin, and no companion plugin is planned. The core stays a faithful, stable drop-in with no JavaScript build, and a fast-moving block layer would cost it exactly that. Block *themes* are a separate matter and are supported.
+- **Editor blocks.** Sermon blocks for the block editor won't be added to this plugin, and no companion plugin is planned. The core stays a faithful, stable drop-in with no JavaScript build, and a fast-moving block layer would cost it exactly that. Block *themes* are a separate matter and are supported. For blocks, see [Blocks for Sermon Manager](https://wordpress.org/plugins/blocks-for-sermon-manager/), a separate plugin that supports Mattytap Sermons.
 - **Removing CMB2.** CMB2 is bundled and kept current.
 
 ## Known latent risks (not features)

@@ -38,6 +38,8 @@ trouble before users find it.
   address, and the player's icons load from the site itself rather than a third-party server
   (3.7.0).
 
+**The restoration, for the record.**
+
 - **Approved and shipped.** Submitted as `mattytap-sermons` and approved by the WordPress.org plugin team on 2026-06-15. The earlier `sermon-works` slug was bounced in pre-review on trademark grounds; the ten pre-review technical findings (text-domain loading, prefix annotations, output escaping in views, callback escaping, enqueue-path refactors, vendor refresh) are all closed.
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All have shipping patches, verified in production.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
@@ -72,7 +74,7 @@ These shape what gets accepted and what gets shipped.
 
 ## Documentation
 
-- [ROADMAP.md](ROADMAP.md): features under consideration; deliberately not commitments.
+- [ROADMAP.md](ROADMAP.md): the maintenance-mode stance, and the few kinds of contribution that could still land.
 - [CONTRIBUTORS.md](CONTRIBUTORS.md): credits for the original Sermon Manager team and contributors to this restoration.
 - [SECURITY.md](SECURITY.md): how to report a vulnerability privately.
 - [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md): how to contribute code.
@@ -81,7 +83,7 @@ These shape what gets accepted and what gets shipped.
 
 ## Credit
 
-This work would not exist without the original [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) by [WP-for-Church](https://wpforchurch.com/) and [Jason Westbrook](https://github.com/jasonmwestbrook). Their codebase is the foundation; this restoration is the renovation.
+This work would not exist without the original [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) by [WP-for-Church](https://github.com/WP-for-Church) and [Jason Westbrook](https://github.com/jasonmwestbrook). Their codebase is the foundation; this restoration is the renovation.
 
 ## License
 

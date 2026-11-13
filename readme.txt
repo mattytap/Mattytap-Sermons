@@ -12,7 +12,7 @@ A maintained restoration of Sermon Manager: publish, organise, and podcast sermo
 
 == Description ==
 
-Mattytap Sermons lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types, all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
+Mattytap Sermons lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types, all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and publish a full podcast feed, ready for Apple Podcasts and other podcast apps, for the whole library or for any individual series, speaker, topic, or book.
 
 Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpress.org/plugins/sermon-manager-for-wordpress/) by WP for Church. The original plugin was last published to WordPress.org in September 2024 (version 2.30.0); the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs remain unpatched in 2.30.0 and earlier. Mattytap Sermons is the successor line. Existing Sermon Manager installs (including 2.30.0) can switch to Mattytap Sermons as a drop-in replacement: the database schema, custom post type (`wpfc_sermon`), taxonomies (`wpfc_preacher`, `wpfc_sermon_series`, etc.), all `wpfc_*` option keys, six core shortcodes, and view templates are preserved. Multi-attachments for notes and bulletin, post-body editor support, and Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0.
 
@@ -22,7 +22,7 @@ Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpre
 * Same custom post type and taxonomies: existing sermon data carries over without import
 * Same template files in `views/`: existing theme overrides continue to work
 * Same Bib.ly Bible-reference integration
-* Same iTunes-compatible podcast feeds
+* Same podcast feeds, at the same addresses, so subscribers carry on
 
 = What's new in Mattytap Sermons =
 
@@ -53,7 +53,7 @@ Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpre
 
 = Migrating from Sermon Manager =
 
-If you have an existing Sermon Manager install, install and activate Mattytap Sermons, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action. The two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
+If you have an existing Sermon Manager install, install Mattytap Sermons, deactivate Sermon Manager, then activate Mattytap Sermons. All your sermons, speakers, series, topics, and settings carry over without further action. The two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
 
 = Migrating from Sermon Browser or Series Engine =
 
@@ -75,7 +75,7 @@ Yes. Sermon Manager is no longer receiving updates, and Mattytap Sermons continu
 
 = I'm coming from Sermon Manager. Will my sermons survive? =
 
-Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once. The overlapping schema will conflict.
+Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Deactivate Sermon Manager, then activate Mattytap Sermons, and existing sermons keep working. Don't run both at once. The overlapping schema will conflict.
 
 = I'm coming from Sermon Manager Pro. What carries over? =
 
@@ -97,9 +97,11 @@ Yes. Your sermons are published as a podcast feed at your sermon archive's addre
 
 For developers, the same sermons are available as data through the WordPress REST API at `/wp-json/wp/v2/wpfc_sermon`.
 
-= How do I report a bug or request a feature? =
+= Where do I get help or report a bug? =
 
-[GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than public issues.
+Open a topic on this plugin's [support forum](https://wordpress.org/support/plugin/mattytap-sermons/). If you're at home on GitHub, [GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues) works too. The plugin is in maintenance mode, so bugs get fixed but new features are rarely added.
+
+For a security issue, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than either of those.
 
 = Does it work with my theme? =
 
@@ -109,7 +111,7 @@ If your sermon pages look wrong, first turn on Theme Compatibility under Sermons
 
 = Is there a paid version or commercial support? =
 
-No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.
+No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Help is free on the support forum. Code fixes are welcome on GitHub, and translations through [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/mattytap-sermons/).
 
 == External services ==
 

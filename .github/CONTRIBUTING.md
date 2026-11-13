@@ -6,7 +6,7 @@ By participating, you agree to abide by the [Code of Conduct](../CODE_OF_CONDUCT
 
 ## Before you start
 
-1. **Check the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues) first.** Many bugs are already filed and many feature ideas are already on the [ROADMAP](../ROADMAP.md) as no-commitment backlog items.
+1. **Check the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues) first.** Many bugs are already filed. For a feature, read the [ROADMAP](../ROADMAP.md) first: it explains why most are declined, and what kind could still land.
 2. **Open an issue before opening a PR for non-trivial changes.** A short description of what you are proposing (and why) is faster than writing code that may not fit. Trivial fixes (typos, comment corrections, obvious one-line bug fixes) are fine to PR directly.
 3. **Security findings go through [SECURITY.md](../SECURITY.md), not the public issue tracker.** Mattytap Sermons is tracking security work openly, but new findings need private disclosure first so existing Sermon Manager installations aren't exposed.
 
@@ -35,7 +35,7 @@ composer install
 vendor/bin/phpcs
 ```
 
-The ruleset (`phpcs.xml.dist`) is `WordPress-Extra`, so the `Security.*` sniffs fire. New code should be clean against this ruleset; legacy code is being brought up to it incrementally as part of the restoration.
+The ruleset (`phpcs.xml.dist`) is `WordPress-Extra`, so the `Security.*` sniffs fire. New code should be clean against this ruleset. Some inherited code still isn't, and is brought up to it when it's next touched.
 
 **PHP version floor: 8.1.** The plugin will not activate on lower versions.
 

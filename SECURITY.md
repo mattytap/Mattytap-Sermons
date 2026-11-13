@@ -19,11 +19,11 @@ You should receive an acknowledgement within five working days.
 
 ## Why private disclosure matters here
 
-Mattytap Sermons exists because the upstream [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin was left dormant with known unpatched vulnerabilities still installed on production sites worldwide. Quiet, coordinated disclosure of any new findings against Mattytap Sermons helps protect those existing Sermon Manager installations, many of which Mattytap Sermons will eventually offer a migration path for.
+Mattytap Sermons exists because the upstream [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin was left dormant with known unpatched vulnerabilities still installed on production sites worldwide. Quiet, coordinated disclosure of any new findings against Mattytap Sermons helps protect those existing Sermon Manager installations, many of which can switch to Mattytap Sermons as a drop-in replacement.
 
 ## Disclosure window
 
-Mattytap Sermons follows a 90-day coordinated-disclosure window from the date of acknowledgement. We aim to ship a fix faster (most security work on this codebase is done publicly via the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues)), but the 90-day window gives room when a fix needs broader discussion.
+Mattytap Sermons follows a 90-day coordinated-disclosure window from the date of acknowledgement. We aim to ship a fix much sooner; the 90-day window gives room when a fix needs broader discussion. The fix is prepared privately, and nothing about it appears in the public repository until the release.
 
 When a fix ships:
 

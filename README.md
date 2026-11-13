@@ -24,6 +24,20 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 **Maintenance mode.** The restoration is complete, so the plugin is now maintained, not developed. Bugs and security findings get fixed, and compatibility is kept current with each WordPress release. New features face a deliberately high bar: "fix not change" is the working stance, and most enhancement requests will be politely declined. The door isn't bolted shut, a genuinely compelling and well-scoped contribution that fits the plugin's purpose can still land, but nothing is planned and a missing feature is not a backlog item waiting its turn. See [ROADMAP.md](ROADMAP.md) for what that means in practice.
 
+**What maintenance has meant lately.** Keeping a plugin working includes going looking for
+trouble before users find it.
+
+- **Themes.** One support topic about one theme led to testing 70 free themes, every default
+  Twenty theme among them, with Theme Compatibility on and off. 3.8.0 fixed what turned up,
+  most of it inherited. 3.6.0 had already brought sermon pages up to date with block themes,
+  WordPress's default since Twenty Twenty-Two.
+- **Sites moving across.** Pages built with Sermon Manager Pro's shortcodes (3.5.0) or Church
+  Sermon Manager's sermon grid block (3.7.0) now show the standard sermon list, where before
+  they showed raw shortcode text or nothing.
+- **Privacy.** With the Plyr player, YouTube sermons play from YouTube's reduced-tracking
+  address, and the player's icons load from the site itself rather than a third-party server
+  (3.7.0).
+
 - **Approved and shipped.** Submitted as `mattytap-sermons` and approved by the WordPress.org plugin team on 2026-06-15. The earlier `sermon-works` slug was bounced in pre-review on trademark grounds; the ten pre-review technical findings (text-domain loading, prefix annotations, output escaping in views, callback escaping, enqueue-path refactors, vendor refresh) are all closed.
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All have shipping patches, verified in production.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.

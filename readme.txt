@@ -29,7 +29,10 @@ Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpre
 * Active security maintenance, with [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security) for responsible disclosure
 * Modernised for PHP 8.1+ and WordPress 6.0+
 * Bundled outdated third-party dependencies removed or upgraded (CMB2, wp-background-processing, the entry-views polyfill, taxonomy-images)
-* Continuing development on [GitHub](https://github.com/mattytap/Mattytap-Sermons)
+* Tested with 70 free themes, including every default Twenty theme, so sermon pages sit properly inside your theme's own layout, block themes included
+* Sites coming from Sermon Manager Pro or another Sermon Manager fork keep working pages: their old shortcodes and blocks show the standard sermon list instead of raw text or a blank space
+* Kinder to your visitors' privacy: YouTube sermons play from YouTube's reduced-tracking address, and the player's icons load from your own site
+* Source code and issue tracker on [GitHub](https://github.com/mattytap/Mattytap-Sermons)
 
 = Popular shortcodes =
 

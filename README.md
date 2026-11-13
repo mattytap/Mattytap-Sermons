@@ -6,11 +6,13 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Install
 
-The current release is **3.8.2**.
+Mattytap Sermons is on the [WordPress.org plugin directory](https://wordpress.org/plugins/mattytap-sermons/).
+In WordPress admin, go to **Plugins, Add New**, search for **Mattytap Sermons**, then
+**Install Now** and **Activate**. Updates arrive through the dashboard like any other plugin.
 
-1. Open the [Releases page](https://github.com/mattytap/Mattytap-Sermons/releases) and download `mattytap-sermons-3.8.2.zip` from the latest release.
-2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
-3. Choose the ZIP, click **Install Now**, then **Activate**.
+To install by hand instead, download the zip from the
+[latest release](https://github.com/mattytap/Mattytap-Sermons/releases/latest) and upload it
+through **Plugins, Add New, Upload Plugin**.
 
 Existing Sermon Manager users can deactivate Sermon Manager and activate Mattytap Sermons in its place. Database, shortcodes, post types and taxonomies are unchanged, so existing sermons, preachers and series carry across.
 

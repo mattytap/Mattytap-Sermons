@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 3.8.2
+Stable tag: 3.8.3
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,7 +122,7 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons doesn't need any outside service to work. A few features do reach one, either in a visitor's browser or from your own site. Each is listed here with what is sent, when, and how to avoid it.
 
 * **Bible verse popups (Faithlife Reftagger).** On sermon pages, the visitor's browser loads a script from api.reftagger.com, which turns Bible references into links that show the verse when hovered. It's on by default, as it was in Sermon Manager. Turn it off under Sermons > Settings > Verse > Verse Popups. Faithlife [terms](https://faithlife.com/terms) and [privacy](https://faithlife.com/privacy).
-* **YouTube and Vimeo.** A sermon given a YouTube or Vimeo address in its Video Link field plays in that service's own player, which the visitor's browser loads from YouTube or Vimeo when the sermon is opened. With the Plyr player, the default, YouTube videos come from youtube-nocookie.com, YouTube's reduced-tracking address, though YouTube may still set cookies of its own, and Vimeo is asked not to track the visitor. Plyr also asks noembed.com for a YouTube video's title. A video pasted into the Video Embed Code field plays exactly as pasted. Nothing is embedded unless a sermon has a video. YouTube [terms](https://www.youtube.com/t/terms) and [privacy](https://policies.google.com/privacy). Vimeo [terms](https://vimeo.com/terms) and [privacy](https://vimeo.com/privacy). [noembed](https://noembed.com/).
+* **YouTube and Vimeo.** A sermon given a YouTube or Vimeo address in its Video Link field plays in that service's own player, which the visitor's browser loads from YouTube or Vimeo when the sermon is opened. With the Plyr player, the default, YouTube videos come from youtube-nocookie.com, YouTube's reduced-tracking address, though YouTube may still set cookies of its own, and Vimeo is asked not to track the visitor. With the Browser HTML5 player, YouTube and Vimeo videos use WordPress's own embed instead. The first time such a sermon is shown, your site asks YouTube or Vimeo for the player's details, and WordPress keeps the answer with the sermon, checking again at most once a day. Those YouTube videos come from youtube.com. Plyr also asks noembed.com for a YouTube video's title. A video pasted into the Video Embed Code field plays exactly as pasted. Nothing is embedded unless a sermon has a video. YouTube [terms](https://www.youtube.com/t/terms) and [privacy](https://policies.google.com/privacy). Vimeo [terms](https://vimeo.com/terms) and [privacy](https://vimeo.com/privacy). [noembed](https://noembed.com/).
 * **Audio file size.** When a sermon is saved with an audio file address rather than an uploaded file, your site sends a single request to that address to read the file's size for the podcast feed. Only public web addresses are checked, and nothing about your site is sent.
 * **PodTrac.** Off by default. If you turn on PodTrac Tracking under Sermons > Settings > Podcast, the audio links in your podcast feed pass through dts.podtrac.com, so podcast apps fetch each episode by way of PodTrac, which counts the download. PodTrac [privacy](https://www.podtrac.com/privacy-policy/).
 * **Importing a Sermon Manager export file.** When you import an export file under Sermons > Import/Export, your site downloads each attached file from the address recorded in the export. Only public web addresses are fetched.
@@ -139,6 +139,11 @@ The Plyr player's icons are part of the plugin and load from your own site.
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.8.3 =
+
+* Fix: with the Browser HTML5 player, a sermon with a YouTube or Vimeo video link showed an empty player that wouldn't play. These videos now play in YouTube's or Vimeo's own player, through WordPress's own embed. Inherited from Sermon Manager.
+* Fix: with the Old WordPress player, a video file whose address doesn't end in a file extension (such as .mp4) showed only a link. It now plays in the browser's own player. Inherited from Sermon Manager.
 
 = 3.8.2 =
 
@@ -334,6 +339,10 @@ First stable release of the renamed Mattytap Sermons line, and the first WordPre
 Earlier versions, from the 3.0 restoration to the 3.1 release candidates, are in [changelog.txt](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt).
 
 == Upgrade Notice ==
+
+= 3.8.3 =
+
+Fixes video with two of the four player settings: YouTube and Vimeo with Browser HTML5, and video files without an extension with the Old WordPress player. The default player, Plyr, is unchanged. No data changes.
 
 = 3.8.2 =
 

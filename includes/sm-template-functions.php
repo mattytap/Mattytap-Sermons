@@ -883,7 +883,16 @@ function wpfc_render_video( $url = '', $seek = true ) {
 		);
 
 		$output = wp_video_shortcode( $attr );
-	} else {
+
+		// A direct file at a URL with no extension WordPress recognises comes
+		// back as a bare link, with no player. Fall back to the browser's own
+		// player, which goes by the type the file is served with (#109).
+		if ( ! is_string( $output ) || false === strpos( $output, '<video' ) ) {
+			$player = 'none';
+		}
+	}
+
+	if ( strtolower( 'WordPress' ) !== $player ) {
 		$is_youtube_long  = strpos( strtolower( $url ), 'youtube.com' );
 		$is_youtube_short = strpos( strtolower( $url ), 'youtu.be' );
 		$is_youtube       = $is_youtube_long || $is_youtube_short;

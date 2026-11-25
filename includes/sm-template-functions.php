@@ -908,9 +908,18 @@ function wpfc_render_video( $url = '', $seek = true ) {
 		if ( 'plyr' === $player && ( $is_youtube || $is_vimeo ) ) {
 			$output .= '<div data-plyr-provider="' . ( $is_youtube ? 'youtube' : 'vimeo' ) . '" data-plyr-embed-id="' . esc_url( $url ) . '" class="plyr__video-embed wpfc-sermon-video-player video-' . ( $is_youtube ? 'youtube' : 'vimeo' ) . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '></div>';
 		} else {
-			$output .= '<video controls preload="metadata" class="wpfc-sermon-video-player ' . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '>';
-			$output .= '<source src="' . esc_url( $url ) . '">';
-			$output .= '</video>';
+			// Browser HTML5 has no script player, and a YouTube or Vimeo link
+			// is a web page that no video tag can play. Use WordPress's own
+			// embed for those, the provider's plain player (#109).
+			$embed = ( 'none' === $player && ( $is_youtube || $is_vimeo ) ) ? wp_oembed_get( $url ) : false;
+
+			if ( $embed ) {
+				$output .= '<div class="wpfc-sermon-video-player video-' . ( $is_youtube ? 'youtube' : 'vimeo' ) . '">' . $embed . '</div>';
+			} else {
+				$output .= '<video controls preload="metadata" class="wpfc-sermon-video-player ' . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '>';
+				$output .= '<source src="' . esc_url( $url ) . '">';
+				$output .= '</video>';
+			}
 		}
 	}
 

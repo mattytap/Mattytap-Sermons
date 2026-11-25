@@ -919,8 +919,15 @@ function wpfc_render_video( $url = '', $seek = true ) {
 		} else {
 			// Browser HTML5 has no script player, and a YouTube or Vimeo link
 			// is a web page that no video tag can play. Use WordPress's own
-			// embed for those, the provider's plain player (#109).
-			$embed = ( 'none' === $player && ( $is_youtube || $is_vimeo ) ) ? wp_oembed_get( $url ) : false;
+			// embed for those, the provider's plain player, cached as for an
+			// embed in post content (#109).
+			$embed = false;
+			if ( 'none' === $player && ( $is_youtube || $is_vimeo ) && isset( $GLOBALS['wp_embed'] ) ) {
+				$embed = $GLOBALS['wp_embed']->shortcode( array(), $url );
+				if ( ! is_string( $embed ) || false === strpos( $embed, '<iframe' ) ) {
+					$embed = false;
+				}
+			}
 
 			if ( $embed ) {
 				$output .= '<div class="wpfc-sermon-video-player video-' . ( $is_youtube ? 'youtube' : 'vimeo' ) . '">' . $embed . '</div>';
